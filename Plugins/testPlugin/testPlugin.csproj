@@ -49,5 +49,17 @@
       <Project>{DB1099A1-B7FE-474F-A03A-41687D6C5C76}</Project>
       <Name>PluginManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Terminal\Terminal.csproj">
+      <Project>{FDF2DE99-68CF-4947-952C-2D2BCC846F3E}</Project>
+      <Name>Terminal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\DomainModel\DomainModel.csproj">
+      <Project>{79EF699D-6A88-4054-AF04-F22486DB47FA}</Project>
+      <Name>DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Math\Math.csproj">
+      <Project>{A2D1D8E5-7C5C-4EA3-95C7-D8D97AB0B74E}</Project>
+      <Name>Math</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
