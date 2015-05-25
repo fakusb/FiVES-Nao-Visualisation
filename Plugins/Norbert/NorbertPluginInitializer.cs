@@ -5,7 +5,7 @@ using EventLoopPlugin;
 
 namespace NorbertPlugin
 {
-	public class NorbertPluginInitializer
+	public class NorbertPluginInitializer : IPluginInitializer
 	{
 		public void Initialize ()
 		{
