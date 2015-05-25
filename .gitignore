@@ -1,5 +1,6 @@
 obj/
 bin/
+*.directory
 *.userprefs
 *.pidb
 *test-results*
