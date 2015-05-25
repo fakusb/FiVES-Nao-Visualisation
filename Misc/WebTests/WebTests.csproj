@@ -31,9 +31,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
@@ -68,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Plugins\Testing\Testing.csproj">
-      <Project>{b8f2eb4b-fa66-4c7b-928f-2f8ee385d5b1}</Project>
+      <Project>{B8F2EB4B-FA66-4C7B-928F-2F8EE385D5B1}</Project>
       <Name>Testing</Name>
     </ProjectReference>
   </ItemGroup>

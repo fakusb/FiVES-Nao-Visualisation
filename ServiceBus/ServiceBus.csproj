@@ -31,13 +31,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,11 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\DomainModel\DomainModel.csproj">
-      <Project>{79ef699d-6a88-4054-af04-f22486db47fa}</Project>
+      <Project>{79EF699D-6A88-4054-AF04-F22486DB47FA}</Project>
       <Name>DomainModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core\FIVES\FIVES.csproj">
-      <Project>{2f7e0670-ca00-42fb-9158-89056784d122}</Project>
+      <Project>{2F7E0670-CA00-42FB-9158-89056784D122}</Project>
       <Name>FIVES</Name>
     </ProjectReference>
   </ItemGroup>

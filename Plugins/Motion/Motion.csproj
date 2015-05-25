@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{46BD08A8-E01D-4181-805C-847D361297A8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>MotionPlugin</RootNamespace>
@@ -31,20 +29,18 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="KIARA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ThirdParty\KIARA\KIARA.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NLog.3.2.0.0\lib\net40\NLog.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\packages\Moq.4.1.1309.1617\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="KIARA">
+      <HintPath>..\..\ThirdParty\KIARA\KIARA.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\..\packages\NLog.3.2.0.0\lib\net40\NLog.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -73,7 +69,7 @@
       <Name>PluginManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ServiceBus\ServiceBus.csproj">
-      <Project>{6c4c01e3-2f44-462f-bf63-a9d5d288c662}</Project>
+      <Project>{6C4C01E3-2F44-462F-BF63-A9D5D288C662}</Project>
       <Name>ServiceBus</Name>
     </ProjectReference>
     <ProjectReference Include="..\ClientManager\ClientManager.csproj">
@@ -81,11 +77,11 @@
       <Name>ClientManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\EventLoop\EventLoop.csproj">
-      <Project>{6cd0fe0e-7d56-4e24-8568-625a13c37130}</Project>
+      <Project>{6CD0FE0E-7D56-4E24-8568-625A13C37130}</Project>
       <Name>EventLoop</Name>
     </ProjectReference>
     <ProjectReference Include="..\KIARA\KIARAPlugin.csproj">
-      <Project>{d5b8e5d2-a427-4985-b885-9eac5bddab06}</Project>
+      <Project>{D5B8E5D2-A427-4985-B885-9EAC5BDDAB06}</Project>
       <Name>KIARAPlugin</Name>
     </ProjectReference>
   </ItemGroup>

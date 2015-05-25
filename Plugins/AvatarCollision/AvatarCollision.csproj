@@ -31,14 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="KIARA, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ThirdParty\KIARA\KIARA.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +38,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="KIARA">
+      <HintPath>..\..\ThirdParty\KIARA\KIARA.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AvatarCollisionPluginInitializer.cs" />
@@ -54,27 +52,27 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\DomainModel\DomainModel.csproj">
-      <Project>{79ef699d-6a88-4054-af04-f22486db47fa}</Project>
+      <Project>{79EF699D-6A88-4054-AF04-F22486DB47FA}</Project>
       <Name>DomainModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Math\Math.csproj">
-      <Project>{a2d1d8e5-7c5c-4ea3-95c7-d8d97ab0b74e}</Project>
+      <Project>{A2D1D8E5-7C5C-4EA3-95C7-D8D97AB0B74E}</Project>
       <Name>Math</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\PluginManager\PluginManager.csproj">
-      <Project>{db1099a1-b7fe-474f-a03a-41687d6c5c76}</Project>
+      <Project>{DB1099A1-B7FE-474F-A03A-41687D6C5C76}</Project>
       <Name>PluginManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ServiceBus\ServiceBus.csproj">
-      <Project>{6c4c01e3-2f44-462f-bf63-a9d5d288c662}</Project>
+      <Project>{6C4C01E3-2F44-462F-BF63-A9D5D288C662}</Project>
       <Name>ServiceBus</Name>
     </ProjectReference>
     <ProjectReference Include="..\ClientManager\ClientManager.csproj">
-      <Project>{e1955ff2-6109-4c71-9f13-486a48de6c17}</Project>
+      <Project>{E1955FF2-6109-4C71-9F13-486A48DE6C17}</Project>
       <Name>ClientManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\KIARA\KIARAPlugin.csproj">
-      <Project>{d5b8e5d2-a427-4985-b885-9eac5bddab06}</Project>
+      <Project>{D5B8E5D2-A427-4985-B885-9EAC5BDDAB06}</Project>
       <Name>KIARAPlugin</Name>
     </ProjectReference>
   </ItemGroup>

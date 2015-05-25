@@ -48,23 +48,23 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Collections\Collections.csproj">
-      <Project>{9c2af21f-4d8c-4ade-a5c4-135a6f50e18a}</Project>
+      <Project>{9C2AF21F-4D8C-4ADE-A5C4-135A6F50E18A}</Project>
       <Name>Collections</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\DomainModel\DomainModel.csproj">
-      <Project>{79ef699d-6a88-4054-af04-f22486db47fa}</Project>
+      <Project>{79EF699D-6A88-4054-AF04-F22486DB47FA}</Project>
       <Name>DomainModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\FIVES\FIVES.csproj">
-      <Project>{2f7e0670-ca00-42fb-9158-89056784d122}</Project>
+      <Project>{2F7E0670-CA00-42FB-9158-89056784D122}</Project>
       <Name>FIVES</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\Math\Math.csproj">
-      <Project>{a2d1d8e5-7c5c-4ea3-95c7-d8d97ab0b74e}</Project>
+      <Project>{A2D1D8E5-7C5C-4EA3-95C7-D8D97AB0B74E}</Project>
       <Name>Math</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\PluginManager\PluginManager.csproj">
-      <Project>{db1099a1-b7fe-474f-a03a-41687d6c5c76}</Project>
+      <Project>{DB1099A1-B7FE-474F-A03A-41687D6C5C76}</Project>
       <Name>PluginManager</Name>
     </ProjectReference>
   </ItemGroup>

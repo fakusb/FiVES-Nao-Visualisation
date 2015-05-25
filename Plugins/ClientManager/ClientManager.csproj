@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E1955FF2-6109-4C71-9F13-486A48DE6C17}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>ClientManagerPlugin</RootNamespace>
@@ -31,18 +29,6 @@
     <ConsolePause>False</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="KIARA, Version=1.0.5513.20794, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ThirdParty\KIARA\KIARA.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ThirdParty\KIARA\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NLog.3.2.0.0\lib\net40\NLog.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +40,15 @@
     </Reference>
     <Reference Include="WebSocket">
       <HintPath>..\..\ThirdParty\KIARA\WebSocket.dll</HintPath>
+    </Reference>
+    <Reference Include="KIARA">
+      <HintPath>..\..\ThirdParty\KIARA\KIARA.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\ThirdParty\KIARA\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\..\packages\NLog.3.2.0.0\lib\net40\NLog.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -67,7 +62,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Collections\Collections.csproj">
-      <Project>{9c2af21f-4d8c-4ade-a5c4-135a6f50e18a}</Project>
+      <Project>{9C2AF21F-4D8C-4ADE-A5C4-135A6F50E18A}</Project>
       <Name>Collections</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core\DomainModel\DomainModel.csproj">
@@ -87,11 +82,11 @@
       <Name>Auth</Name>
     </ProjectReference>
     <ProjectReference Include="..\KIARA\KIARAPlugin.csproj">
-      <Project>{d5b8e5d2-a427-4985-b885-9eac5bddab06}</Project>
+      <Project>{D5B8E5D2-A427-4985-B885-9EAC5BDDAB06}</Project>
       <Name>KIARAPlugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Terminal\Terminal.csproj">
-      <Project>{fdf2de99-68cf-4947-952c-2d2bcc846f3e}</Project>
+      <Project>{FDF2DE99-68CF-4947-952C-2D2BCC846F3E}</Project>
       <Name>Terminal</Name>
     </ProjectReference>
   </ItemGroup>
