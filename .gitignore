@@ -20,3 +20,6 @@ Core/PluginManager/TestPlugins
 *.licenseheader
 WebClient/resources/proprietary
 TestResult.xml
+
+# Gereon's scripts #
+git-gui.sh
