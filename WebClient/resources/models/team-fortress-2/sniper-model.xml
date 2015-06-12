@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xml3d xmlns="http://www.xml3d.org/2009/xml3d" >
+
+<group  style="transform: scale3d(0.04, 0.04, 0.04)">
+    <model src="sniper.xml#asset">
+        <assetdata name="config">
+            <float name="key" id="sniper-animation">0.5</float>
+        </assetdata>
+    </model>
+    <animations>
+        <anim name="taunt" startKey = "0" endKey = "3.375" speed = "1" loop = "true" cycles = "1" key="#sniper-animation" />
+    </animations>
+</group>
+
+</xml3d>

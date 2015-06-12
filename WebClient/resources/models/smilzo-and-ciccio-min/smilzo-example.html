@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<title>[FIcontent] Augmented Resistance: Smilzo</title>
+		
+        <script src="scripts/xml3d.js" type="text/javascript" ></script>
+        <script src="scripts/camera.js" type="text/javascript"></script>
+	</head>
+    <body>
+        <xml3d activeView="#defaultView" style="width:800px; height:600px; background-color:darkgray;" >
+
+            <!-- Asset Instance -->
+            <model src="assets/smilzo.xml#asset" >
+                <assetdata name="config" >
+                    <float name="emissiveColor" >0.141604 0.46566 0.585367</float>
+                    <float id="keySmilzo" name="key" >0.0</float>
+                </assetdata>
+            </model>
+
+            <!-- Light and View -->
+            <view id="defaultView" position="10 12.0 44.065818786621094" orientation="0 1 0 0.2"></view>
+            <lightshader id="light1" script="urn:xml3d:lightshader:directional">
+                <float3 name="intensity">0.6 0.6 0.6</float3>
+            </lightshader>
+            <group style="transform: translate3d(50px, 50px, 50px)" >
+                <light shader="#light1"></light>
+            </group>
+
+
+        </xml3d>
+
+          <!-- Script for animation -->
+
+          <script type="text/javascript">
+			
+            var mytime = 0;
+            var lastTime = Date.now();
+
+            var docAnims = {
+				"smilzoWalk": {
+					"begin": 12,
+					"end": 35
+				},
+				"smilzoRun": {
+					"begin": 42,
+					"end": 65
+				},
+				"smilzoIdle": {
+					"begin": 71,
+					"end": 196
+				},
+				"smilzoYesSir": {
+					"begin": 211,
+					"end": 265
+				},
+				"smilzoShoot": {
+					"shootStart": {
+						"begin": 301,
+						"end": 320
+					},
+					"shoot": {
+						"begin": 320,
+						"end": 361
+					},
+					"shootEnd": {
+						"begin": 361,
+						"end": 380
+					}
+				},
+				"death": {
+					"begin": 411,
+					"end": 434
+				}
+            }
+			
+			var ft = 1.0 / 24.0;
+			
+            var reqAniFrame = (window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame).bind(window);
+			
+			var animFrames = docAnims.smilzoRun;
+
+			function updateColor(color) {
+				//document.getElementById("colorSmilzoStripes").textContent = color;
+				//document.getElementById("colorSmilzoSpots").textContent = color;
+			}
+			
+			window.onload = function () {
+				var teamColorRed = "0.785367 0.16566 0.141604";
+				var teamColorBlue = "0.141604 0.46566 0.585367";
+				updateColor(teamColorBlue);
+				
+				animFrames = docAnims.smilzoWalk;
+
+				reqAniFrame(updateAnim);
+			}
+			
+            function updateAnim() {
+				var currTime = Date.now();
+				var diff = currTime - lastTime;
+				lastTime = currTime;
+				
+				mytime += diff / 1000;
+
+				var modLength = (animFrames.begin - animFrames.end) * ft;
+				var beginOffset = animFrames.begin * ft;
+				
+				var value = beginOffset + (mytime % modLength);
+				document.getElementById("keySmilzo").textContent = value;
+
+				reqAniFrame(updateAnim);
+            }
+          </script>
+	</body>
+</html>
