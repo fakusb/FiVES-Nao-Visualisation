@@ -44,4 +44,9 @@
       <Name>EventLoop</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="queryJoints.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
