@@ -168,7 +168,7 @@ namespace NorbertPlugin
 			CheckAndRegisterAvatarEntity(e.Entity);
 		}
 
-		bool CheckAndRegisterAvatarEntity(Entity entity)
+		void CheckAndRegisterAvatarEntity(Entity entity)
 		{
 			if (entity.ContainsComponent("nao_posture"))
 				entities.Add(entity);
