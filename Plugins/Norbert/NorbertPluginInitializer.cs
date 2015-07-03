@@ -36,8 +36,6 @@ namespace NorbertPlugin
 				AddEntity);
 
 
-			// TODO: Remove this debug output!
-			System.Console.Error.WriteLine ("Call me Norbert. MuHAHA!");
 			DefineComponents();
 			RegisterEvents();
 		}
