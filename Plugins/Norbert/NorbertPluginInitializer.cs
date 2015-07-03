@@ -35,9 +35,6 @@ namespace NorbertPlugin
 			Terminal.Instance.RegisterCommand("nao", "Adds an entity for a NAO robot", false,
 				AddEntity);
 
-
-			// TODO: Remove this debug output!
-			System.Console.Error.WriteLine ("Call me Norbert. MuHAHA!");
 			DefineComponents();
 			RegisterEvents();
 		}
@@ -73,35 +70,35 @@ namespace NorbertPlugin
 
 		internal void DefineComponents()
 		{
-			posture.AddAttribute<double>("HeadYaw", 0);
-			posture.AddAttribute<double>("HeadPitch", 0);
-			posture.AddAttribute<double>("RShoulderPitch", 0);
+			posture.AddAttribute<double>("HeadYaw", 0.0);
+			posture.AddAttribute<double>("HeadPitch", 0.0);
+			posture.AddAttribute<double>("RShoulderPitch", 0.0);
 			posture.AddAttribute<double>("RShoulderRoll", -0.5);
 			posture.AddAttribute<double>("RElbowRoll", 0.5);
-			posture.AddAttribute<double>("RElbowYaw", 0);
-			posture.AddAttribute<double>("RWristYaw", 0);
-			posture.AddAttribute<double>("RHand", 0);
+			posture.AddAttribute<double>("RElbowYaw", 0.0);
+			posture.AddAttribute<double>("RWristYaw", 0.0);
+			posture.AddAttribute<double>("RHand", 0.0);
 
-			posture.AddAttribute<double>("LShoulderPitch", 0);
+			posture.AddAttribute<double>("LShoulderPitch", 0.0);
 			posture.AddAttribute<double>("LShoulderRoll", -0.5);
 			posture.AddAttribute<double>("LElbowRoll", 0.5);
-			posture.AddAttribute<double>("LElbowYaw", 0);
-			posture.AddAttribute<double>("LWristYaw", 0);
-			posture.AddAttribute<double>("LHand", 0);
+			posture.AddAttribute<double>("LElbowYaw", 0.0);
+			posture.AddAttribute<double>("LWristYaw", 0.0);
+			posture.AddAttribute<double>("LHand", 0.0);
 
-			posture.AddAttribute<double>("RHipYawPitch", 0);
-			posture.AddAttribute<double>("RHipPitch", 0);
-			posture.AddAttribute<double>("RHipRoll", 0);
-			posture.AddAttribute<double>("RKneePitch", 0);
-			posture.AddAttribute<double>("RAnklePitch", 0);
-			posture.AddAttribute<double>("RAnkleRoll", 0);
+			posture.AddAttribute<double>("RHipYawPitch", 0.0);
+			posture.AddAttribute<double>("RHipPitch", 0.0);
+			posture.AddAttribute<double>("RHipRoll", 0.0);
+			posture.AddAttribute<double>("RKneePitch", 0.0);
+			posture.AddAttribute<double>("RAnklePitch", 0.0);
+			posture.AddAttribute<double>("RAnkleRoll", 0.0);
 
-			posture.AddAttribute<double>("LHipYawPitch", 0);
-			posture.AddAttribute<double>("LHipPitch", 0);
-			posture.AddAttribute<double>("LHipRoll", 0);
-			posture.AddAttribute<double>("LKneePitch", 0);
-			posture.AddAttribute<double>("LAnklePitch", 0);
-			posture.AddAttribute<double>("LAnkleRoll", 0);
+			posture.AddAttribute<double>("LHipYawPitch", 0.0);
+			posture.AddAttribute<double>("LHipPitch", 0.0);
+			posture.AddAttribute<double>("LHipRoll", 0.0);
+			posture.AddAttribute<double>("LKneePitch", 0.0);
+			posture.AddAttribute<double>("LAnklePitch", 0.0);
+			posture.AddAttribute<double>("LAnkleRoll", 0.0);
 
 			ComponentRegistry.Instance.Register(posture);
 		}
@@ -145,6 +142,8 @@ namespace NorbertPlugin
 			inputWriter.WriteLine("query()");
 
 			var data = outputReader.ReadToEnd().Split(null);
+
+			Console.WriteLine(data);
 
 			for (int i = 0; i < data.Length;)
 			{
