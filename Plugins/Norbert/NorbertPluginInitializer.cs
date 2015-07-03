@@ -22,11 +22,20 @@ namespace NorbertPlugin
 		private System.IO.TextWriter inputWriter;
 		private System.IO.TextReader outputReader;
 		private Shell shell;
+	
+		// Our component definition:
+		private ComponentDefinition posture = new ComponentDefinition("nao_posture");
+
 
 		public void Initialize ()
 		{
 			inputWriter = new System.IO.StreamWriter(input);
 			outputReader = new System.IO.StreamReader(output);
+
+			Terminal.Instance.RegisterCommand("nao", "Adds an entity for a NAO robot", false,
+				AddEntity);
+
+
 			// TODO: Remove this debug output!
 			System.Console.Error.WriteLine ("Call me Norbert. MuHAHA!");
 			DefineComponents();
@@ -52,7 +61,7 @@ namespace NorbertPlugin
 
 		public List<string> PluginDependencies {
 			get {
-				return new List<string> {"KIARA", "ClientManager", "EventLoop"};
+				return new List<string> {"KIARA", "ClientManager", "EventLoop", "Terminal"};
 			}
 		}
 
@@ -64,7 +73,6 @@ namespace NorbertPlugin
 
 		internal void DefineComponents()
 		{
-			ComponentDefinition posture = new ComponentDefinition("nao_posture");
 			posture.AddAttribute<double>("HeadYaw", 0);
 			posture.AddAttribute<double>("HeadPitch", 0);
 			posture.AddAttribute<double>("RShoulderPitch", 0);
@@ -109,7 +117,7 @@ namespace NorbertPlugin
 			World.Instance.AddedEntity += HandleAddedEntity;
 
 			foreach (var entity in World.Instance)
-				CheckAndRegisterAvatarEntity(entity);
+				CheckAndRegisterEntity(entity);
 		}
 
 		private void connect(string hostName, string userName, string password)
@@ -156,23 +164,36 @@ namespace NorbertPlugin
 		/// <param name="e">TickEventArgs</param>
 		private void HandleEventTick(Object sender, TickEventArgs e)
 		{
-			System.Console.WriteLine("Querying robot posture.");
-
-			connect("192.168.176.121", "nao", "nao");
-			queryJoints();
+			if (client != null && client.IsConnected)
+				queryJoints();
 		}
-
-
+	
 		void HandleAddedEntity (object sender, EntityEventArgs e)
 		{
-			CheckAndRegisterAvatarEntity(e.Entity);
+			CheckAndRegisterEntity(e.Entity);
 		}
 
-		void CheckAndRegisterAvatarEntity(Entity entity)
+		void CheckAndRegisterEntity(Entity entity)
 		{
 			if (entity.ContainsComponent("nao_posture"))
 				entities.Add(entity);
 		}
+
+		void AddEntity(string commandLine)
+		{
+			var data = commandLine.Split();
+			AddEntity(data[0], data[1], data[2]);
+		}
+
+		void AddEntity(string hostName, string userName, string password)
+		{
+			connect(hostName, userName, password);
+			var e = new Entity();
+
+			World.Instance.Add(e);
+			CheckAndRegisterEntity(e);
+		}
+
 	}
 }
 

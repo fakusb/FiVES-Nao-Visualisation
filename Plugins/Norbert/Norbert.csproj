@@ -61,6 +61,10 @@
       <Project>{D5B8E5D2-A427-4985-B885-9EAC5BDDAB06}</Project>
       <Name>KIARAPlugin</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Terminal\Terminal.csproj">
+      <Project>{FDF2DE99-68CF-4947-952C-2D2BCC846F3E}</Project>
+      <Name>Terminal</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="queryJoints.py">
