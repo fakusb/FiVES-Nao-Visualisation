@@ -35,7 +35,6 @@ namespace NorbertPlugin
 			Terminal.Instance.RegisterCommand("nao", "Adds an entity for a NAO robot", false,
 				AddEntity);
 
-
 			DefineComponents();
 			RegisterEvents();
 		}
@@ -181,6 +180,9 @@ namespace NorbertPlugin
 		{
 			var data = commandLine.Split();
 			AddEntity(data[0], data[1], data[2]);
+
+			CommandLine.Write("Enter something: ");
+			CommandLine.ReadLine();
 		}
 
 		void AddEntity(string hostName, string userName, string password)
