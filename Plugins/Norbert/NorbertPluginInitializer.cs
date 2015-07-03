@@ -181,7 +181,7 @@ namespace NorbertPlugin
 		void AddEntity(string commandLine)
 		{
 			var data = commandLine.Split();
-			AddEntity(data[0], data[1], data[2]);
+			AddEntity(data[1], data[2], data[3]);
 		}
 
 		void AddEntity(string hostName, string userName, string password)
