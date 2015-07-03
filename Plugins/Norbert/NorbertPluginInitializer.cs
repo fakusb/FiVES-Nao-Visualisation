@@ -6,7 +6,7 @@ using EventLoopPlugin;
 using Renci.SshNet;
 using KIARA;
 using KIARAPlugin;
-
+using TerminalPlugin;
 
 namespace NorbertPlugin
 {
