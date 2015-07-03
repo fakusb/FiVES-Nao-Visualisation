@@ -11,19 +11,23 @@ using KIARAPlugin;
 namespace NorbertPlugin
 {
 	public class NorbertPluginInitializer : IPluginInitializer
-	{
+	{	
+		// Stores all the robot entities:
+		private List<Entity> entities = new List<Entity>();
+
+		// Connection to the robot:
 		private SshClient client;
 		private System.IO.MemoryStream input = new System.IO.MemoryStream();
 		private System.IO.MemoryStream output = new System.IO.MemoryStream();
 		private System.IO.TextWriter inputWriter;
 		private System.IO.TextReader outputReader;
-
 		private Shell shell;
 
 		public void Initialize ()
 		{
 			inputWriter = new System.IO.StreamWriter(input);
 			outputReader = new System.IO.StreamReader(output);
+			// TODO: Remove this debug output!
 			System.Console.Error.WriteLine ("Call me Norbert. MuHAHA!");
 			DefineComponents();
 			RegisterEvents();
@@ -48,7 +52,7 @@ namespace NorbertPlugin
 
 		public List<string> PluginDependencies {
 			get {
-				return new List<string> {"EventLoop"};
+				return new List<string> {"KIARA", "ClientManager", "EventLoop"};
 			}
 		}
 
@@ -101,19 +105,11 @@ namespace NorbertPlugin
 		{
 			EventLoop.Instance.TickFired += new EventHandler<TickEventArgs>(HandleEventTick);
 
-			/*
-			ClientManager.Instance.NotifyWhenAnyClientAuthenticated(delegate(KIARA.Connection connection)
-				{
-					Activate(connection);
-					connection.Closed += (sender, e) => Deactivate(connection);
-				});
-			*/
 
 			World.Instance.AddedEntity += HandleAddedEntity;
 
 			foreach (var entity in World.Instance)
 				CheckAndRegisterAvatarEntity(entity);
-
 		}
 
 		private void connect(string hostName, string userName, string password)
@@ -147,8 +143,8 @@ namespace NorbertPlugin
 				var key = data[i++];
 				var val = data[i++];
 
-				foreach (Entity e in entities.Values)
-					e["nao_posture"][key].Suggest(val);
+				foreach (Entity entity in entities)
+					entity["nao_posture"][key].Suggest(val);
 			}
 
 		}
@@ -162,46 +158,21 @@ namespace NorbertPlugin
 		{
 			System.Console.WriteLine("Querying robot posture.");
 
-			connect("192.168.176.34", "nao", "nao");
+			connect("192.168.176.121", "nao", "nao");
 			queryJoints();
 		}
 
 
 		void HandleAddedEntity (object sender, EntityEventArgs e)
 		{
-			if (!CheckAndRegisterAvatarEntity(e.Entity))
-				e.Entity.CreatedComponent += HandleCreatedComponent;
-		}
-
-		void HandleCreatedComponent(object sender, ComponentEventArgs e)
-		{
-			if (e.Component.Name == "nao_posture")
-				e.Component.ChangedAttribute += HandleChangedAvatarComponent;
-		}
-
-		void HandleChangedAvatarComponent(object sender, ChangedAttributeEventArgs e)
-		{
-			if (e.AttributeName == "userLogin")
-			{
-				if (e.OldValue != null && entities.ContainsKey((string)e.OldValue))
-					entities.Remove((string)e.OldValue);
-				entities[(string)e.NewValue] = e.Entity;
-			}
+			CheckAndRegisterAvatarEntity(e.Entity);
 		}
 
 		bool CheckAndRegisterAvatarEntity(Entity entity)
 		{
 			if (entity.ContainsComponent("nao_posture"))
-			{
-				entities[(string)entity["avatar"]["userLogin"].Value] = entity;
-				return true;
-			}
-
-			return false;
+				entities.Add(entity);
 		}
-
-		Dictionary<string, Entity> entities = new Dictionary<string, Entity>();
-
 	}
 }
 
