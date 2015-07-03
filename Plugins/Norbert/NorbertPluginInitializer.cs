@@ -47,7 +47,7 @@ namespace NorbertPlugin
 		/// </summary>
 		private void RegisterToPluginEvents()
 		{
-			EventLoop.Instance.TickFired += new EventHandler<TickEventArgs>(HandleEventTick);
+			//EventLoop.Instance.TickFired += new EventHandler<TickEventArgs>(HandleEventTick);
 		}
 
 		/// <summary>
