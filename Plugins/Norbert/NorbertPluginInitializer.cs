@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using FIVES;
+using ClientManagerPlugin;
 using EventLoopPlugin;
 using Renci.SshNet;
+using KIARA;
+using KIARAPlugin;
+
 
 namespace NorbertPlugin
 {
@@ -11,13 +15,15 @@ namespace NorbertPlugin
 		private SshClient client;
 		private System.IO.MemoryStream input = new System.IO.MemoryStream();
 		private System.IO.MemoryStream output = new System.IO.MemoryStream();
-		private System.IO.TextWriter inputWriter = new System.IO.TextWriter(input);
-		private System.IO.TextReader outputReader = new System.IO.TextReader(output);
+		private System.IO.TextWriter inputWriter;
+		private System.IO.TextReader outputReader;
 
 		private Shell shell;
 
 		public void Initialize ()
 		{
+			inputWriter = new System.IO.StreamWriter(input);
+			outputReader = new System.IO.StreamReader(output);
 			System.Console.Error.WriteLine ("Call me Norbert. MuHAHA!");
 			DefineComponents();
 			RegisterEvents();
@@ -55,35 +61,35 @@ namespace NorbertPlugin
 		internal void DefineComponents()
 		{
 			ComponentDefinition posture = new ComponentDefinition("nao_posture");
-			location.AddAttribute<double>("HeadYaw", 0);
-			location.AddAttribute<double>("HeadPitch", 0);
-			location.AddAttribute<double>("RShoulderPitch", 0);
-			location.AddAttribute<double>("RShoulderRoll", -0.5);
-			location.AddAttribute<double>("RElbowRoll", 0.5);
-			location.AddAttribute<double>("RElbowYaw", 0);
-			location.AddAttribute<double>("RWristYaw", 0);
-			location.AddAttribute<double>("RHand", 0);
+			posture.AddAttribute<double>("HeadYaw", 0);
+			posture.AddAttribute<double>("HeadPitch", 0);
+			posture.AddAttribute<double>("RShoulderPitch", 0);
+			posture.AddAttribute<double>("RShoulderRoll", -0.5);
+			posture.AddAttribute<double>("RElbowRoll", 0.5);
+			posture.AddAttribute<double>("RElbowYaw", 0);
+			posture.AddAttribute<double>("RWristYaw", 0);
+			posture.AddAttribute<double>("RHand", 0);
 
-			location.AddAttribute<double>("LShoulderPitch", 0);
-			location.AddAttribute<double>("LShoulderRoll", -0.5);
-			location.AddAttribute<double>("LElbowRoll", 0.5);
-			location.AddAttribute<double>("LElbowYaw", 0);
-			location.AddAttribute<double>("LWristYaw", 0);
-			location.AddAttribute<double>("LHand", 0);
+			posture.AddAttribute<double>("LShoulderPitch", 0);
+			posture.AddAttribute<double>("LShoulderRoll", -0.5);
+			posture.AddAttribute<double>("LElbowRoll", 0.5);
+			posture.AddAttribute<double>("LElbowYaw", 0);
+			posture.AddAttribute<double>("LWristYaw", 0);
+			posture.AddAttribute<double>("LHand", 0);
 
-			location.AddAttribute<double>("RHipYawPitch", 0);
-			location.AddAttribute<double>("RHipPitch", 0);
-			location.AddAttribute<double>("RHipRoll", 0);
-			location.AddAttribute<double>("RKneePitch", 0);
-			location.AddAttribute<double>("RAnklePitch", 0);
-			location.AddAttribute<double>("RAnkleRoll", 0);
+			posture.AddAttribute<double>("RHipYawPitch", 0);
+			posture.AddAttribute<double>("RHipPitch", 0);
+			posture.AddAttribute<double>("RHipRoll", 0);
+			posture.AddAttribute<double>("RKneePitch", 0);
+			posture.AddAttribute<double>("RAnklePitch", 0);
+			posture.AddAttribute<double>("RAnkleRoll", 0);
 
-			location.AddAttribute<double>("LHipYawPitch", 0);
-			location.AddAttribute<double>("LHipPitch", 0);
-			location.AddAttribute<double>("LHipRoll", 0);
-			location.AddAttribute<double>("LKneePitch", 0);
-			location.AddAttribute<double>("LAnklePitch", 0);
-			location.AddAttribute<double>("LAnkleRoll", 0);
+			posture.AddAttribute<double>("LHipYawPitch", 0);
+			posture.AddAttribute<double>("LHipPitch", 0);
+			posture.AddAttribute<double>("LHipRoll", 0);
+			posture.AddAttribute<double>("LKneePitch", 0);
+			posture.AddAttribute<double>("LAnklePitch", 0);
+			posture.AddAttribute<double>("LAnkleRoll", 0);
 
 			ComponentRegistry.Instance.Register(posture);
 		}
@@ -95,12 +101,13 @@ namespace NorbertPlugin
 		{
 			EventLoop.Instance.TickFired += new EventHandler<TickEventArgs>(HandleEventTick);
 
-
-			ClientManager.Instance.NotifyWhenAnyClientAuthenticated(delegate(Connection connection)
+			/*
+			ClientManager.Instance.NotifyWhenAnyClientAuthenticated(delegate(KIARA.Connection connection)
 				{
 					Activate(connection);
 					connection.Closed += (sender, e) => Deactivate(connection);
 				});
+			*/
 
 			World.Instance.AddedEntity += HandleAddedEntity;
 
@@ -108,7 +115,6 @@ namespace NorbertPlugin
 				CheckAndRegisterAvatarEntity(entity);
 
 		}
-
 
 		private void connect(string hostName, string userName, string password)
 		{
@@ -122,7 +128,7 @@ namespace NorbertPlugin
 
 			inputWriter.WriteLine("python");
 
-			using (var sr = new System.IO.TextReader("queryJoints.py"))
+			using (var sr = new System.IO.StreamReader("queryJoints.py"))
 			{
 				inputWriter.Write(sr.ReadToEnd());
 			}
@@ -177,7 +183,7 @@ namespace NorbertPlugin
 		{
 			if (e.AttributeName == "userLogin")
 			{
-				if (e.OldValue != null && avatarEntities.ContainsKey((string)e.OldValue))
+				if (e.OldValue != null && entities.ContainsKey((string)e.OldValue))
 					entities.Remove((string)e.OldValue);
 				entities[(string)e.NewValue] = e.Entity;
 			}

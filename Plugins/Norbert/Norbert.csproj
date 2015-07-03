@@ -31,6 +31,9 @@
     <Reference Include="Renci.SshNet">
       <HintPath>..\..\ThirdParty\Renci.SshNet.dll</HintPath>
     </Reference>
+    <Reference Include="KIARA">
+      <HintPath>..\..\ThirdParty\KIARA\KIARA.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -45,6 +48,18 @@
     <ProjectReference Include="..\EventLoop\EventLoop.csproj">
       <Project>{6CD0FE0E-7D56-4E24-8568-625A13C37130}</Project>
       <Name>EventLoop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\DomainModel\DomainModel.csproj">
+      <Project>{79EF699D-6A88-4054-AF04-F22486DB47FA}</Project>
+      <Name>DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClientManager\ClientManager.csproj">
+      <Project>{E1955FF2-6109-4C71-9F13-486A48DE6C17}</Project>
+      <Name>ClientManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KIARA\KIARAPlugin.csproj">
+      <Project>{D5B8E5D2-A427-4985-B885-9EAC5BDDAB06}</Project>
+      <Name>KIARAPlugin</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
