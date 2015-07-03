@@ -143,6 +143,8 @@ namespace NorbertPlugin
 
 			var data = outputReader.ReadToEnd().Split(null);
 
+			Console.WriteLine(data);
+
 			for (int i = 0; i < data.Length;)
 			{
 				var key = data[i++];
@@ -180,9 +182,6 @@ namespace NorbertPlugin
 		{
 			var data = commandLine.Split();
 			AddEntity(data[0], data[1], data[2]);
-
-			CommandLine.Write("Enter something: ");
-			CommandLine.ReadLine();
 		}
 
 		void AddEntity(string hostName, string userName, string password)
