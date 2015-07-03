@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<title>[FIcontent] Augmented Resistance: Ciccio</title>
+		
+        <script src="scripts/xml3d.js" type="text/javascript" ></script>
+        <script src="scripts/camera.js" type="text/javascript"></script>
+	</head>
+    <body>
+        <xml3d activeView="#defaultView" style="width:800px; height:600px; background-color:darkgray;" >
+
+            <model src="assets/ciccio.xml#asset" \>
+                <!--
+                <assetdata name="config" >
+                    <float3 name="emissiveColor" >0.785367 0.16566 0.141604</float3>
+                    <float id="keyCiccio" name="key" >0</float>
+                </assetdata>
+            </model> -->
+
+
+            <!-- Light and View -->
+            <view id="defaultView" position="-10.0 14.0 50.065818786621094" orientation="0 1 0 -0.2"></view>
+
+            <lightshader id="light1" script="urn:xml3d:lightshader:directional">
+                <float3 name="intensity">0.6 0.6 0.6</float3>
+            </lightshader>
+            <group style="transform: translate3d(50px, 50px, 50px)" >
+                <light shader="#light1"></light>
+            </group>
+
+        </xml3d>
+        <!--
+        <script type="text/javascript" >
+            var mytime = 0;
+            var lastTime = Date.now();
+
+            var ciccioAnims = {
+                "walk": {
+                    "begin": 12,
+                    "end": 35
+                },
+                "run": {
+                    "begin": 42,
+                    "end": 65
+                },
+                "idle": {
+                    "begin": 71,
+                    "end": 122
+                },
+                "yesSir": {
+                    "begin": 140,
+                    "end": 212
+                },
+                "shoot": {
+                    "shootStart": {
+                        "begin": 218,
+                        "end": 255
+                    },
+                    "shoot": {
+                        "begin": 255,
+                        "end": 320
+                    },
+                    "shootEnd": {
+                        "begin": 320,
+                        "end": 350
+                    }
+                },
+                "death": {
+                    "begin": 360,
+                    "end": 400
+                }
+            }
+
+            var ft = 1.0 / 24.0;
+
+            var reqAniFrame = (window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame).bind(window);
+
+
+            var animFrames = ciccioAnims.idle;
+            var requestYesSir = false;
+
+
+            window.onload = function () {
+                var teamColorRed = "0.785367 0.16566 0.141604";
+                var teamColorBlue = "0.141604 0.46566 0.585367";
+
+                animFrames = ciccioAnims.idle;
+
+                reqAniFrame(updateAnim);
+            }
+
+
+            function updateAnim() {
+                var currTime = Date.now();
+                var diff = currTime - lastTime;
+                lastTime = currTime;
+
+                var modLength = (animFrames.begin - animFrames.end) * ft;
+
+                newtime = (mytime + diff / 1000) % modLength;
+
+                if (newtime < mytime) {
+                    if (requestYesSir) {
+                        // console.log("new iteration: yes sir");
+                        animFrames = ciccioAnims.yesSir;
+                        newtime = 0;
+                        requestYesSir = false;
+                    } else {
+                        // console.log("new iteration: idle");
+                        animFrames = ciccioAnims.idle;
+                        newtime = 0;
+                    }
+                }
+
+                var beginOffset = animFrames.begin * ft;
+
+                mytime = newtime;
+                var value = beginOffset + mytime;
+                document.getElementById("keyCiccio").textContent = value;
+
+                reqAniFrame(updateAnim);
+            }
+
+
+            function queueYesSir() {
+                requestYesSir = true;
+                setTimeout(queueYesSir, 10000);
+            }
+
+            setTimeout(queueYesSir, 5000);
+
+        </script> -->
+	</body>
+</html>

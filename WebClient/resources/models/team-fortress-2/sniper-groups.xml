@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml3d xmlns="http://www.w3.org/1999/xhtml">
+    <group style="transform: translate3d(-45px,-50px,-120px)">
+        <data id="sniperSkinned" compute="dataflow['resources/proprietary/team-fortress-2/asset/protos.xml#skinning']">
+            <data src="sniper-old.xml#meshbase"></data>
+            <data src="sniper-old.xml#anim_taunt02_heelClick"></data>
+            <float id="keySniper" name="key">0.8541666666668206</float>
+        </data>
+        <group shader="sniper-old.xml#shader_sniper_head">
+            <mesh type="triangles">
+                <data src="#sniperSkinned"></data>
+                <data src="sniper-old.xml#index_sniper_head"></data>
+            </mesh>
+        </group>
+        <group shader="sniper-old.xml#shader_eyeball_l">
+            <mesh type="triangles">
+                <data src="#sniperSkinned"></data>
+                <data src="sniper-old.xml#index_eyeball_l"></data>
+            </mesh>
+        </group>
+        <group shader="sniper-old.xml#shader_eyeball_r">
+            <mesh type="triangles">
+                <data src="#sniperSkinned"></data>
+                <data src="sniper-old.xml#index_eyeball_r"></data>
+            </mesh>
+        </group>
+        <group shader="sniper-old.xml#shader_sniper_red">
+            <mesh type="triangles">
+                <data src="#sniperSkinned"></data>
+                <data src="sniper-old.xml#index_sniper_red"></data>
+            </mesh>
+        </group>
+        <group shader="sniper-old.xml#shader_sniper_lens">
+            <mesh type="triangles">
+                <data src="#sniperSkinned"></data>
+                <data src="sniper-old.xml#index_sniper_lens"></data>
+            </mesh>
+        </group>
+        <group shader="sniper-old.xml#shader_c_arrow">
+            <mesh type="triangles">
+                <data src="#sniperSkinned"></data>
+                <data src="sniper-old.xml#index_c_arrow"></data>
+            </mesh>
+        </group>
+        <animations>
+            <anim name="taunt" startKey = "0" endKey = "3.375" speed = "1" loop = "true" cycles = "1" key="#keySniper" />
+        </animations>
+    </group>
+   </xml3d>
