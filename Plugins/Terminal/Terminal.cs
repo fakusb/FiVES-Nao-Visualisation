@@ -293,7 +293,7 @@ namespace TerminalPlugin
             ConsoleKey consoleKey = info.Key;
             char consoleChar = info.KeyChar;
 
-            return (consoleKey >= ConsoleKey.A && consoleKey <= ConsoleKey.Z) ||
+			return true; /*(consoleKey >= ConsoleKey.A && consoleKey <= ConsoleKey.Z) ||
                 (consoleKey >= ConsoleKey.D0 && consoleKey <= ConsoleKey.D9) ||
                 consoleChar == '?' || consoleChar == '"' || consoleChar == '+' || consoleChar == '(' ||
                 consoleChar == ')' || consoleChar == '-' || consoleKey == ConsoleKey.Oem1 ||
@@ -301,7 +301,7 @@ namespace TerminalPlugin
                 consoleKey == ConsoleKey.OemComma || consoleKey == ConsoleKey.OemMinus ||
                 consoleKey == ConsoleKey.Add || consoleKey == ConsoleKey.Divide || consoleKey == ConsoleKey.Multiply ||
                 consoleKey == ConsoleKey.Subtract || consoleKey == ConsoleKey.Oem102 ||
-                consoleKey == ConsoleKey.Decimal || consoleKey == ConsoleKey.Spacebar;
+                consoleKey == ConsoleKey.Decimal || consoleKey == ConsoleKey.Spacebar;*/
         }
 
         private class CommandInfo
