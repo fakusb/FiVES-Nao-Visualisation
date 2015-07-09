@@ -84,6 +84,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{32339A
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ssh-playground", "ssh-playground\ssh-playground.csproj", "{6ED2A9D3-3ACD-4E29-B74B-C9EBFE470E8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -146,6 +148,10 @@ Global
 		{6CD0FE0E-7D56-4E24-8568-625A13C37130}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CD0FE0E-7D56-4E24-8568-625A13C37130}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CD0FE0E-7D56-4E24-8568-625A13C37130}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ED2A9D3-3ACD-4E29-B74B-C9EBFE470E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ED2A9D3-3ACD-4E29-B74B-C9EBFE470E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ED2A9D3-3ACD-4E29-B74B-C9EBFE470E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ED2A9D3-3ACD-4E29-B74B-C9EBFE470E8B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{74073FC3-BC58-45A8-9897-4A718F903916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{74073FC3-BC58-45A8-9897-4A718F903916}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74073FC3-BC58-45A8-9897-4A718F903916}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -265,7 +271,7 @@ Global
 		{B698B7A2-8E46-4D92-9229-1A68F8BFC545} = {4493E16B-2266-45D8-A0B5-F998EF9B790E}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Core\FIVES\FIVES.csproj
+		StartupItem = ssh-playground\ssh-playground.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None
