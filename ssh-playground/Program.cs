@@ -8,17 +8,16 @@ namespace sshplayground
 	{
 
 		private static SshClient client;
-		private static System.IO.TextWriter input;
-		private static System.IO.TextReader output;
 		private static ShellStream sshStream;
 
 
-		private static void sendReceive(string toSend)
+		private static string command(string cmd, int timeout=100)
 		{
-			input.WriteLine(toSend);
-			input.Flush();
-			System.Threading.Thread.Sleep(1000);
-			Console.Write(output.ReadToEnd());
+			sshStream.WriteLine(cmd);
+			System.Threading.Thread.Sleep(timeout);
+			string s = sshStream.Read();
+			Console.Write(s);
+			return s;
 		}
 
 
@@ -41,17 +40,18 @@ namespace sshplayground
 
 			sshStream = client.CreateShellStream("", 80, 40, 80, 40, 1024);
 
+			System.Threading.Thread.Sleep(500);
+			Console.Write(sshStream.Read());
 
-			input = new System.IO.StreamWriter(sshStream);
-			output = new System.IO.StreamReader(sshStream);
+			command("python");
 
-			sendReceive("echo Hallo");
-
-
-			/*
 			using (var sr = new System.IO.StreamReader("queryJoints.py"))
-				sendReceive(sr.ReadToEnd());
-			*/
+			{
+				String line;
+				while ((line = sr.ReadLine()) != null)
+					command(line);
+			}
+
 
 			/*
 			shell = client.CreateShell(input, output, null);
@@ -75,11 +75,11 @@ namespace sshplayground
 
 		private static void queryJoints()
 		{
-			input.WriteLine("query()");
+			//input.WriteLine("query()");
 
-			var data = output.ReadToEnd().Split(null);
+			//var data = output.ReadToEnd().Split(null);
 
-			Console.WriteLine(data);
+			//Console.WriteLine(data);
 		}
 
 		public static void Main (string[] args)
