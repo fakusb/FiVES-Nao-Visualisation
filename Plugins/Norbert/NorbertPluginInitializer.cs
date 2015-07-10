@@ -4,6 +4,8 @@ using FIVES;
 using ClientManagerPlugin;
 using EventLoopPlugin;
 using Renci.SshNet;
+using Renci.SshNet.Common;
+using System.Text.RegularExpressions;
 using KIARA;
 using KIARAPlugin;
 using TerminalPlugin;
@@ -15,13 +17,14 @@ namespace NorbertPlugin
 		// Stores all the robot entities:
 		private List<Entity> entities = new List<Entity>();
 
-		// Connection to the robot:
+		// SSH infrastructure:
 		private SshClient client;
-		private System.IO.MemoryStream input = new System.IO.MemoryStream();
-		private System.IO.MemoryStream output = new System.IO.MemoryStream();
-		private System.IO.TextWriter inputWriter;
-		private System.IO.TextReader outputReader;
-		private Shell shell;
+		private ShellStream sshStream;
+		private Regex shellTerm = new Regex("\\$");
+		private Regex pythonTerm = new Regex("\\>\\>\\>|\\.\\.\\.");
+		private bool shellReady = false;
+		private bool pythonReady = false;
+
 	
 		// Our component definition:
 		private ComponentDefinition posture = new ComponentDefinition("nao_posture");
@@ -29,9 +32,6 @@ namespace NorbertPlugin
 
 		public void Initialize ()
 		{
-			inputWriter = new System.IO.StreamWriter(input);
-			outputReader = new System.IO.StreamReader(output);
-
 			Terminal.Instance.RegisterCommand("nao", "Adds an entity for a NAO robot", false,
 				AddEntity);
 
@@ -41,13 +41,7 @@ namespace NorbertPlugin
 
 		public void Shutdown ()
 		{
-			if (client != null)
-			{
-				shell.Stop();
-				client.Disconnect();
-				client.Dispose();
-				client = null;
-			}
+			//TODO Close the connection properly!
 		}
 
 		public string Name {
@@ -117,43 +111,94 @@ namespace NorbertPlugin
 				CheckAndRegisterEntity(entity);
 		}
 
+		private string command(string cmd, Regex terminator, Regex readyTerminator=null)
+		{
+			if (readyTerminator!=null)
+				sshStream.Expect(readyTerminator);
+
+			sshStream.WriteLine(cmd);
+
+			if (terminator == null)
+				return null;
+
+			string output = sshStream.Expect(terminator);
+
+			var s = output.IndexOf('\n');
+			var e = output.LastIndexOf('\n');
+
+			output = output.Substring(s + 1, e - s);
+
+			return output;
+		}
+
+		private string shellCommand(string cmd)
+		{
+			return shellCommand(cmd, shellTerm);
+		}
+
+		private string shellCommand(string cmd, Regex terminator)
+		{
+			var r = command(cmd, terminator, shellReady ? null : shellTerm);
+			shellReady = true;
+			return r;
+		}
+
+		private string pythonCommand(string cmd)
+		{
+			return pythonCommand(cmd, pythonTerm);
+		}
+
+		private string pythonCommand(string cmd, Regex terminator)
+		{
+			var r = command(cmd, terminator, pythonReady ? null : pythonTerm);
+			pythonReady = true;
+			return r;
+		}
+
 		private void connect(string hostName, string userName, string password)
 		{
 			if (client != null && client.IsConnected)
 				return;
 
-			client = new SshClient(new PasswordConnectionInfo(hostName, userName, password));
-			shell = client.CreateShell(input, output, null);
 
-			shell.Start();
+			var connectionInfo = new KeyboardInteractiveConnectionInfo(hostName, userName);
+			connectionInfo.AuthenticationPrompt += delegate(object sender, AuthenticationPromptEventArgs e)
+			{
+				foreach (var prompt in e.Prompts)
+					prompt.Response = password;
+			};
 
-			inputWriter.WriteLine("python");
+			client = new SshClient(connectionInfo);
+			client.Connect();
+
+			sshStream = client.CreateShellStream("", 80, 40, 80, 40, 1024);
+
+			shellCommand("python", null);
 
 			using (var sr = new System.IO.StreamReader("queryJoints.py"))
 			{
-				inputWriter.Write(sr.ReadToEnd());
+				String line;
+				while ((line = sr.ReadLine()) != null)
+					pythonCommand(line);
 			}
-
-			outputReader.ReadToEnd();
 		}
 
 		private void queryJoints()
 		{
-			inputWriter.WriteLine("query()");
+			string line;
 
-			var data = outputReader.ReadToEnd().Split(null);
+			using (var sr = new System.IO.StringReader(pythonCommand("query()")))
+				while ((line = sr.ReadLine()) != null)
+				{
+					var data = line.Trim().Split();
+					var key = data[0];
+					var val = double.Parse(data[1]);
 
-			Console.WriteLine(data);
+					foreach (Entity entity in entities)
+						entity["nao_posture"][key].Suggest(val);
 
-			for (int i = 0; i < data.Length;)
-			{
-				var key = data[i++];
-				var val = data[i++];
-
-				foreach (Entity entity in entities)
-					entity["nao_posture"][key].Suggest(val);
-			}
-
+					Console.WriteLine("{0} = {1}", key, val);
+				}
 		}
 
 		/// <summary>
