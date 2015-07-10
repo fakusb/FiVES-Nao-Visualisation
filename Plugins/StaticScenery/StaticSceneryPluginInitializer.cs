@@ -94,9 +94,9 @@ namespace StaticSceneryPlugin
             World.Instance.Add(sceneryEntity);
         }
 
-        internal string SceneryURL = "";
+		internal string SceneryURL = "resources/proprietary/megacity/megacity.xml";
         internal float OffsetX = 0f;
-        internal float OffsetY = 0f;
+        internal float OffsetY = -2.0f;
         internal float OffsetZ = 0f;
 
         private static Logger logger = LogManager.GetCurrentClassLogger();
