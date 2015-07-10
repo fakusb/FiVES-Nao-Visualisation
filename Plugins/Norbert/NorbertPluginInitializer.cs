@@ -102,7 +102,6 @@ namespace NorbertPlugin
 		/// </summary>
 		private void RegisterEvents()
 		{
-			EventLoop.Instance.TickFired += new EventHandler<TickEventArgs>(HandleEventTick);
 
 
 			World.Instance.AddedEntity += HandleAddedEntity;
@@ -181,6 +180,8 @@ namespace NorbertPlugin
 				while ((line = sr.ReadLine()) != null)
 					pythonCommand(line);
 			}
+
+			EventLoop.Instance.TickFired += new EventHandler<TickEventArgs>(HandleEventTick);
 		}
 
 		private void queryJoints()
@@ -208,8 +209,7 @@ namespace NorbertPlugin
 		/// <param name="e">TickEventArgs</param>
 		private void HandleEventTick(Object sender, TickEventArgs e)
 		{
-			if (client != null && client.IsConnected)
-				queryJoints();
+			queryJoints();
 		}
 	
 		void HandleAddedEntity (object sender, EntityEventArgs e)
@@ -230,12 +230,12 @@ namespace NorbertPlugin
 		}
 
 		void AddEntity(string hostName, string userName, string password)
-		{
+		{	
 			connect(hostName, userName, password);
+			
 			var e = new Entity();
-
 			World.Instance.Add(e);
-			CheckAndRegisterEntity(e);
+			CheckAndRegisterEntity (e);
 		}
 
 	}
