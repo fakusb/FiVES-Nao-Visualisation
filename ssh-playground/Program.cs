@@ -11,7 +11,7 @@ namespace sshplayground
 		private static ShellStream sshStream;
 
 
-		private static string command(string cmd, int timeout=100)
+		private static string command(string cmd, int timeout=500)
 		{
 			sshStream.WriteLine(cmd);
 			System.Threading.Thread.Sleep(timeout);
@@ -51,42 +51,19 @@ namespace sshplayground
 				while ((line = sr.ReadLine()) != null)
 					command(line);
 			}
-
-
-			/*
-			shell = client.CreateShell(input, output, null);
-
-			shell.Start();
-
-			inputWriter.WriteLine("python");
-
-			inputWriter.Flush();
-
-			using (var sr = new System.IO.StreamReader("queryJoints.py"))
-			{
-				inputWriter.Write(sr.ReadToEnd());
-			}
-
-			inputWriter.Flush();
-
-			Console.WriteLine(outputReader.ReadToEnd());
-			*/
 		}
 
 		private static void queryJoints()
 		{
-			//input.WriteLine("query()");
+			var data = command("query()");
 
-			//var data = output.ReadToEnd().Split(null);
-
-			//Console.WriteLine(data);
+			Console.WriteLine(data);
 		}
 
 		public static void Main (string[] args)
 		{
-
-			connect("localhost", "nao", "nao");
-			//queryJoints();
+			connect("192.168.176.189", "nao", "nao");
+			queryJoints();
 		}
 	}
 }
