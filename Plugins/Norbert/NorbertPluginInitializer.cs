@@ -15,16 +15,7 @@ namespace NorbertPlugin
 	public class NorbertPluginInitializer : IPluginInitializer
 	{	
 		// Stores all the robot entities:
-		private List<Entity> entities = new List<Entity>();
-
-		// SSH infrastructure:
-		private SshClient client;
-		private ShellStream sshStream;
-		private Regex shellTerm = new Regex("\\$");
-		private Regex pythonTerm = new Regex("\\>\\>\\>|\\.\\.\\.");
-		private bool shellReady = false;
-		private bool pythonReady = false;
-
+		private Dictionary<Entity, NaoConnection> entities = new Dictionary<Entity, NaoConnection>();
 	
 		// Our component definition:
 		private ComponentDefinition posture = new ComponentDefinition("nao_posture");
@@ -41,7 +32,9 @@ namespace NorbertPlugin
 
 		public void Shutdown ()
 		{
-			//TODO Close the connection properly!
+			lock (entities)
+				foreach (NaoConnection nc in entities.Values)
+					nc.Dispose();
 		}
 
 		public string Name {
@@ -102,125 +95,22 @@ namespace NorbertPlugin
 		/// </summary>
 		private void RegisterEvents()
 		{
-
-
-			World.Instance.AddedEntity += HandleAddedEntity;
-
-			foreach (var entity in World.Instance)
-				CheckAndRegisterEntity(entity);
-		}
-
-		private string command(string cmd, Regex terminator, Regex readyTerminator=null)
-		{
-			if (readyTerminator!=null)
-				sshStream.Expect(readyTerminator);
-
-			sshStream.WriteLine(cmd);
-
-			if (terminator == null)
-				return null;
-
-			string output = sshStream.Expect(terminator);
-
-			var s = output.IndexOf('\n');
-			var e = output.LastIndexOf('\n');
-
-			output = output.Substring(s + 1, e - s);
-
-			return output;
-		}
-
-		private string shellCommand(string cmd)
-		{
-			return shellCommand(cmd, shellTerm);
-		}
-
-		private string shellCommand(string cmd, Regex terminator)
-		{
-			var r = command(cmd, terminator, shellReady ? null : shellTerm);
-			shellReady = true;
-			return r;
-		}
-
-		private string pythonCommand(string cmd)
-		{
-			return pythonCommand(cmd, pythonTerm);
-		}
-
-		private string pythonCommand(string cmd, Regex terminator)
-		{
-			var r = command(cmd, terminator, pythonReady ? null : pythonTerm);
-			pythonReady = true;
-			return r;
-		}
-
-		private void connect(string hostName, string userName, string password)
-		{
-			if (client != null && client.IsConnected)
-				return;
-
-
-			var connectionInfo = new KeyboardInteractiveConnectionInfo(hostName, userName);
-			connectionInfo.AuthenticationPrompt += delegate(object sender, AuthenticationPromptEventArgs e)
-			{
-				foreach (var prompt in e.Prompts)
-					prompt.Response = password;
-			};
-
-			client = new SshClient(connectionInfo);
-			client.Connect();
-
-			sshStream = client.CreateShellStream("", 80, 40, 80, 40, 1024);
-
-			shellCommand("python", null);
-
-			using (var sr = new System.IO.StreamReader("queryJoints.py"))
-			{
-				String line;
-				while ((line = sr.ReadLine()) != null)
-					pythonCommand(line);
-			}
-
 			EventLoop.Instance.TickFired += new EventHandler<TickEventArgs>(HandleEventTick);
 		}
 
-		private void queryJoints()
-		{
-			string line;
-
-			using (var sr = new System.IO.StringReader(pythonCommand("query()")))
-				while ((line = sr.ReadLine()) != null)
-				{
-					var data = line.Trim().Split();
-					var key = data[0];
-					var val = double.Parse(data[1]);
-
-					foreach (Entity entity in entities)
-						entity["nao_posture"][key].Suggest(val);
-
-					Console.WriteLine("{0} = {1}", key, val);
-				}
-		}
-
-		/// <summary>
-		/// Handles a TickFired Evenet of EventLoop. Queries the robot for its posture.
-		/// </summary>
-		/// <param name="sender">Sender of tick event args (EventLoop)</param>
-		/// <param name="e">TickEventArgs</param>
 		private void HandleEventTick(Object sender, TickEventArgs e)
 		{
-			queryJoints();
-		}
-	
-		void HandleAddedEntity (object sender, EntityEventArgs e)
-		{
-			CheckAndRegisterEntity(e.Entity);
-		}
+			lock(entities)
+			{
+				foreach (KeyValuePair<Entity, NaoConnection> ec in entities)
+				{
+					var entity = ec.Key;
+					var connection = ec.Value;
 
-		void CheckAndRegisterEntity(Entity entity)
-		{
-			if (entity.ContainsComponent("nao_posture"))
-				entities.Add(entity);
+					foreach (KeyValuePair<string, double> kv in connection.QueryJoints())
+						entity["nao_posture"][kv.Key].Suggest(kv.Value);
+				}
+			}
 		}
 
 		void AddEntity(string commandLine)
@@ -230,12 +120,14 @@ namespace NorbertPlugin
 		}
 
 		void AddEntity(string hostName, string userName, string password)
-		{	
-			connect(hostName, userName, password);
-			
+		{
 			var e = new Entity();
 			World.Instance.Add(e);
-			CheckAndRegisterEntity (e);
+
+			var connection = new NaoConnection(hostName, userName, password);
+
+			lock (entities)
+				entities[e] = connection;
 		}
 
 	}
