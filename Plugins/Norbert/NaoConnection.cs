@@ -1,27 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
+using FIVES;
+using ClientManagerPlugin;
+using EventLoopPlugin;
 using Renci.SshNet;
 using Renci.SshNet.Common;
 using System.Text.RegularExpressions;
+using KIARA;
+using KIARAPlugin;
+using TerminalPlugin;
 
-namespace sshplayground
+namespace NorbertPlugin
 {
-	class MainClass
-	{
+	public class NaoConnection : IDisposable
+	{	
+		// SSH infrastructure:
+		private SshClient client;
+		private ShellStream sshStream;
+		private Regex shellTerm = new Regex("\\$");
+		private Regex pythonTerm = new Regex("\\>\\>\\>|\\.\\.\\.");
+		private bool shellReady = false;
+		private bool pythonReady = false;
 
-		private static SshClient client;
-		private static ShellStream sshStream;
-
-
-		private static Regex shellTerm = new Regex("\\$");
-		private static Regex pythonTerm = new Regex("\\>\\>\\>|\\.\\.\\.");
-		private static bool shellReady = false;
-		private static bool pythonReady = false;
-
-
-		private static string command(string cmd, Regex terminator, Regex readyTerminator=null)
+		private string command(string cmd, Regex terminator, Regex readyTerminator=null)
 		{
 			if (readyTerminator!=null)
-				Console.Write(sshStream.Expect(readyTerminator));
+				sshStream.Expect(readyTerminator);
 
 			sshStream.WriteLine(cmd);
 
@@ -29,7 +33,6 @@ namespace sshplayground
 				return null;
 
 			string output = sshStream.Expect(terminator);
-			Console.Write(output);
 
 			var s = output.IndexOf('\n');
 			var e = output.LastIndexOf('\n');
@@ -39,36 +42,33 @@ namespace sshplayground
 			return output;
 		}
 
-		private static string shellCommand(string cmd)
+		private string shellCommand(string cmd)
 		{
 			return shellCommand(cmd, shellTerm);
 		}
 
-		private static string shellCommand(string cmd, Regex terminator)
+		private string shellCommand(string cmd, Regex terminator)
 		{
 			var r = command(cmd, terminator, shellReady ? null : shellTerm);
 			shellReady = true;
 			return r;
 		}
 
-		private static string pythonCommand(string cmd)
+		private string pythonCommand(string cmd)
 		{
 			return pythonCommand(cmd, pythonTerm);
 		}
 
-		private static string pythonCommand(string cmd, Regex terminator)
+		private string pythonCommand(string cmd, Regex terminator)
 		{
 			var r = command(cmd, terminator, pythonReady ? null : pythonTerm);
 			pythonReady = true;
 			return r;
 		}
 
-		private static void connect(string hostName, string userName, string password)
+
+		public NaoConnection(string hostName, string userName, string password)
 		{
-			if (client != null && client.IsConnected)
-				return;
-
-
 			var connectionInfo = new KeyboardInteractiveConnectionInfo(hostName, userName);
 			connectionInfo.AuthenticationPrompt += delegate(object sender, AuthenticationPromptEventArgs e)
 			{
@@ -91,22 +91,31 @@ namespace sshplayground
 			}
 		}
 
-		private static void queryJoints()
+		public Dictionary<string, double> QueryJoints()
 		{
 			string line;
+
+			Dictionary<string, double> queryResult = new Dictionary<string, double>();
 
 			using (var sr = new System.IO.StringReader(pythonCommand("query()")))
 				while ((line = sr.ReadLine()) != null)
 				{
 					var data = line.Trim().Split();
-					Console.WriteLine("{0} = {1}", data[0], data[1]);
+					var key = data[0];
+					var val = double.Parse(data[1]);
+
+					queryResult[key] = val;
 				}
+
+			return queryResult;
 		}
 
-		public static void Main (string[] args)
+		public void Dispose()
 		{
-			connect("192.168.176.189", "nao", "nao");
-			queryJoints();
+			sshStream.Dispose();
+			client.Disconnect();
+			client.Dispose();
 		}
 	}
 }
+

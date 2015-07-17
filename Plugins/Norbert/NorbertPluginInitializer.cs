@@ -4,6 +4,8 @@ using FIVES;
 using ClientManagerPlugin;
 using EventLoopPlugin;
 using Renci.SshNet;
+using Renci.SshNet.Common;
+using System.Text.RegularExpressions;
 using KIARA;
 using KIARAPlugin;
 using TerminalPlugin;
@@ -13,15 +15,7 @@ namespace NorbertPlugin
 	public class NorbertPluginInitializer : IPluginInitializer
 	{	
 		// Stores all the robot entities:
-		private List<Entity> entities = new List<Entity>();
-
-		// Connection to the robot:
-		private SshClient client;
-		private System.IO.MemoryStream input = new System.IO.MemoryStream();
-		private System.IO.MemoryStream output = new System.IO.MemoryStream();
-		private System.IO.TextWriter inputWriter;
-		private System.IO.TextReader outputReader;
-		private Shell shell;
+		private Dictionary<Entity, NaoConnection> entities = new Dictionary<Entity, NaoConnection>();
 	
 		// Our component definition:
 		private ComponentDefinition posture = new ComponentDefinition("nao_posture");
@@ -29,9 +23,6 @@ namespace NorbertPlugin
 
 		public void Initialize ()
 		{
-			inputWriter = new System.IO.StreamWriter(input);
-			outputReader = new System.IO.StreamReader(output);
-
 			Terminal.Instance.RegisterCommand("nao", "Adds an entity for a NAO robot", false,
 				AddEntity);
 
@@ -41,13 +32,9 @@ namespace NorbertPlugin
 
 		public void Shutdown ()
 		{
-			if (client != null)
-			{
-				shell.Stop();
-				client.Disconnect();
-				client.Dispose();
-				client = null;
-			}
+			lock (entities)
+				foreach (NaoConnection nc in entities.Values)
+					nc.Dispose();
 		}
 
 		public string Name {
@@ -109,73 +96,21 @@ namespace NorbertPlugin
 		private void RegisterEvents()
 		{
 			EventLoop.Instance.TickFired += new EventHandler<TickEventArgs>(HandleEventTick);
-
-
-			World.Instance.AddedEntity += HandleAddedEntity;
-
-			foreach (var entity in World.Instance)
-				CheckAndRegisterEntity(entity);
 		}
 
-		private void connect(string hostName, string userName, string password)
-		{
-			if (client != null && client.IsConnected)
-				return;
-
-			client = new SshClient(new PasswordConnectionInfo(hostName, userName, password));
-			shell = client.CreateShell(input, output, null);
-
-			shell.Start();
-
-			inputWriter.WriteLine("python");
-
-			using (var sr = new System.IO.StreamReader("queryJoints.py"))
-			{
-				inputWriter.Write(sr.ReadToEnd());
-			}
-
-			outputReader.ReadToEnd();
-		}
-
-		private void queryJoints()
-		{
-			inputWriter.WriteLine("query()");
-
-			var data = outputReader.ReadToEnd().Split(null);
-
-			Console.WriteLine(data);
-
-			for (int i = 0; i < data.Length;)
-			{
-				var key = data[i++];
-				var val = data[i++];
-
-				foreach (Entity entity in entities)
-					entity["nao_posture"][key].Suggest(val);
-			}
-
-		}
-
-		/// <summary>
-		/// Handles a TickFired Evenet of EventLoop. Queries the robot for its posture.
-		/// </summary>
-		/// <param name="sender">Sender of tick event args (EventLoop)</param>
-		/// <param name="e">TickEventArgs</param>
 		private void HandleEventTick(Object sender, TickEventArgs e)
 		{
-			if (client != null && client.IsConnected)
-				queryJoints();
-		}
-	
-		void HandleAddedEntity (object sender, EntityEventArgs e)
-		{
-			CheckAndRegisterEntity(e.Entity);
-		}
+			lock(entities)
+			{
+				foreach (KeyValuePair<Entity, NaoConnection> ec in entities)
+				{
+					var entity = ec.Key;
+					var connection = ec.Value;
 
-		void CheckAndRegisterEntity(Entity entity)
-		{
-			if (entity.ContainsComponent("nao_posture"))
-				entities.Add(entity);
+					foreach (KeyValuePair<string, double> kv in connection.QueryJoints())
+						entity["nao_posture"][kv.Key].Suggest(kv.Value);
+				}
+			}
 		}
 
 		void AddEntity(string commandLine)
@@ -186,11 +121,13 @@ namespace NorbertPlugin
 
 		void AddEntity(string hostName, string userName, string password)
 		{
-			connect(hostName, userName, password);
 			var e = new Entity();
-
 			World.Instance.Add(e);
-			CheckAndRegisterEntity(e);
+
+			var connection = new NaoConnection(hostName, userName, password);
+
+			lock (entities)
+				entities[e] = connection;
 		}
 
 	}
