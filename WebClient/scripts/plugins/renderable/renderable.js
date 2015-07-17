@@ -74,7 +74,8 @@ FIVES.Plugins = FIVES.Plugins || {};
         // Once this is fixed, we should use the following code instead:
         //scm.removeEntity(entity);
         //scm.addMeshForEntity(entity).
-        entity.xml3dView.groupElement.setAttribute("visible", entity["mesh"]["visible"]);
+        if (entity.xml3dView.groupElement)
+            entity.xml3dView.groupElement.setAttribute("visible", entity["mesh"]["visible"]);
     };
 
     FIVES.Plugins.Renderable = new renderable();
