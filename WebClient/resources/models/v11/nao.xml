@@ -9,8 +9,9 @@
             <float name="ambientIntensity">0.15555333</float>
             <float name="transparency">0.0</float>
         </shader>
+        <transform id="root_transform" scale="0.3 0.3 0.3" rotation="1.0 0.0 0.0 -1.57"/>
     </defs>
-    <group id="assetGroup" shader="#shader_test">
+    <group id="assetGroup" shader="#shader_test" transform="#root_transform">
 
         <group id="Chest" class="layer-0" style="transform:matrix3d(0.010000,0.000000,0.000000,0.000000,0.000000,0.010000,0.000000,0.000000,0.000000,0.000000,0.010000,0.000000,0.029162,0.000000,-0.989356,1.000000);" shader="#shader_test">
             <model src="assets/assets-0.xml#Chest" shader="#shader_test"></model>
