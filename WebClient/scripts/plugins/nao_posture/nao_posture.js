@@ -12,15 +12,15 @@ FIVES.Plugins = FIVES.Plugins || {};
 
     var _fivesCommunicator = FIVES.Communication.FivesCommunicator;
 
-    var posture = function() {
+    var nao_posture = function() {
         FIVES.Events.AddConnectionEstablishedHandler(this._createFunctionWrappers.bind(this));
         FIVES.Events.AddOnComponentUpdatedHandler(this._componentUpdatedHandler.bind(this));
     };
 
-    var l = posture.prototype;
+    var l = nao_posture.prototype;
 
     l._createFunctionWrappers = function (){
-        this.updateEntityHeadYaw = _fivesCommunicator.connection.generateFuncWrapper("posture.updateHeadYaw");
+        this.updateEntityHeadYaw = _fivesCommunicator.connection.generateFuncWrapper("nao_posture.updateHeadYaw");
     };
 
     l._componentUpdatedHandler = function(entity, componentName, attributeName) {
@@ -37,7 +37,7 @@ FIVES.Plugins = FIVES.Plugins || {};
 
     l.updateHeadYaw = function(entity, headYaw) {
 		console.log("updateHeadYaw");
-        //entity.posture.headYaw = headYaw;
+        //entity.nao_posture.headYaw = headYaw;
         //FIVES.Resources.SceneManager.applyPositionToXML3DView(entity);
     };
 
@@ -50,6 +50,6 @@ FIVES.Plugins = FIVES.Plugins || {};
         //this.updateEntityPosition(guid, position, _fivesCommunicator.generateTimestamp());
     };
 
-    FIVES.Plugins.Posture = new posture();
+    FIVES.Plugins.Posture = new nao_posture();
 
 }());
