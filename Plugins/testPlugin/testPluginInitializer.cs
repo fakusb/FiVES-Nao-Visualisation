@@ -75,7 +75,7 @@ namespace testPluginPlugin
 			Terminal.Instance.RegisterCommand("spawnSniper", "Spawns an new Sniper (NORBERT)", false,
 				SpawnSniper, new List<string> { "sniper" });
 			Terminal.Instance.RegisterCommand("spawnNao", "Spawns an new NORBERT (NORBERT)", false,
-				SpawnNao, new List<string> { "nao" });
+				SpawnNao, new List<string> {  });
 			Terminal.Instance.RegisterCommand("spawn", "Spawns an new Model with given Name (NORBERT)", false,
 				SpawnModelCommand, new List<string> { });
 			Terminal.Instance.RegisterCommand("despawn", "despawns the last spawned model (NORBERT)", false,

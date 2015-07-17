@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="generator" content="xml3d-blender-exporter v0.4.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="all" href="./public/style/normalize.css">
+    <link rel="stylesheet" type="text/css" media="all" href="./public/style/foundation.css">
+    <link rel="stylesheet" type="text/css" media="all" href="./public/style/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="./public/style/xml3d-blender-preview.css">
+    <script src="./public/scripts/vendor/modernizr.js"></script>
+    <script src="./public/scripts/vendor/jquery.js"></script>
+    <script src="./public/scripts/foundation.min.js"></script>
+    <script src="./common/scripts/xml3d/xml3d-4.9-min.js" type="text/javascript"></script>
+    <script src="./common/scripts/xml3d/camera.js" type="text/javascript"></script>
+    <script src="./common/scripts/blender-xflow.js" type="text/javascript"></script>
+    <script src="./public/scripts/stats.js" type="text/javascript"></script>
+    <script src="./public/scripts/xml3d-blender-preview.js" type="text/javascript"></script>
+
+
+    <title>Scene</title>
+</head>
+<body>
+<div class="fixed">
+    <nav class="top-bar bottom-bar">
+        <ul class="title-area">
+            <li class="name"><h1><a href="">XML3D-Blender</a></h1></li>
+        </ul>
+        <section class="top-bar-section">
+        <ul class="left">
+        </ul>
+        <ul class="right">
+            <li class='divider'></li>
+            <li><a class='renderStats' href='#'></a></li>
+            <li class='divider'></li>
+            <li><a href='#'><span class="fa fa-circle-o-notch fa-spin"></span></a></li>
+            <li class='divider'></li>
+            <li><a href="#" data-reveal-id="statisticsModal"><span class='fa fa-bar-chart'></span></a>
+            <li class='divider'></li>
+            <li><a href="#" data-reveal-id="warningsModal"><span id='bell' class='fa fa-bell-o fa-lg message-parent'></span></a>
+            </li>
+        </ul>
+        </section>
+    </nav>
+</div>
+<xml3d id="Scene" style="width: 100%; height: 100%; background-color:rgb(69,128,168);">
+ <defs></defs>
+ <view id="v_view"></view>
+ <group id="Chest" class="layer-0" style="transform:matrix3d(0.010000,0.000000,0.000000,0.000000,0.000000,0.010000,0.000000,0.000000,0.000000,0.000000,0.010000,0.000000,0.029162,0.000000,-0.989356,1.000000);">
+  <model src="assets/assets-0.xml#Chest"></model>
+  <group id="RShoulderPadMobil" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-2.866554,-98.000000,99.957069,1.000000);">
+   <model src="assets/assets-1.xml#RShoulderPadMobil-001"></model>
+   <group id="RBiceps" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,-0.049633,0.000000,-1.021519,1.000000);">
+    <model src="assets/assets-2.xml#RBiceps"></model>
+    <group id="RForeArm" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,104.999992,-15.000000,0.000000,1.000000);">
+     <model src="assets/assets-3.xml#RForeArm"></model>
+     <group id="RHand" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,55.950020,-0.000008,0.000000,1.000000);">
+      <model src="assets/assets-4.xml#RHand"></model>
+      <group id="RPhalax_7" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,50.031250,-0.099991,-25.950912,1.000000);">
+       <model src="assets/assets-5.xml#RPhalax_7"></model>
+       <group id="RPhalax_8" class="layer-0" style="transform:matrix3d(1.000000,-0.000000,0.000000,0.000000,-0.000000,1.000000,0.000000,0.000000,0.000000,-0.000000,1.000000,0.000000,5.618744,-0.073013,-13.254360,1.000000);">
+        <model src="assets/assets-6.xml#RPhalax_8"></model>
+       </group>
+      </group>
+      <group id="RPhalax_4" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,69.889999,11.450020,-2.914470,1.000000);">
+       <model src="assets/assets-7.xml#RPhalax_4"></model>
+       <group id="RPhalax_5" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,-0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,14.660004,0.000002,-0.000000,1.000000);">
+        <model src="assets/assets-0.xml#RPhalax_5"></model>
+        <group id="RPhalax_6" class="layer-0" style="transform:matrix3d(1.000000,-0.000000,0.000000,0.000000,-0.000000,1.000000,-0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,14.199966,0.000000,-0.000000,1.000000);">
+         <model src="assets/assets-1.xml#RPhalax_6"></model>
+        </group>
+       </group>
+      </group>
+      <group id="RPhalax_1" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,69.889999,-11.403168,-2.914470,1.000000);">
+       <model src="assets/assets-2.xml#RPhalax_1"></model>
+       <group id="RPhalax_2" class="layer-0" style="transform:matrix3d(1.000000,-0.000000,0.000000,0.000000,-0.000000,1.000000,-0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,14.660004,0.003181,0.000000,1.000000);">
+        <model src="assets/assets-3.xml#RPhalax_2"></model>
+        <group id="RPhalax_3" class="layer-0" style="transform:matrix3d(1.000000,0.000000,-0.000000,0.000000,-0.000000,1.000000,0.000000,0.000000,-0.000000,-0.000000,1.000000,0.000000,14.199966,0.000010,0.000000,1.000000);">
+         <model src="assets/assets-4.xml#RPhalax_3"></model>
+        </group>
+       </group>
+      </group>
+     </group>
+    </group>
+   </group>
+  </group>
+  <group id="Neck" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-0.970842,0.252345,126.475937,1.000000);">
+   <model src="assets/assets-5.xml#Neck"></model>
+   <group id="Head" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-3.367815,-0.000000,-0.435688,1.000000);">
+    <model src="assets/assets-6.xml#Head"></model>
+   </group>
+  </group>
+  <group id="LShoulderPadMobile" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-0.637196,98.000000,100.484627,1.000000);">
+   <model src="assets/assets-7.xml#LShoulderPadMobile"></model>
+   <group id="LBiceps" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,-2.278991,0.000000,-1.549082,1.000000);">
+    <model src="assets/assets-0.xml#LBiceps"></model>
+    <group id="LForeArm" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,104.999992,15.000000,0.000000,1.000000);">
+     <model src="assets/assets-1.xml#LForeArm"></model>
+     <group id="LHand" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,55.950020,0.000008,0.000000,1.000000);">
+      <model src="assets/assets-2.xml#LHand"></model>
+      <group id="LPhalax_7" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,50.031250,0.099991,-25.950912,1.000000);">
+       <model src="assets/assets-3.xml#LPhalax_7"></model>
+       <group id="LPhalax_8" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,5.618744,0.070007,-13.254360,1.000000);">
+        <model src="assets/assets-4.xml#LPhalax_8"></model>
+       </group>
+      </group>
+      <group id="LPhalax_1" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,69.889999,11.399986,-2.914470,1.000000);">
+       <model src="assets/assets-5.xml#LPhalax_1"></model>
+       <group id="LPhalax_2" class="layer-0" style="transform:matrix3d(1.000000,-0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,-0.000000,1.000000,0.000000,14.660004,0.000006,0.000000,1.000000);">
+        <model src="assets/assets-6.xml#LPhalax_2"></model>
+        <group id="LPhalax_3" class="layer-0" style="transform:matrix3d(1.000000,0.000000,-0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,14.199966,0.000018,-0.000000,1.000000);">
+         <model src="assets/assets-7.xml#LPhalax_3"></model>
+        </group>
+       </group>
+      </group>
+      <group id="LPhalax_4" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,69.889999,-11.450020,-2.914470,1.000000);">
+       <model src="assets/assets-0.xml#LPhalax_4"></model>
+       <group id="LPhalax_5" class="layer-0" style="transform:matrix3d(1.000000,-0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,-0.000000,1.000000,0.000000,14.660004,-0.000002,-0.000000,1.000000);">
+        <model src="assets/assets-1.xml#LPhalax_5"></model>
+        <group id="LPhalax_6" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,14.199997,-0.000015,0.000000,1.000000);">
+         <model src="assets/assets-2.xml#LPhalax_6"></model>
+        </group>
+       </group>
+      </group>
+     </group>
+    </group>
+   </group>
+  </group>
+  <group id="LHip" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-2.556187,14.659999,-50.314453,1.000000);">
+   <model src="assets/assets-3.xml#LHip"></model>
+   <group id="LUpperThigh" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,-0.000000,1.000000,0.000001,0.000000,0.000000,0.000000,1.000000,0.000000,-0.360000,35.330002,-35.450573,1.000000);">
+    <model src="assets/assets-4.xml#LUpperThigh"></model>
+    <group id="LThigh" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,-0.000001,0.000000,0.000000,-0.000000,1.000000,0.000000,0.000000,0.000000,0.000597,1.000000);">
+     <model src="assets/assets-5.xml#LThigh"></model>
+     <group id="LShinebone" class="layer-0" style="transform:matrix3d(1.000000,-0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,-0.000000,-0.000036,-103.799988,1.000000);">
+      <model src="assets/assets-6.xml#LShinebone"></model>
+      <group id="LAnkle" class="layer-0" style="transform:matrix3d(1.000000,0.000000,-0.000000,0.000000,-0.000000,1.000000,-0.000000,0.000000,0.000000,-0.000000,1.000000,0.000000,-0.000000,-0.000024,-100.999947,1.000000);">
+       <model src="assets/assets-7.xml#LAnkle"></model>
+       <group id="LFoot" class="layer-0" style="transform:matrix3d(1.000000,-0.000000,-0.000000,0.000000,-0.000000,1.000000,-0.000001,0.000000,0.000000,0.000000,1.000000,0.000000,-0.000000,-0.000004,0.000015,1.000000);">
+        <model src="assets/assets-0.xml#LFoot"></model>
+       </group>
+      </group>
+     </group>
+    </group>
+   </group>
+  </group>
+  <group id="RHip" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-2.556187,-14.659999,-50.314453,1.000000);">
+   <model src="assets/assets-1.xml#RHip"></model>
+   <group id="RUpperThigh" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,-0.000001,0.000000,0.000000,0.000000,1.000000,0.000000,-0.360000,-35.330002,-35.450573,1.000000);">
+    <model src="assets/assets-2.xml#RUpperThigh"></model>
+    <group id="RThigh" class="layer-0" style="transform:matrix3d(1.000000,-0.000000,0.000000,0.000000,-0.000000,1.000000,0.000001,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000597,1.000000);">
+     <model src="assets/assets-3.xml#RThigh"></model>
+     <group id="RShinebone" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,-0.000000,1.000000,-0.000000,0.000000,0.000000,-0.000000,1.000000,0.000000,-0.000000,0.000036,-103.799988,1.000000);">
+      <model src="assets/assets-4.xml#RShinebone"></model>
+      <group id="RAnkle" class="layer-0" style="transform:matrix3d(1.000000,-0.000000,-0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,-0.000000,0.000024,-100.999947,1.000000);">
+       <model src="assets/assets-5.xml#RAnkle"></model>
+       <group id="RFoot" class="layer-0" style="transform:matrix3d(1.000000,0.000000,-0.000000,0.000000,0.000000,1.000000,0.000001,0.000000,0.000000,-0.000000,1.000000,0.000000,-0.000000,0.000004,0.000015,1.000000);">
+        <model src="assets/assets-6.xml#RFoot"></model>
+       </group>
+      </group>
+     </group>
+    </group>
+   </group>
+  </group>
+ </group>
+</xml3d>
+
+<div id="warningsModal" class="reveal-modal" data-reveal>
+  <h4><i class="fa fa-exclamation-triangle"></i> Warnings</h4><hr>
+  <div class="warningsList"></div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+<div id="statisticsModal" class="reveal-modal" data-reveal>
+    <div class="d3Target"></div>
+      <a class="close-reveal-modal">&#215;</a>
+</div>
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html>

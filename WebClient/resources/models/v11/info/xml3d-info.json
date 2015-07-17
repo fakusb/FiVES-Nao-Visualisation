@@ -1,0 +1,69 @@
+{
+    "animations": [],
+    "armatures": [],
+    "assets": [
+        {
+            "name": "assets-3.xml",
+            "size": 1203795,
+            "url": "/home/fabian/Schreibtisch/v11/assets/assets-3.xml"
+        },
+        {
+            "name": "assets-1.xml",
+            "size": 960223,
+            "url": "/home/fabian/Schreibtisch/v11/assets/assets-1.xml"
+        },
+        {
+            "name": "assets-7.xml",
+            "size": 268286,
+            "url": "/home/fabian/Schreibtisch/v11/assets/assets-7.xml"
+        },
+        {
+            "name": "assets-5.xml",
+            "size": 516046,
+            "url": "/home/fabian/Schreibtisch/v11/assets/assets-5.xml"
+        },
+        {
+            "name": "assets-2.xml",
+            "size": 1073724,
+            "url": "/home/fabian/Schreibtisch/v11/assets/assets-2.xml"
+        },
+        {
+            "name": "assets-6.xml",
+            "size": 2331739,
+            "url": "/home/fabian/Schreibtisch/v11/assets/assets-6.xml"
+        },
+        {
+            "name": "assets-0.xml",
+            "size": 2297013,
+            "url": "/home/fabian/Schreibtisch/v11/assets/assets-0.xml"
+        },
+        {
+            "name": "assets-4.xml",
+            "size": 1060844,
+            "url": "/home/fabian/Schreibtisch/v11/assets/assets-4.xml"
+        }
+    ],
+    "groups": 39,
+    "lights": 0,
+    "materials": [
+        {
+            "name": "shared-materials.xml",
+            "size": 5652
+        }
+    ],
+    "meshes": [],
+    "scene": {
+        "name": "nao-v4-hierarchie-origins.html",
+        "size": 14076
+    },
+    "textures": [],
+    "views": 0,
+    "warnings": [
+        {
+            "category": "camera",
+            "issue": null,
+            "message": "Scene 'Scene' has no active camera set.",
+            "object": null
+        }
+    ]
+}

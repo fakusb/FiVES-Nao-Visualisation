@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="generator" content="xml3d-blender-exporter v0.4.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="all" href="./public/style/normalize.css">
+    <link rel="stylesheet" type="text/css" media="all" href="./public/style/foundation.css">
+    <link rel="stylesheet" type="text/css" media="all" href="./public/style/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="./public/style/xml3d-blender-preview.css">
+    <script src="./public/scripts/vendor/modernizr.js"></script>
+    <script src="./public/scripts/vendor/jquery.js"></script>
+    <script src="./public/scripts/foundation.min.js"></script>
+    <script src="./common/scripts/xml3d/xml3d-4.9-min.js" type="text/javascript"></script>
+    <script src="./common/scripts/xml3d/camera.js" type="text/javascript"></script>
+    <script src="./common/scripts/blender-xflow.js" type="text/javascript"></script>
+    <script src="./public/scripts/stats.js" type="text/javascript"></script>
+    <script src="./public/scripts/xml3d-blender-preview.js" type="text/javascript"></script>
+
+
+    <title>Scene</title>
+</head>
+<body>
+<div class="fixed">
+    <nav class="top-bar bottom-bar">
+        <ul class="title-area">
+            <li class="name"><h1><a href="">XML3D-Blender</a></h1></li>
+        </ul>
+        <section class="top-bar-section">
+        <ul class="left">
+        </ul>
+        <ul class="right">
+            <li class='divider'></li>
+            <li><a class='renderStats' href='#'></a></li>
+            <li class='divider'></li>
+            <li><a href='#'><span class="fa fa-circle-o-notch fa-spin"></span></a></li>
+            <li class='divider'></li>
+            <li><a href="#" data-reveal-id="statisticsModal"><span class='fa fa-bar-chart'></span></a>
+            <li class='divider'></li>
+            <li><a href="#" data-reveal-id="warningsModal"><span id='bell' class='fa fa-bell-o fa-lg message-parent'></span></a>
+            </li>
+        </ul>
+        </section>
+    </nav>
+</div>
+<xml3d id="Scene" style="width: 100%; height: 100%; background-color:rgb(69,128,168);">
+ <defs></defs>
+ <view id="v_view"></view>
+ <group id="Chest" class="layer-0" style="transform:matrix3d(_chest_1_1_,_chest_1_2_,_chest_1_3_,0.000000,_chest_2_1_,_chest_2_2_,_chest_2_3_,0.000000,_chest_3_1_,_chest_3_2_,_chest_3_3_,0.000000,0.029162,0.000000,-0.989356,1.000000);">
+  <model src="assets/assets-0.xml#Chest"></model>
+  <group id="RShoulderPadMobil" class="layer-0" style="transform:matrix3d(_rshoulder_1_1_,_rshoulder_1_2_,_rshoulder_1_3_,0.000000,_rshoulder_2_1_,_rshoulder_2_2_,_rshoulder_2_3_,0.000000,_rshoulder_3_1_,_rshoulder_3_2_,_rshoulder_3_3_,0.000000,-2.866554,-98.000000,99.957069,1.000000);">
+   <model src="assets/assets-1.xml#RShoulderPadMobil-001"></model>
+   <group id="RBiceps" class="layer-0" style="transform:matrix3d(_rbiceps_1_1_,_rbiceps_1_2_,_rbiceps_1_3_,0.000000,_rbiceps_2_1_,_rbiceps_2_2_,_rbiceps_2_3_,0.000000,_rbiceps_3_1_,_rbiceps_3_2_,_rbiceps_3_3_,0.000000,-0.049633,0.000000,-1.021519,1.000000);">
+    <model src="assets/assets-2.xml#RBiceps"></model>
+    <group id="RForeArm" class="layer-0" style="transform:matrix3d(_rforearm_1_1_,_rforearm_1_2_,_rforearm_1_3_,0.000000,_rforearm_2_1_,_rforearm_2_2_,_rforearm_2_3_,0.000000,_rforearm_3_1_,_rforearm_3_2_,_rforearm_3_3_,0.000000,104.999992,-15.000000,0.000000,1.000000);">
+     <model src="assets/assets-3.xml#RForeArm"></model>
+     <group id="RHand" class="layer-0" style="transform:matrix3d(_rhand_1_1_,_rhand_1_2_,_rhand_1_3_,0.000000,_rhand_2_1_,_rhand_2_2_,_rhand_2_3_,0.000000,_rhand_3_1_,_rhand_3_2_,_rhand_3_3_,0.000000,55.950020,-0.000008,0.000000,1.000000);">
+      <model src="assets/assets-4.xml#RHand"></model>
+      <group id="RPhalax_7" class="layer-0" style="transform:matrix3d(_rphalanx7_1_1_,_rphalanx7_1_2_,_rphalanx7_1_3_,0.000000,_rphalanx7_2_1_,_rphalanx7_2_2_,_rphalanx7_2_3_,0.000000,_rphalanx7_3_1_,_rphalanx7_3_2_,_rphalanx7_3_3_,0.000000,50.031250,-0.099991,-25.950912,1.000000);">
+       <model src="assets/assets-5.xml#RPhalax_7"></model>
+       <group id="RPhalax_8" class="layer-0" style="transform:matrix3d(_rphalanx8_1_1_,_rphalanx8_1_2_,_rphalanx8_1_3_,0.000000,_rphalanx8_2_1_,_rphalanx8_2_2_,_rphalanx8_2_3_,0.000000,_rphalanx8_3_1_,_rphalanx8_3_2_,_rphalanx8_3_3_,0.000000,5.618744,-0.073013,-13.254360,1.000000);">
+        <model src="assets/assets-6.xml#RPhalax_8"></model>
+       </group>
+      </group>
+      <group id="RPhalax_4" class="layer-0" style="transform:matrix3d(_rphalanx4_1_1_,_rphalanx4_1_2_,_rphalanx4_1_3_,0.000000,_rphalanx4_2_1_,_rphalanx4_2_2_,_rphalanx4_2_3_,0.000000,_rphalanx4_3_1_,_rphalanx4_3_2_,_rphalanx4_3_3_,0.000000,69.889999,11.450020,-2.914470,1.000000);">
+       <model src="assets/assets-7.xml#RPhalax_4"></model>
+       <group id="RPhalax_5" class="layer-0" style="transform:matrix3d(_rphalanx5_1_1_,_rphalanx5_1_2_,_rphalanx5_1_3_,0.000000,_rphalanx5_2_1_,_rphalanx5_2_2_,_rphalanx5_2_3_,0.000000,_rphalanx5_3_1_,_rphalanx5_3_2_,_rphalanx5_3_3_,0.000000,14.660004,0.000002,-0.000000,1.000000);">
+        <model src="assets/assets-0.xml#RPhalax_5"></model>
+        <group id="RPhalax_6" class="layer-0" style="transform:matrix3d(_rphalanx6_1_1_,_rphalanx6_1_2_,_rphalanx6_1_3_,0.000000,_rphalanx6_2_1_,_rphalanx6_2_2_,_rphalanx6_2_3_,0.000000,_rphalanx6_3_1_,_rphalanx6_3_2_,_rphalanx6_3_3_,0.000000,14.199966,0.000000,-0.000000,1.000000);">
+         <model src="assets/assets-1.xml#RPhalax_6"></model>
+        </group>
+       </group>
+      </group>
+      <group id="RPhalax_1" class="layer-0" style="transform:matrix3d(_rphalanx1_1_1_,_rphalanx1_1_2_,_rphalanx1_1_3_,0.000000,_rphalanx1_2_1_,_rphalanx1_2_2_,_rphalanx1_2_3_,0.000000,_rphalanx1_3_1_,_rphalanx1_3_2_,_rphalanx1_3_3_,0.000000,69.889999,-11.403168,-2.914470,1.000000);">
+       <model src="assets/assets-2.xml#RPhalax_1"></model>
+       <group id="RPhalax_2" class="layer-0" style="transform:matrix3d(_rphalanx2_1_1_,_rphalanx2_1_2_,_rphalanx2_1_3_,0.000000,_rphalanx2_2_1_,_rphalanx2_2_2_,_rphalanx2_2_3_,0.000000,_rphalanx2_3_1_,_rphalanx2_3_2_,_rphalanx2_3_3_,0.000000,14.660004,0.003181,0.000000,1.000000);">
+        <model src="assets/assets-3.xml#RPhalax_2"></model>
+        <group id="RPhalax_3" class="layer-0" style="transform:matrix3d(_rphalanx3_1_1_,_rphalanx3_1_2_,_rphalanx3_1_3_,0.000000,_rphalanx3_2_1_,_rphalanx3_2_2_,_rphalanx3_2_3_,0.000000,_rphalanx3_3_1_,_rphalanx3_3_2_,_rphalanx3_3_3_,0.000000,14.199966,0.000010,0.000000,1.000000);">
+         <model src="assets/assets-4.xml#RPhalax_3"></model>
+        </group>
+       </group>
+      </group>
+     </group>
+    </group>
+   </group>
+  </group>
+  <group id="Neck" class="layer-0" style="transform:matrix3d(_neck_1_1_,_neck_1_2_,_neck_1_3_,0.000000,_neck_2_1_,_neck_2_2_,_neck_2_3_,0.000000,_neck_3_1_,_neck_3_2_,_neck_3_3_,0.000000,-0.970842,0.252345,126.475937,1.000000);">
+   <model src="assets/assets-5.xml#Neck"></model>
+   <group id="Head" class="layer-0" style="transform:matrix3d(_head_1_1_,_head_1_2_,_head_1_3_,0.000000,_head_2_1_,_head_2_2_,_head_2_3_,0.000000,_head_3_1_,_head_3_2_,_head_3_3_,0.000000,-3.367815,-0.000000,-0.435688,1.000000);">
+    <model src="assets/assets-6.xml#Head"></model>
+   </group>
+  </group>
+  <group id="LShoulderPadMobile" class="layer-0" style="transform:matrix3d(_lshoulder_1_1_,_lshoulder_1_2_,_lshoulder_1_3_,0.000000,_lshoulder_2_1_,_lshoulder_2_2_,_lshoulder_2_3_,0.000000,_lshoulder_3_1_,_lshoulder_3_2_,_lshoulder_3_3_,0.000000,-0.637196,98.000000,100.484627,1.000000);">
+   <model src="assets/assets-7.xml#LShoulderPadMobile"></model>
+   <group id="LBiceps" class="layer-0" style="transform:matrix3d(_lbiceps_1_1_,_lbiceps_1_2_,_lbiceps_1_3_,0.000000,_lbiceps_2_1_,_lbiceps_2_2_,_lbiceps_2_3_,0.000000,_lbiceps_3_1_,_lbiceps_3_2_,_lbiceps_3_3_,0.000000,-2.278991,0.000000,-1.549082,1.000000);">
+    <model src="assets/assets-0.xml#LBiceps"></model>
+    <group id="LForeArm" class="layer-0" style="transform:matrix3d(_lforearm_1_1_,_lforearm_1_2_,_lforearm_1_3_,0.000000,_lforearm_2_1_,_lforearm_2_2_,_lforearm_2_3_,0.000000,_lforearm_3_1_,_lforearm_3_2_,_lforearm_3_3_,0.000000,104.999992,15.000000,0.000000,1.000000);">
+     <model src="assets/assets-1.xml#LForeArm"></model>
+     <group id="LHand" class="layer-0" style="transform:matrix3d(_lhand_1_1_,_lhand_1_2_,_lhand_1_3_,0.000000,_lhand_2_1_,_lhand_2_2_,_lhand_2_3_,0.000000,_lhand_3_1_,_lhand_3_2_,_lhand_3_3_,0.000000,55.950020,0.000008,0.000000,1.000000);">
+      <model src="assets/assets-2.xml#LHand"></model>
+      <group id="LPhalax_7" class="layer-0" style="transform:matrix3d(_lphalanx7_1_1_,_lphalanx7_1_2_,_lphalanx7_1_3_,0.000000,_lphalanx7_2_1_,_lphalanx7_2_2_,_lphalanx7_2_3_,0.000000,_lphalanx7_3_1_,_lphalanx7_3_2_,_lphalanx7_3_3_,0.000000,50.031250,0.099991,-25.950912,1.000000);">
+       <model src="assets/assets-3.xml#LPhalax_7"></model>
+       <group id="LPhalax_8" class="layer-0" style="transform:matrix3d(_lphalanx8_1_1_,_lphalanx8_1_2_,_lphalanx8_1_3_,0.000000,_lphalanx8_2_1_,_lphalanx8_2_2_,_lphalanx8_2_3_,0.000000,_lphalanx8_3_1_,_lphalanx8_3_2_,_lphalanx8_3_3_,0.000000,5.618744,0.070007,-13.254360,1.000000);">
+        <model src="assets/assets-4.xml#LPhalax_8"></model>
+       </group>
+      </group>
+      <group id="LPhalax_1" class="layer-0" style="transform:matrix3d(_lphalanx1_1_1_,_lphalanx1_1_2_,_lphalanx1_1_3_,0.000000,_lphalanx1_2_1_,_lphalanx1_2_2_,_lphalanx1_2_3_,0.000000,_lphalanx1_3_1_,_lphalanx1_3_2_,_lphalanx1_3_3_,0.000000,69.889999,11.399986,-2.914470,1.000000);">
+       <model src="assets/assets-5.xml#LPhalax_1"></model>
+       <group id="LPhalax_2" class="layer-0" style="transform:matrix3d(_lphalanx2_1_1_,_lphalanx2_1_2_,_lphalanx2_1_3_,0.000000,_lphalanx2_2_1_,_lphalanx2_2_2_,_lphalanx2_2_3_,0.000000,_lphalanx2_3_1_,_lphalanx2_3_2_,_lphalanx2_3_3_,0.000000,14.660004,0.000006,0.000000,1.000000);">
+        <model src="assets/assets-6.xml#LPhalax_2"></model>
+        <group id="LPhalax_3" class="layer-0" style="transform:matrix3d(_lphalanx3_1_1_,_lphalanx3_1_2_,_lphalanx3_1_3_,0.000000,_lphalanx3_2_1_,_lphalanx3_2_2_,_lphalanx3_2_3_,0.000000,_lphalanx3_3_1_,_lphalanx3_3_2_,_lphalanx3_3_3_,0.000000,14.199966,0.000018,-0.000000,1.000000);">
+         <model src="assets/assets-7.xml#LPhalax_3"></model>
+        </group>
+       </group>
+      </group>
+      <group id="LPhalax_4" class="layer-0" style="transform:matrix3d(_lphalanx4_1_1_,_lphalanx4_1_2_,_lphalanx4_1_3_,0.000000,_lphalanx4_2_1_,_lphalanx4_2_2_,_lphalanx4_2_3_,0.000000,_lphalanx4_3_1_,_lphalanx4_3_2_,_lphalanx4_3_3_,0.000000,69.889999,-11.450020,-2.914470,1.000000);">
+       <model src="assets/assets-0.xml#LPhalax_4"></model>
+       <group id="LPhalax_5" class="layer-0" style="transform:matrix3d(_lphalanx5_1_1_,_lphalanx5_1_2_,_lphalanx5_1_3_,0.000000,_lphalanx5_2_1_,_lphalanx5_2_2_,_lphalanx5_2_3_,0.000000,_lphalanx5_3_1_,_lphalanx5_3_2_,_lphalanx5_3_3_,0.000000,14.660004,-0.000002,-0.000000,1.000000);">
+        <model src="assets/assets-1.xml#LPhalax_5"></model>
+        <group id="LPhalax_6" class="layer-0" style="transform:matrix3d(_lphalanx6_1_1_,_lphalanx6_1_2_,_lphalanx6_1_3_,0.000000,_lphalanx6_2_1_,_lphalanx6_2_2_,_lphalanx6_2_3_,0.000000,_lphalanx6_3_1_,_lphalanx6_3_2_,_lphalanx6_3_3_,0.000000,14.199997,-0.000015,0.000000,1.000000);">
+         <model src="assets/assets-2.xml#LPhalax_6"></model>
+        </group>
+       </group>
+      </group>
+     </group>
+    </group>
+   </group>
+  </group>
+  <group id="LHip" class="layer-0" style="transform:matrix3d(_lhip_1_1_,_lhip_1_2_,_lhip_1_3_,0.000000,_lhip_2_1_,_lhip_2_2_,_lhip_2_3_,0.000000,_lhip_3_1_,_lhip_3_2_,_lhip_3_3_,0.000000,-2.556187,14.659999,-50.314453,1.000000);">
+   <model src="assets/assets-3.xml#LHip"></model>
+   <group id="LUpperThigh" class="layer-0" style="transform:matrix3d(_lupperthigh_1_1_,_lupperthigh_1_2_,_lupperthigh_1_3_,0.000000,_lupperthigh_2_1_,_lupperthigh_2_2_,_lupperthigh_2_3_,0.000000,_lupperthigh_3_1_,_lupperthigh_3_2_,_lupperthigh_3_3_,0.000000,-0.360000,35.330002,-35.450573,1.000000);">
+    <model src="assets/assets-4.xml#LUpperThigh"></model>
+    <group id="LThigh" class="layer-0" style="transform:matrix3d(_lthigh_1_1_,_lthigh_1_2_,_lthigh_1_3_,0.000000,_lthigh_2_1_,_lthigh_2_2_,_lthigh_2_3_,0.000000,_lthigh_3_1_,_lthigh_3_2_,_lthigh_3_3_,0.000000,0.000000,0.000000,0.000597,1.000000);">
+     <model src="assets/assets-5.xml#LThigh"></model>
+     <group id="LShinebone" class="layer-0" style="transform:matrix3d(_lshinebone_1_1_,_lshinebone_1_2_,_lshinebone_1_3_,0.000000,_lshinebone_2_1_,_lshinebone_2_2_,_lshinebone_2_3_,0.000000,_lshinebone_3_1_,_lshinebone_3_2_,_lshinebone_3_3_,0.000000,-0.000000,-0.000036,-103.799988,1.000000);">
+      <model src="assets/assets-6.xml#LShinebone"></model>
+      <group id="LAnkle" class="layer-0" style="transform:matrix3d(_lankle_1_1_,_lankle_1_2_,_lankle_1_3_,0.000000,_lankle_2_1_,_lankle_2_2_,_lankle_2_3_,0.000000,_lankle_3_1_,_lankle_3_2_,_lankle_3_3_,0.000000,-0.000000,-0.000024,-100.999947,1.000000);">
+       <model src="assets/assets-7.xml#LAnkle"></model>
+       <group id="LFoot" class="layer-0" style="transform:matrix3d(_lfoot_1_1_,_lfoot_1_2_,_lfoot_1_3_,0.000000,_lfoot_2_1_,_lfoot_2_2_,_lfoot_2_3_,0.000000,_lfoot_3_1_,_lfoot_3_2_,_lfoot_3_3_,0.000000,-0.000000,-0.000004,0.000015,1.000000);">
+        <model src="assets/assets-0.xml#LFoot"></model>
+       </group>
+      </group>
+     </group>
+    </group>
+   </group>
+  </group>
+  <group id="RHip" class="layer-0" style="transform:matrix3d(_rhip_1_1_,_rhip_1_2_,_rhip_1_3_,0.000000,_rhip_2_1_,_rhip_2_2_,_rhip_2_3_,0.000000,_rhip_3_1_,_rhip_3_2_,_rhip_3_3_,0.000000,-2.556187,-14.659999,-50.314453,1.000000);">
+   <model src="assets/assets-1.xml#RHip"></model>
+   <group id="RUpperThigh" class="layer-0" style="transform:matrix3d(_rupperthigh_1_1_,_rupperthigh_1_2_,_rupperthigh_1_3_,0.000000,_rupperthigh_2_1_,_rupperthigh_2_2_,_rupperthigh_2_3_,0.000000,_rupperthigh_3_1_,_rupperthigh_3_2_,_rupperthigh_3_3_,0.000000,-0.360000,-35.330002,-35.450573,1.000000);">
+    <model src="assets/assets-2.xml#RUpperThigh"></model>
+    <group id="RThigh" class="layer-0" style="transform:matrix3d(_rthigh_1_1_,_rthigh_1_2_,_rthigh_1_3_,0.000000,_rthigh_2_1_,_rthigh_2_2_,_rthigh_2_3_,0.000000,_rthigh_3_1_,_rthigh_3_2_,_rthigh_3_3_,0.000000,0.000000,-0.000000,0.000597,1.000000);">
+     <model src="assets/assets-3.xml#RThigh"></model>
+     <group id="RShinebone" class="layer-0" style="transform:matrix3d(_rshinebone_1_1_,_rshinebone_1_2_,_rshinebone_1_3_,0.000000,_rshinebone_2_1_,_rshinebone_2_2_,_rshinebone_2_3_,0.000000,_rshinebone_3_1_,_rshinebone_3_2_,_rshinebone_3_3_,0.000000,-0.000000,0.000036,-103.799988,1.000000);">
+      <model src="assets/assets-4.xml#RShinebone"></model>
+      <group id="RAnkle" class="layer-0" style="transform:matrix3d(_rankle_1_1_,_rankle_1_2_,_rankle_1_3_,0.000000,_rankle_2_1_,_rankle_2_2_,_rankle_2_3_,0.000000,_rankle_3_1_,_rankle_3_2_,_rankle_3_3_,0.000000,-0.000000,0.000024,-100.999947,1.000000);">
+       <model src="assets/assets-5.xml#RAnkle"></model>
+       <group id="RFoot" class="layer-0" style="transform:matrix3d(_rfoot_1_1_,_rfoot_1_2_,_rfoot_1_3_,0.000000,_rfoot_2_1_,_rfoot_2_2_,_rfoot_2_3_,0.000000,_rfoot_3_1_,_rfoot_3_2_,_rfoot_3_3_,0.000000,-0.000000,0.000004,0.000015,1.000000);">
+        <model src="assets/assets-6.xml#RFoot"></model>
+       </group>
+      </group>
+     </group>
+    </group>
+   </group>
+  </group>
+ </group>
+</xml3d>
+
+<div id="warningsModal" class="reveal-modal" data-reveal>
+  <h4><i class="fa fa-exclamation-triangle"></i> Warnings</h4><hr>
+  <div class="warningsList"></div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+<div id="statisticsModal" class="reveal-modal" data-reveal>
+    <div class="d3Target"></div>
+      <a class="close-reveal-modal">&#215;</a>
+</div>
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html>
