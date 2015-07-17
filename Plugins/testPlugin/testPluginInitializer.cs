@@ -22,7 +22,8 @@ namespace testPluginPlugin
 
 		//string tf2Mash = "resources/models/plane/plane.xml";
 		string fireTruckMash = "resources/models/firetruck/xml3d/firetruck.xml";
-		string planeMash = "resources/models/plane/plane.xml";
+		string SniperMash = "resources/models/team-fortress-2/sniper-model-FIVES.xml";
+		string naoMash = "resources/models/v11/nao.xml";
 
 		private void SpawnModel (string path){
 			Entity newModel = new Entity();
@@ -55,9 +56,14 @@ namespace testPluginPlugin
 			SpawnModel (fireTruckMash);
 		}
 
-		private void SpawnPlane (string commandLine)
+		private void SpawnNao (string commandLine)
 		{
-			SpawnModel (planeMash);
+			SpawnModel (naoMash);
+		}
+
+		private void SpawnSniper (string commandLine)
+		{
+			SpawnModel (SniperMash);
 		}
 
 		public void Initialize ()
@@ -66,8 +72,10 @@ namespace testPluginPlugin
 				PrintCurrentTime, new List<string> { "now" });
 			Terminal.Instance.RegisterCommand("spawnTruck", "Spawns an new Truck (NORBERT)", false,
 				SpawnTruck, new List<string> { "truck" });
-			Terminal.Instance.RegisterCommand("spawnPlane", "Spawns an new Plane (NORBERT)", false,
-				SpawnPlane, new List<string> { "plane" });
+			Terminal.Instance.RegisterCommand("spawnSniper", "Spawns an new Sniper (NORBERT)", false,
+				SpawnSniper, new List<string> { "sniper" });
+			Terminal.Instance.RegisterCommand("spawnNao", "Spawns an new NORBERT (NORBERT)", false,
+				SpawnNao, new List<string> { "nao" });
 			Terminal.Instance.RegisterCommand("spawn", "Spawns an new Model with given Name (NORBERT)", false,
 				SpawnModelCommand, new List<string> { });
 			Terminal.Instance.RegisterCommand("despawn", "despawns the last spawned model (NORBERT)", false,

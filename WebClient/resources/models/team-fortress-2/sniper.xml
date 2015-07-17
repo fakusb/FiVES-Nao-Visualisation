@@ -109,4 +109,9 @@
     <assetmesh shader="#shader_c_arrow" src="#index_c_arrow" includes="base" />
   </asset>
 
+    <!--
+        tranforms
+        -->
+    <transform id="root_transform" scale="0.01 0.01 0.01" rotation="0 0 0 0"/>
+
 </xml3d>

@@ -115,7 +115,7 @@ FIVES.Plugins = FIVES.Plugins || {};
                 center.z + viewDirection.z * 0.5);
         else
             rayOrigin = new XML3DVec3(center.x + viewDirection.x * 0.5,
-                boundingBox.max.y,
+                boundingBox.max.y+2,
                 center.z + viewDirection.z * 0.5);
 
         return rayOrigin;

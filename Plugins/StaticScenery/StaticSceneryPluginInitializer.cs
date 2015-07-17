@@ -46,18 +46,18 @@ namespace StaticSceneryPlugin
 
         public void Initialize()
         {
-            try
+            /*try
             {
                 ReadConfig();
             }
-            catch (Exception)
+            catch (Exception x)
             {
                 logger.Warn("Could not read Config for StaticScenery. Using default values instead.");
             }
             finally
-            {
+            {*/
                 CreateSceneryEntity();
-            }
+            //}
         }
 
         public void Shutdown()
@@ -94,11 +94,11 @@ namespace StaticSceneryPlugin
             World.Instance.Add(sceneryEntity);
         }
 
-		internal string SceneryURL = "resources/proprietary/megacity/megacity.xml";
+		internal string SceneryURL = "";//"resources/proprietary/megacity/megacity.xml";
         internal float OffsetX = 0f;
-        internal float OffsetY = -2.0f;
+        internal float OffsetY = 0f;
         internal float OffsetZ = 0f;
 
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        //private static Logger logger = LogManager.GetCurrentClassLogger();
     }
 }
