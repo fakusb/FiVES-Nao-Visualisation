@@ -119,11 +119,12 @@ namespace NorbertPlugin
 		void AddEntity(string hostName, string userName, string password)
 		{
 			var e = new Entity();
-			World.Instance.Add(e);
 
-			//e["mesh"]["uri"].Suggest("resources/models/v11/nao.xml");
-			//e["mesh"]["visible"].Suggest(true);
-			//e["location"]["position"].Suggest(new Vector(0, 0, 0));
+			e["mesh"]["uri"].Suggest("resources/models/v11/nao.xml");
+			e["mesh"]["visible"].Suggest(true);
+			e["location"]["position"].Suggest(new Vector(0, 10, 0));
+
+			World.Instance.Add(e);
 
 			var connection = new NaoConnection(hostName, userName, password);
 
