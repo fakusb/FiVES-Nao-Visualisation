@@ -26,12 +26,22 @@ FIVES.Plugins = FIVES.Plugins || {};
     l._componentUpdatedHandler = function(entity, componentName, attributeName) {
         if(componentName == "nao_posture")
         {
-			console.log(componentName + "." + attributeName + " = " + entity[componentName][attributeName]);
-						
-			// TODO: Update Mesh here!
+			//console.log(componentName + "." + attributeName + " = " + entity[componentName][attributeName]);
 			
-                // FIVES.Resources.SceneManager.applyPositionToXML3DView(entity);
-                // IVES.Resources.SceneManager.applyOrientationToXML3DView(entity);
+			if (componentName == "nao_posture" && attributeName == "HeadYaw")
+			{
+				console.log("Here we go!");
+				
+				var axisAngleRotation = new XML3DRotation();
+				
+				var zAxis = new XML3DVec3();
+				zAxis.x = 0;
+				zAxis.y = 0;
+				zAxis.z = 1;
+				
+				axisAngleRotation.setAxisAngle(zAxis, entity["nao_posture"]["HeadYaw"]);
+				transformationForEntity.rotation.set(axisAngleRotation);
+			}
         }
     };
 
