@@ -107,14 +107,10 @@ namespace NorbertPlugin
 					var val = double.Parse(data[1]);
 
 					double current;
-					if (!jointState.TryGetValue(key, current))
-					{
-						jointState[key] = val;
-						queryState[key] = val;
-					}
-					else
-						if (current != val || !updatesOnly)
-							queryState[key] = val;
+					if (!updatesOnly || !jointState.TryGetValue(key, out current) || current != val)
+						queryResult[key] = val;	
+
+					jointState[key] = val;
 				}
 
 			return queryResult;
