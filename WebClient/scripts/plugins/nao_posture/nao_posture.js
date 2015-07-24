@@ -26,8 +26,8 @@ FIVES.Plugins = FIVES.Plugins || {};
     l._componentUpdatedHandler = function(entity, componentName, attributeName) {
         if(componentName == "nao_posture")
         {
-			console.log(componentName + "." + attributeName + " updated!");
-			
+			console.log(componentName + "." + attributeName + " = " + entity[componentName][attributeName]);
+						
 			// TODO: Update Mesh here!
 			
                 // FIVES.Resources.SceneManager.applyPositionToXML3DView(entity);
