@@ -40,7 +40,13 @@ FIVES.Plugins = FIVES.Plugins || {};
 				zAxis.z = 1;
 				
 				axisAngleRotation.setAxisAngle(zAxis, entity["nao_posture"]["HeadYaw"]);
-				transformationForEntity.rotation.set(axisAngleRotation);
+				var transformationForEntity = entity.getTransformElement();
+				if(transformationForEntity)
+				{
+					console.log("Caua bunga!");
+					transformationForEntity.rotation.set(axisAngleRotation);
+				}
+				
 			}
         }
     };
