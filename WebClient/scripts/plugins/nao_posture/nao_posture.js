@@ -44,7 +44,8 @@ FIVES.Plugins = FIVES.Plugins || {};
 				if(transformationForEntity)
 				{
 					console.log("Caua bunga!");
-					transformationForEntity.rotation.set(axisAngleRotation);
+					entity.xml3dView.groupElement.getElementById("Head").transform.rotation.set(axisAngleRotation);
+					//transformationForEntity.rotation.set(axisAngleRotation);
 				}
 				
 			}
