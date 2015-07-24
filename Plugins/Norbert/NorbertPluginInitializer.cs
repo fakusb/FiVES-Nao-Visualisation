@@ -104,7 +104,7 @@ namespace NorbertPlugin
 					var entity = ec.Key;
 					var connection = ec.Value;
 
-					foreach (KeyValuePair<string, double> kv in connection.QueryJoints())
+					foreach (KeyValuePair<string, double> kv in connection.QueryJoints(true))
 						entity["nao_posture"][kv.Key].Suggest(kv.Value);
 				}
 			}

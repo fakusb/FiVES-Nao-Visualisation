@@ -22,6 +22,8 @@ namespace NorbertPlugin
 		private bool shellReady = false;
 		private bool pythonReady = false;
 
+		Dictionary<string, double> jointState = new Dictionary<string, double>();
+
 		private string command(string cmd, Regex terminator, Regex readyTerminator=null)
 		{
 			if (readyTerminator!=null)
@@ -91,7 +93,7 @@ namespace NorbertPlugin
 			}
 		}
 
-		public Dictionary<string, double> QueryJoints()
+		public Dictionary<string, double> QueryJoints(bool updatesOnly=false)
 		{
 			string line;
 
@@ -104,7 +106,15 @@ namespace NorbertPlugin
 					var key = data[0];
 					var val = double.Parse(data[1]);
 
-					queryResult[key] = val;
+					double current;
+					if (!jointState.TryGetValue(key, current))
+					{
+						jointState[key] = val;
+						queryState[key] = val;
+					}
+					else
+						if (current != val || !updatesOnly)
+							queryState[key] = val;
 				}
 
 			return queryResult;
