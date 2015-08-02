@@ -23,58 +23,87 @@ FIVES.Plugins = FIVES.Plugins || {};
         this.updateEntityHeadYaw = _fivesCommunicator.connection.generateFuncWrapper("nao_posture.updateHeadYaw");
     };
 
+    var xAxis = new XML3DVec3();
+    xAxis.x = 1;
+    xAxis.y = 0;
+    xAxis.z = 0;
+    var yAxis = new XML3DVec3();
+    yAxis.x = 0;
+    yAxis.y = 1;
+    yAxis.z = 0;
+    var zAxis = new XML3DVec3();
+    zAxis.x = 0;
+    zAxis.y = 0;
+    zAxis.z = 1;
+    var dict = {};
+    dict["HeadYaw"] = {obj: "Head_transform", axis: zAxis}
+
     l._componentUpdatedHandler = function(entity, componentName, attributeName) {
         if(componentName == "nao_posture")
         {
-			//console.log(componentName + "." + attributeName + " = " + entity[componentName][attributeName]);
-			
-			if (componentName == "nao_posture" && attributeName == "HeadYaw")
-			{
-				console.log("Here we go!");
-				
-				var axisAngleRotation = new XML3DRotation();
-				
-				var zAxis = new XML3DVec3();
-				zAxis.x = 0;
-				zAxis.y = 0;
-				zAxis.z = 1;
-				
-				axisAngleRotation.setAxisAngle(zAxis, entity["nao_posture"]["HeadYaw"]);
-				var transformationForEntity = entity.getTransformElement();
-				if(transformationForEntity)
-				{
-					console.log("Caua bunga!");
-					entity.xml3dView.groupElement.getElementById("Head").transform.rotation.set(axisAngleRotation);
-					//transformationForEntity.rotation.set(axisAngleRotation);
-				}
-				
-				
-				
-				/*
-				var _xml3dElement = FIVES.Resources.SceneManager.xml3dElement;
-				
-				
-				
-		
-				
-				
-		var transformTag = XML3D.createElement("transform");
+            //console.log(componentName + "." + attributeName + " = " + entity[componentName][attributeName]);
+
+            var entry = dict[attributeName];
+            if (entry)
+            {
+                var objname = entry.obj;
+                var axis = entry.axis;
+
+                var elem;
+                var i;
+                for (i = 0; i < entity.xml3dView.defElement.children.length ; i++)
+                {
+                    elem = entity.xml3dView.defElement.children[i];
+                    if (elem.id.split("-")[0] == objname)
+                    {
+                        var axisAngleRotation = new XML3DRotation();
+                        axisAngleRotation.setAxisAngle(axis, entity["nao_posture"][attributeName]);
+                        console.log("Caua bunga!");
+                        elem.rotation.set(axisAngleRotation);
+                    }
+                }
+            }
+
+            // if (componentName == "nao_posture" && attributeName == "HeadYaw")
+            // {
+            //     console.log("Here we go!");
+            //
+            //     var axisAngleRotation = new XML3DRotation();
+            //
+            //     axisAngleRotation.setAxisAngle(zAxis, entity["nao_posture"]["HeadYaw"]);
+            //     var transformationForEntity = entity.getTransformElement();
+            //     if(transformationForEntity)
+            //     {
+            //         console.log("Caua bunga!");
+            //         // entity.xml3dView.groupElement.getElementById("Head").transform.rotation.set(axisAngleRotation);
+            //         entity.xml3dView.defElement.children[2].rotation.set(axisAngleRotation);
+            //         //transformationForEntity.rotation.set(axisAngleRotation);
+            //     }
+
+
+
+                /*
+                var _xml3dElement = FIVES.Resources.SceneManager.xml3dElement;
+
+
+
+        var transformTag = XML3D.createElement("transform");
         transformTag.setAttribute("id", "transform-" + entity.guid) ;
 
-		transformTag.rotation.set(this._createRotationFromOrientation(entity));
+        transformTag.rotation.set(this._createRotationFromOrientation(entity));
 
-		_mainDefs.appendChild(transformTag);
+        _mainDefs.appendChild(transformTag);
         return transformTag;
 
-				
-				
-				        var entityGroup = XML3D.createElement("group");
+
+
+                        var entityGroup = XML3D.createElement("group");
         entityGroup.setAttribute("id", "Entity-" + entity.guid);
         entityGroup.setAttribute("transform", "#transform-" + entity.guid );
         return entityGroup;
 */
-				
-			}
+
+            // }
         }
     };
 
