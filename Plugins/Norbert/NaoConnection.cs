@@ -117,14 +117,14 @@ namespace NorbertPlugin
 
 					double current;
 					if (!updatesOnly || !jointState.TryGetValue (key, out current) || current != val) {
-						if(key.Equals("LHipYawPitch"))
-							queryResult ["RHipYawPitch"] = -val;
+
 						queryResult [key] = val;
 					}
-					if(key.Equals("LHipYawPitch"))
-						jointState ["RHipYawPitch"] = -val;
 					jointState[key] = val;
 				}
+			jointState ["RHipYawPitch"] = -jointState ["LHipYawPitch"];
+			if(queryResult.ContainsKey("LHipYawPitch"))
+				queryResult ["RHipYawPitch"] = -queryResult ["LHipYawPitch"];
 			return queryResult;
 		}
 
