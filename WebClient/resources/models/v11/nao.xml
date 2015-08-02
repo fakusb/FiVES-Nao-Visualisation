@@ -16,14 +16,14 @@
 
         <transform id="RShoulderPadMobil_transform" translation="-2.866554 -98.000000 99.957069"/>
         <transform id="RBiceps_transform" translation="-0.049633 0.000000 -1.021519"/>
-        <transform id="RElbow_transform" translation="0.00 0.000000 0.000000"/>
-        <transform id="RForeArm_transform" translation="104.999992 -15.000000 0.000000"/>
+        <transform id="RElbow_transform" translation="104.999992 -15.000000 0.000000"/>
+        <transform id="RForeArm_transform" translation="0.00 0.000000 0.000000"/>
         <transform id="RHand_transform" translation="55.950020 -0.000008 0.000000"/>
 
         <transform id="LShoulderPadMobil_transform" translation="-0.637196 98.000000 100.484627"/>
         <transform id="LBiceps_transform" translation="2.278991 0.000000 -1.549082"/>
-        <transform id="LElbow_transform" translation="0.00 0.000000 0.000000"/>
-        <transform id="LForeArm_transform" translation="104.999992 15.000000 0.000000"/>
+        <transform id="LElbow_transform" translation="104.999992 15.000000 0.000000"/>
+        <transform id="LForeArm_transform" translation="0.00 0.000000 0.000000"/>
         <transform id="LHand_transform" translation="55.950020 0.000008 0.000000"/>
 
         <transform id="LHip_transform" translation="-2.556187 14.659999 -50.314453"/>
