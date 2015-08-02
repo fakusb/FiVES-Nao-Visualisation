@@ -10,7 +10,8 @@
             <float name="transparency">0.0</float>
         </shader>
         <transform id="root_transform" scale="0.3 0.3 0.3" rotation="1.0 0.0 0.0 -1.57"/>
-        <transform id="head_transform" translation="-3.367815 -0.000000 -0.435688"/>
+        <transform id="Head_transform" translation="-3.367815 -0.000000 -0.435688"/>
+        <transform id="RShoulderPadMobil_transform" translation="-2.866554 -98.000000 99.957069"/>
         
         <!--style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-3.367815,-0.000000,-0.435688,1.000000);"--->
         
@@ -19,7 +20,7 @@
 
         <group id="Chest" class="layer-0" style="transform:matrix3d(0.010000,0.000000,0.000000,0.000000,0.000000,0.010000,0.000000,0.000000,0.000000,0.000000,0.010000,0.000000,0.029162,0.000000,-0.989356,1.000000);" shader="#shader_test">
             <model src="assets/assets-0.xml#Chest" shader="#shader_test"></model>
-            <group id="RShoulderPadMobil" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-2.866554,-98.000000,99.957069,1.000000);">
+            <group id="RShoulderPadMobil" class="layer-0" transform="#RShoulderPadMobil_transform">
                 <model src="assets/assets-1.xml#RShoulderPadMobil-001"></model>
                 <group id="RBiceps" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,-0.049633,0.000000,-1.021519,1.000000);">
                     <model src="assets/assets-2.xml#RBiceps"></model>
@@ -57,7 +58,7 @@
             </group>
             <group id="Neck" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-0.970842,0.252345,126.475937,1.000000);">
                 <model src="assets/assets-5.xml#Neck"></model>
-                <group id="Head" class="layer-0" transform="#head_transform">
+                <group id="Head" class="layer-0" transform="#Head_transform">
                     <model src="assets/assets-6.xml#Head"></model>
                 </group>
             </group>
