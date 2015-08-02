@@ -112,7 +112,7 @@ namespace NorbertPlugin
 
 					jointState[key] = val;
 				}
-
+			queryResult ["RHipYawPitch"] = -queryResult ["LHipYawPitch"]; //only one servo, but two joins
 			return queryResult;
 		}
 
