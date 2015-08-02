@@ -48,6 +48,32 @@ FIVES.Plugins = FIVES.Plugins || {};
 					//transformationForEntity.rotation.set(axisAngleRotation);
 				}
 				
+				
+				
+				/*
+				var _xml3dElement = FIVES.Resources.SceneManager.xml3dElement;
+				
+				
+				
+		
+				
+				
+		var transformTag = XML3D.createElement("transform");
+        transformTag.setAttribute("id", "transform-" + entity.guid) ;
+
+		transformTag.rotation.set(this._createRotationFromOrientation(entity));
+
+		_mainDefs.appendChild(transformTag);
+        return transformTag;
+
+				
+				
+				        var entityGroup = XML3D.createElement("group");
+        entityGroup.setAttribute("id", "Entity-" + entity.guid);
+        entityGroup.setAttribute("transform", "#transform-" + entity.guid );
+        return entityGroup;
+*/
+				
 			}
         }
     };
