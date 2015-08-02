@@ -116,12 +116,15 @@ namespace NorbertPlugin
 					var val = double.Parse(data[1]);
 
 					double current;
-					if (!updatesOnly || !jointState.TryGetValue(key, out current) || current != val)
-						queryResult[key] = val;	
-
+					if (!updatesOnly || !jointState.TryGetValue (key, out current) || current != val) {
+						if(key.Equals("LHipYawPitch"))
+							queryResult ["RHipYawPitch"] = -val;
+						queryResult [key] = val;
+					}
+					if(key.Equals("LHipYawPitch"))
+						jointState ["RHipYawPitch"] = -val;
 					jointState[key] = val;
 				}
-			queryResult ["RHipYawPitch"] = -queryResult ["LHipYawPitch"]; //only one servo, but two joins
 			return queryResult;
 		}
 
