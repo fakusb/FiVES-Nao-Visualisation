@@ -37,6 +37,33 @@ FIVES.Plugins = FIVES.Plugins || {};
     zAxis.z = 1;
     var dict = {};
     dict["HeadYaw"] = {obj: "Head_transform", axis: zAxis}
+    dict["HeadPitch"] = {obj: "Neck_transform", axis: yAxis}
+
+    dict["RShoulderPitch"] = {obj: "RShoulderPadMobil_transform", axis: yAxis}
+    // dict["RShoulderRoll"] = {obj: "Head_transform", axis: xAxis}
+    // dict["RElbowRoll"] = {obj: "Head_transform", axis: xAxis}
+    // dict["RElbowYaw"] = {obj: "Head_transform", axis: zAxis}
+    // dict["RWristYaw"] = {obj: "Head_transform", axis: zAxis}
+    //
+    // dict["LShoulderPitch"] = {obj: "Head_transform", axis: yAxis}
+    // dict["LShoulderRoll"] = {obj: "Head_transform", axis: xAxis}
+    // dict["LElbowRoll"] = {obj: "Head_transform", axis: xAxis}
+    // dict["LElbowYaw"] = {obj: "Head_transform", axis: zAxis}
+    // dict["LWristYaw"] = {obj: "Head_transform", axis: zAxis}
+    //
+    // // dict["RHipYawPitch"] = {obj: "Head_transform", axis: yAxis}
+    // dict["RHipPitch"] = {obj: "Head_transform", axis: yAxis}
+    // dict["RHipRoll"] = {obj: "Head_transform", axis: xAxis}
+    // dict["RKneePitch"] = {obj: "Head_transform", axis: yAxis}
+    // dict["RAnklePitch"] = {obj: "Head_transform", axis: yAxis}
+    // dict["RAnkleRoll"] = {obj: "Head_transform", axis: xAxis}
+    //
+    // // dict["LHipYawPitch"] = {obj: "Head_transform", axis: yAxis}
+    // dict["LHipPitch"] = {obj: "Head_transform", axis: yAxis}
+    // dict["LHipRoll"] = {obj: "Head_transform", axis: xAxis}
+    // dict["LKneePitch"] = {obj: "Head_transform", axis: yAxis}
+    // dict["LAnklePitch"] = {obj: "Head_transform", axis: yAxis}
+    // dict["LAnkleRoll"] = {obj: "Head_transform", axis: xAxis}
 
     l._componentUpdatedHandler = function(entity, componentName, attributeName) {
         if(componentName == "nao_posture")
