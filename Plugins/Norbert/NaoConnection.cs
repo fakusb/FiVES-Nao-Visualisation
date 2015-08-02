@@ -79,7 +79,16 @@ namespace NorbertPlugin
 			};
 
 			client = new SshClient(connectionInfo);
-			client.Connect();
+			Terminal.Instance.WriteLine("Try to connect to " + userName +"@"+ hostName + "...");
+			try {
+				client.Connect();
+				Terminal.Instance.WriteLine("Connected!");
+			}
+			catch {
+				Terminal.Instance.WriteLine("Connecting to "+userName +"@"+ hostName+" failed!");
+
+			}
+
 
 			sshStream = client.CreateShellStream("", 80, 40, 80, 40, 1024);
 
