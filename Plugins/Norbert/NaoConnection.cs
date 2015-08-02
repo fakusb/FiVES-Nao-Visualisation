@@ -122,9 +122,13 @@ namespace NorbertPlugin
 					}
 					jointState[key] = val;
 				}
+
+
 			jointState ["RHipYawPitch"] = -jointState ["LHipYawPitch"];
-			if(queryResult.ContainsKey("LHipYawPitch"))
-				queryResult ["RHipYawPitch"] = -queryResult ["LHipYawPitch"];
+			if (queryResult.ContainsKey ("LHipYawPitch") || queryResult.ContainsKey ("RHipYawPitch"))
+				queryResult ["RHipYawPitch"] = jointState ["RHipYawPitch"];
+
+
 			return queryResult;
 		}
 
