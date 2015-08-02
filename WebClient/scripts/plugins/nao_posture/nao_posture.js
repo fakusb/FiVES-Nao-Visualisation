@@ -36,9 +36,13 @@ FIVES.Plugins = FIVES.Plugins || {};
     zAxis.y = 0;
     zAxis.z = 1;
     var rHipAxis = new XML3DVec3();
-    rHipAxis.x = 1;
-    rHipAxis.y = 0;
-    rHipAxis.z = 1;
+    rHipAxis.x = 0;
+    rHipAxis.y = -1;
+    rHipAxis.z = -1;
+    var lHipAxis = new XML3DVec3();
+    lHipAxis.x = 0;
+    lHipAxis.y = 1;
+    lHipAxis.z = -1;
     var dict = {};
     dict["HeadYaw"] = {obj: "Head_transform", axis: zAxis}
     dict["HeadPitch"] = {obj: "Neck_transform", axis: yAxis}
@@ -55,19 +59,19 @@ FIVES.Plugins = FIVES.Plugins || {};
     dict["LElbowYaw"] = {obj: "LElbow_transform", axis: xAxis}
     dict["LWristYaw"] = {obj: "LHand_transform", axis: xAxis}
 
-    // dict["RHipYawPitch"] = {obj: "RHip_transform", axis: rHipAxis}
+    dict["RHipYawPitch"] = {obj: "RHip_transform", axis: rHipAxis}
     dict["RHipPitch"] = {obj: "RUpperThigh_transform", axis: yAxis}
     dict["RHipRoll"] = {obj: "RThigh_transform", axis: xAxis}
     dict["RKneePitch"] = {obj: "RShinebone_transform", axis: yAxis}
     dict["RAnklePitch"] = {obj: "RAnkle_transform", axis: yAxis}
     dict["RAnkleRoll"] = {obj: "RFoot_transform", axis: xAxis}
 
-    // // dict["LHipYawPitch"] = {obj: "Head_transform", axis: yAxis}
-    // dict["LHipPitch"] = {obj: "Head_transform", axis: yAxis}
-    // dict["LHipRoll"] = {obj: "Head_transform", axis: xAxis}
-    // dict["LKneePitch"] = {obj: "Head_transform", axis: yAxis}
-    // dict["LAnklePitch"] = {obj: "Head_transform", axis: yAxis}
-    // dict["LAnkleRoll"] = {obj: "Head_transform", axis: xAxis}
+    dict["LHipYawPitch"] = {obj: "LHip_transform", axis: lHipAxis}
+    dict["LHipPitch"] = {obj: "LUpperThigh_transform", axis: yAxis}
+    dict["LHipRoll"] = {obj: "LThigh_transform", axis: xAxis}
+    dict["LKneePitch"] = {obj: "LShinebone_transform", axis: yAxis}
+    dict["LAnklePitch"] = {obj: "LAnkle_transform", axis: yAxis}
+    dict["LAnkleRoll"] = {obj: "LFoot_transform", axis: xAxis}
 
     l._componentUpdatedHandler = function(entity, componentName, attributeName) {
         if(componentName == "nao_posture")
@@ -89,8 +93,9 @@ FIVES.Plugins = FIVES.Plugins || {};
                     {
                         var axisAngleRotation = new XML3DRotation();
                         axisAngleRotation.setAxisAngle(axis, entity["nao_posture"][attributeName]);
-                        console.log("Caua bunga!");
+                        // console.log("Caua bunga!");
                         elem.rotation.set(axisAngleRotation);
+                        break;
                     }
                 }
             }
