@@ -24,6 +24,20 @@
         <transform id="LForeArm_transform" translation="104.999992 15.000000 0.000000"/>
         <transform id="LHand_transform" translation="55.950020 0.000008 0.000000"/>
 
+        <transform id="LHip_transform" translation="-2.556187 14.659999 -50.314453"/>
+        <transform id="LUpperThigh_transform" translation="-0.360000 35.330002 -35.450573"/>
+        <transform id="LThigh_transform" translation="0.000000 0.000000 0.000597"/>
+        <transform id="LShinebone_transform" translation="-0.000000 -0.000036 -103.799988"/>
+        <transform id="LAnkle_transform" translation="-0.000000 -0.000024 -100.999947"/>
+        <transform id="LFoot_transform" translation="-0.000000 -0.000004 0.000015"/>
+
+        <transform id="RHip_transform" translation="-2.556187 -14.659999 -50.314453"/>
+        <transform id="RUpperThigh_transform" translation="-0.360000 -35.330002 -35.450573"/>
+        <transform id="RThigh_transform" translation="0.000000 -0.000000 0.000597"/>
+        <transform id="RShinebone_transform" translation="-0.000000 0.000036 -103.799988"/>
+        <transform id="RAnkle_transform" translation="-0.000000 0.000024 -100.999947"/>
+        <transform id="RFoot_transform" translation="-0.000000 0.000004 0.000015"/>
+
         <!--style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-3.367815,-0.000000,-0.435688,1.000000);"-->
         
     </defs>
@@ -109,17 +123,17 @@
                     </group>
                 </group>
             </group>
-            <group id="LHip" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-2.556187,14.659999,-50.314453,1.000000);">
+            <group id="LHip" class="layer-0" transform="#LHip_transform">
                 <model src="assets/assets-3.xml#LHip"></model>
-                <group id="LUpperThigh" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,-0.000000,1.000000,0.000001,0.000000,0.000000,0.000000,1.000000,0.000000,-0.360000,35.330002,-35.450573,1.000000);">
+                <group id="LUpperThigh" class="layer-0" transform="#LUpperThigh_transform">
                     <model src="assets/assets-4.xml#LUpperThigh"></model>
-                    <group id="LThigh" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,-0.000001,0.000000,0.000000,-0.000000,1.000000,0.000000,0.000000,0.000000,0.000597,1.000000);">
+                    <group id="LThigh" class="layer-0" transform="#LThigh_transform">
                         <model src="assets/assets-5.xml#LThigh"></model>
-                        <group id="LShinebone" class="layer-0" style="transform:matrix3d(1.000000,-0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,-0.000000,-0.000036,-103.799988,1.000000);">
+                        <group id="LShinebone" class="layer-0" transform="#LShinebone_transform">
                             <model src="assets/assets-6.xml#LShinebone"></model>
-                            <group id="LAnkle" class="layer-0" style="transform:matrix3d(1.000000,0.000000,-0.000000,0.000000,-0.000000,1.000000,-0.000000,0.000000,0.000000,-0.000000,1.000000,0.000000,-0.000000,-0.000024,-100.999947,1.000000);">
+                            <group id="LAnkle" class="layer-0" transform="#LAnkle_transform">
                                 <model src="assets/assets-7.xml#LAnkle"></model>
-                                <group id="LFoot" class="layer-0" style="transform:matrix3d(1.000000,-0.000000,-0.000000,0.000000,-0.000000,1.000000,-0.000001,0.000000,0.000000,0.000000,1.000000,0.000000,-0.000000,-0.000004,0.000015,1.000000);">
+                                <group id="LFoot" class="layer-0" transform="#LFoot_transform">
                                     <model src="assets/assets-0.xml#LFoot"></model>
                                 </group>
                             </group>
@@ -127,17 +141,17 @@
                     </group>
                 </group>
             </group>
-            <group id="RHip" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-2.556187,-14.659999,-50.314453,1.000000);">
+            <group id="RHip" class="layer-0" transform="#RHip_transform">
                 <model src="assets/assets-1.xml#RHip"></model>
-                <group id="RUpperThigh" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,-0.000001,0.000000,0.000000,0.000000,1.000000,0.000000,-0.360000,-35.330002,-35.450573,1.000000);">
+                <group id="RUpperThigh" class="layer-0" transform="#RUpperThigh_transform">
                     <model src="assets/assets-2.xml#RUpperThigh"></model>
-                    <group id="RThigh" class="layer-0" style="transform:matrix3d(1.000000,-0.000000,0.000000,0.000000,-0.000000,1.000000,0.000001,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000597,1.000000);">
+                    <group id="RThigh" class="layer-0" transform="#RThigh_transform">
                         <model src="assets/assets-3.xml#RThigh"></model>
-                        <group id="RShinebone" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,-0.000000,1.000000,-0.000000,0.000000,0.000000,-0.000000,1.000000,0.000000,-0.000000,0.000036,-103.799988,1.000000);">
+                        <group id="RShinebone" class="layer-0" transform="#RShinebone_transform">
                             <model src="assets/assets-4.xml#RShinebone"></model>
-                            <group id="RAnkle" class="layer-0" style="transform:matrix3d(1.000000,-0.000000,-0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,-0.000000,0.000024,-100.999947,1.000000);">
+                            <group id="RAnkle" class="layer-0" transform="#RAnkle_transform">
                                 <model src="assets/assets-5.xml#RAnkle"></model>
-                                <group id="RFoot" class="layer-0" style="transform:matrix3d(1.000000,0.000000,-0.000000,0.000000,0.000000,1.000000,0.000001,0.000000,0.000000,-0.000000,1.000000,0.000000,-0.000000,0.000004,0.000015,1.000000);">
+                                <group id="RFoot" class="layer-0" transform="#RFoot_transform">
                                     <model src="assets/assets-6.xml#RFoot"></model>
                                 </group>
                             </group>
