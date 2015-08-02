@@ -10,10 +10,21 @@
             <float name="transparency">0.0</float>
         </shader>
         <transform id="root_transform" scale="0.3 0.3 0.3" rotation="1.0 0.0 0.0 -1.57"/>
+
         <transform id="Head_transform" translation="-3.367815 -0.000000 -0.435688"/>
+        <transform id="Neck_transform" translation="-0.970842 0.252345 126.475937"/>
+
         <transform id="RShoulderPadMobil_transform" translation="-2.866554 -98.000000 99.957069"/>
-        
-        <!--style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-3.367815,-0.000000,-0.435688,1.000000);"--->
+        <transform id="RBiceps_transform" translation="-0.049633 0.000000 -1.021519"/>
+        <transform id="RForeArm_transform" translation="104.999992 -15.000000 0.000000"/>
+        <transform id="RHand_transform" translation="55.950020 -0.000008 0.000000"/>
+
+        <transform id="LShoulderPadMobil_transform" translation="-0.637196 98.000000 100.484627"/>
+        <transform id="LBiceps_transform" translation="2.278991 0.000000 -1.549082"/>
+        <transform id="LForeArm_transform" translation="104.999992 15.000000 0.000000"/>
+        <transform id="LHand_transform" translation="55.950020 0.000008 0.000000"/>
+
+        <!--style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-3.367815,-0.000000,-0.435688,1.000000);"-->
         
     </defs>
     <group id="assetGroup" shader="#shader_test" transform="#root_transform">
@@ -22,11 +33,11 @@
             <model src="assets/assets-0.xml#Chest" shader="#shader_test"></model>
             <group id="RShoulderPadMobil" class="layer-0" transform="#RShoulderPadMobil_transform">
                 <model src="assets/assets-1.xml#RShoulderPadMobil-001"></model>
-                <group id="RBiceps" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,-0.049633,0.000000,-1.021519,1.000000);">
+                <group id="RBiceps" class="layer-0" transform="#RBiceps_transform">
                     <model src="assets/assets-2.xml#RBiceps"></model>
-                    <group id="RForeArm" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,104.999992,-15.000000,0.000000,1.000000);">
+                    <group id="RForeArm" class="layer-0"  transform="#RForeArm_transform">
                         <model src="assets/assets-3.xml#RForeArm"></model>
-                        <group id="RHand" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,55.950020,-0.000008,0.000000,1.000000);">
+                        <group id="RHand" class="layer-0" transform="#RHand_transform">
                             <model src="assets/assets-4.xml#RHand"></model>
                             <group id="RPhalax_7" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,50.031250,-0.099991,-25.950912,1.000000);">
                                 <model src="assets/assets-5.xml#RPhalax_7"></model>
@@ -56,19 +67,19 @@
                     </group>
                 </group>
             </group>
-            <group id="Neck" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-0.970842,0.252345,126.475937,1.000000);">
+            <group id="Neck" class="layer-0" transform="#Neck_transform">
                 <model src="assets/assets-5.xml#Neck"></model>
                 <group id="Head" class="layer-0" transform="#Head_transform">
                     <model src="assets/assets-6.xml#Head"></model>
                 </group>
             </group>
-            <group id="LShoulderPadMobile" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-0.637196,98.000000,100.484627,1.000000);">
+            <group id="LShoulderPadMobil" class="layer-0" transform="#LShoulderPadMobil_transform">
                 <model src="assets/assets-7.xml#LShoulderPadMobile"></model>
-                <group id="LBiceps" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,-2.278991,0.000000,-1.549082,1.000000);">
+                <group id="LBiceps" class="layer-0" transform="#LBiceps_transform">
                     <model src="assets/assets-0.xml#LBiceps"></model>
-                    <group id="LForeArm" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,104.999992,15.000000,0.000000,1.000000);">
+                    <group id="LForeArm" class="layer-0" transform="#LForeArm_transform">
                         <model src="assets/assets-1.xml#LForeArm"></model>
-                        <group id="LHand" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,55.950020,0.000008,0.000000,1.000000);">
+                        <group id="LHand" class="layer-0" transform="#LHand_transform">
                             <model src="assets/assets-2.xml#LHand"></model>
                             <group id="LPhalax_7" class="layer-0" style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,50.031250,0.099991,-25.950912,1.000000);">
                                 <model src="assets/assets-3.xml#LPhalax_7"></model>
