@@ -35,29 +35,33 @@ FIVES.Plugins = FIVES.Plugins || {};
     zAxis.x = 0;
     zAxis.y = 0;
     zAxis.z = 1;
+    var rHipAxis = new XML3DVec3();
+    rHipAxis.x = 1;
+    rHipAxis.y = 0;
+    rHipAxis.z = 1;
     var dict = {};
     dict["HeadYaw"] = {obj: "Head_transform", axis: zAxis}
     dict["HeadPitch"] = {obj: "Neck_transform", axis: yAxis}
 
     dict["RShoulderPitch"] = {obj: "RShoulderPadMobil_transform", axis: yAxis}
-    // dict["RShoulderRoll"] = {obj: "Head_transform", axis: xAxis}
-    // dict["RElbowRoll"] = {obj: "Head_transform", axis: xAxis}
-    // dict["RElbowYaw"] = {obj: "Head_transform", axis: zAxis}
-    // dict["RWristYaw"] = {obj: "Head_transform", axis: zAxis}
-    //
-    // dict["LShoulderPitch"] = {obj: "Head_transform", axis: yAxis}
-    // dict["LShoulderRoll"] = {obj: "Head_transform", axis: xAxis}
-    // dict["LElbowRoll"] = {obj: "Head_transform", axis: xAxis}
-    // dict["LElbowYaw"] = {obj: "Head_transform", axis: zAxis}
-    // dict["LWristYaw"] = {obj: "Head_transform", axis: zAxis}
-    //
-    // // dict["RHipYawPitch"] = {obj: "Head_transform", axis: yAxis}
-    // dict["RHipPitch"] = {obj: "Head_transform", axis: yAxis}
-    // dict["RHipRoll"] = {obj: "Head_transform", axis: xAxis}
-    // dict["RKneePitch"] = {obj: "Head_transform", axis: yAxis}
-    // dict["RAnklePitch"] = {obj: "Head_transform", axis: yAxis}
-    // dict["RAnkleRoll"] = {obj: "Head_transform", axis: xAxis}
-    //
+    dict["RShoulderRoll"] = {obj: "RBiceps_transform", axis: zAxis}
+    dict["RElbowRoll"] = {obj: "RForeArm_transform", axis: zAxis}
+    dict["RElbowYaw"] = {obj: "RElbow_transform", axis: xAxis}
+    dict["RWristYaw"] = {obj: "RHand_transform", axis: xAxis}
+
+    dict["LShoulderPitch"] = {obj: "LShoulderPadMobil_transform", axis: yAxis}
+    dict["LShoulderRoll"] = {obj: "LBiceps_transform", axis: zAxis}
+    dict["LElbowRoll"] = {obj: "LForeArm_transform", axis: zAxis}
+    dict["LElbowYaw"] = {obj: "LElbow_transform", axis: xAxis}
+    dict["LWristYaw"] = {obj: "LHand_transform", axis: xAxis}
+
+    // dict["RHipYawPitch"] = {obj: "RHip_transform", axis: rHipAxis}
+    dict["RHipPitch"] = {obj: "RUpperThigh_transform", axis: yAxis}
+    dict["RHipRoll"] = {obj: "RThigh_transform", axis: xAxis}
+    dict["RKneePitch"] = {obj: "RShinebone_transform", axis: yAxis}
+    dict["RAnklePitch"] = {obj: "RAnkle_transform", axis: yAxis}
+    dict["RAnkleRoll"] = {obj: "RFoot_transform", axis: xAxis}
+
     // // dict["LHipYawPitch"] = {obj: "Head_transform", axis: yAxis}
     // dict["LHipPitch"] = {obj: "Head_transform", axis: yAxis}
     // dict["LHipRoll"] = {obj: "Head_transform", axis: xAxis}
