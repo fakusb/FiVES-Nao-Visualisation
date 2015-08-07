@@ -116,13 +116,18 @@ namespace NorbertPlugin
 			AddEntity(data[1], data[2], data[3]);
 		}
 
+		static int XoffsetBase = 0;
+
 		void AddEntity(string hostName, string userName, string password)
 		{
 			var e = new Entity();
 
 			e["mesh"]["uri"].Suggest("resources/models/v11/nao.xml");
 			e["mesh"]["visible"].Suggest(true);
-			e["location"]["position"].Suggest(new Vector(0, 10, 0));
+			e["location"]["position"].Suggest(new Vector(XoffsetBase, 10, 0));
+			e["location"]["orientation"].Suggest(new Quat((float)3.0, (float)3.0, (float)3.0, (float)10));
+
+			XoffsetBase += 5;
 
 			World.Instance.Add(e);
 
