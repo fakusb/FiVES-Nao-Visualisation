@@ -14,7 +14,7 @@ namespace NorbertPlugin
 	public class NaoConnection : PythonConnection
 	{	
 
-		Dictionary<string, double> jointState = new Dictionary<string, double>();
+		public Dictionary<string, double> jointState = new Dictionary<string, double>();
 
 		public NaoConnection(string hostName, string userName, string password) : base(hostName, userName, password)
 		{
@@ -26,36 +26,21 @@ namespace NorbertPlugin
 			}
 		}
 
-		public Dictionary<string, double> QueryJoints(bool updatesOnly=false)
+		public void QueryJoints()
 		{
 			string line;
-
-			Dictionary<string, double> queryResult = new Dictionary<string, double>();
-
 			using (var sr = new System.IO.StringReader(execute("query()")))
 				while ((line = sr.ReadLine()) != null)
 				{
 					var data = line.Trim().Split();
 					var key = data[0];
 					var val = double.Parse(data[1]);
-
-					double current;
-					if (!updatesOnly || !jointState.TryGetValue (key, out current) || current != val) {
-
-						queryResult [key] = val;
-					}
-					jointState[key] = val;
+					lock (this)
+						jointState [key] = val;
 				}
-
-
-			jointState ["RHipYawPitch"] = -jointState ["LHipYawPitch"];
-			if (queryResult.ContainsKey ("LHipYawPitch") || queryResult.ContainsKey ("RHipYawPitch"))
-				queryResult ["RHipYawPitch"] = jointState ["RHipYawPitch"];
-
-
-			return queryResult;
+			lock (this)
+				jointState ["RHipYawPitch"] = -jointState ["LHipYawPitch"];
 		}
-
 	}
 }
 
