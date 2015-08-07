@@ -28,9 +28,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Renci.SshNet">
-      <HintPath>..\..\ThirdParty\Renci.SshNet.dll</HintPath>
-    </Reference>
     <Reference Include="KIARA">
       <HintPath>..\..\ThirdParty\KIARA\KIARA.dll</HintPath>
     </Reference>
@@ -69,6 +66,10 @@
     <ProjectReference Include="..\..\Core\Math\Math.csproj">
       <Project>{A2D1D8E5-7C5C-4EA3-95C7-D8D97AB0B74E}</Project>
       <Name>Math</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RemotePy\RemotePy.csproj">
+      <Project>{7930DE13-2E51-44F1-B443-025DB6784481}</Project>
+      <Name>RemotePy</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

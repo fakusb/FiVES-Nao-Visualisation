@@ -126,12 +126,20 @@ namespace NorbertPlugin
 
 			World.Instance.Add(e);
 
-			var connection = new NaoConnection(hostName, userName, password);
+			try {
+				Terminal.Instance.WriteLine("Connecting to " + userName +"@"+ hostName + "...");
 
-			lock (entities)
-				entities[e] = connection;
+				var connection = new NaoConnection(hostName, userName, password);
+				lock (entities)
+					entities[e] = connection;
+
+				Terminal.Instance.WriteLine("\tConnected :-)");
+			}
+			catch (Exception ex) {
+				Terminal.Instance.WriteLine("\tFailed: " + ex.Message);
+
+			}
 		}
-
 	}
 }
 

@@ -86,6 +86,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{32339A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ssh-playground", "ssh-playground\ssh-playground.csproj", "{6ED2A9D3-3ACD-4E29-B74B-C9EBFE470E8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotePy", "RemotePy\RemotePy.csproj", "{7930DE13-2E51-44F1-B443-025DB6784481}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -156,6 +158,10 @@ Global
 		{74073FC3-BC58-45A8-9897-4A718F903916}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74073FC3-BC58-45A8-9897-4A718F903916}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74073FC3-BC58-45A8-9897-4A718F903916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7930DE13-2E51-44F1-B443-025DB6784481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7930DE13-2E51-44F1-B443-025DB6784481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7930DE13-2E51-44F1-B443-025DB6784481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7930DE13-2E51-44F1-B443-025DB6784481}.Release|Any CPU.Build.0 = Release|Any CPU
 		{79EF699D-6A88-4054-AF04-F22486DB47FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{79EF699D-6A88-4054-AF04-F22486DB47FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79EF699D-6A88-4054-AF04-F22486DB47FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -271,6 +277,7 @@ Global
 		{B698B7A2-8E46-4D92-9229-1A68F8BFC545} = {4493E16B-2266-45D8-A0B5-F998EF9B790E}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Plugins\Location\Location.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None
