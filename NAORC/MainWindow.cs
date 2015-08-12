@@ -38,9 +38,12 @@ public partial class MainWindow: Gtk.Window
 			level += dataConnection.Receive(imageBuffer, level, imageBuffer.Length - level, SocketFlags.None);
 		}
 
-		Console.WriteLine("Got it :-)");
+		var image = new Gdk.Pixbuf(imageBuffer, Gdk.Colorspace.Rgb, false, 8, 320, 240, 320);
 
 		commandConnection.execute("close()");
+		image.Save("image.png", "png");
+
+		Console.WriteLine("Got it :-)");
 
 		return false; // TODO: Return true here in order to loop the refresh!
 	}
