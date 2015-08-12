@@ -27,12 +27,12 @@ namespace NorbertPlugin
 
 			DefineComponents();
 			RegisterEvents();
-			StartDeamon();
+			StartDaemon();
 		}
 
 		public void Shutdown ()
 		{
-			StopDeamon();
+			StopDaemon();
 			entRWL.AcquireWriterLock(-1);
 			try {
 				foreach (NaoConnection nc in entities.Values)
@@ -107,15 +107,15 @@ namespace NorbertPlugin
 
 		public ManualResetEvent doUpdate = new ManualResetEvent (true);
 
-		Thread deamon;
+		Thread daemon;
 
-		private void StartDeamon()
+		private void StartDaemon()
 		{
-			deamon = new Thread (new ThreadStart (DeamonFunction));
-			deamon.Start();
+			daemon = new Thread (new ThreadStart (DaemonFunction));
+			daemon.Start();
 		}
 
-		public void DeamonFunction()
+		public void DaemonFunction()
 		{
 			while (true) {
 				doUpdate.WaitOne ();
@@ -131,9 +131,9 @@ namespace NorbertPlugin
 			}
 		}
 
-		private void StopDeamon()
+		private void StopDaemon()
 		{
-			deamon.Abort ();
+			daemon.Abort ();
 		}
 			
 		private void HandleEventTick(Object sender, TickEventArgs e)
