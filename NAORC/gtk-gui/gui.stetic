@@ -68,7 +68,6 @@
                 <property name="Icon">stock:gtk-apply Menu</property>
                 <property name="Label" translatable="yes">Connect</property>
                 <property name="UseUnderline">True</property>
-                <signal name="Clicked" handler="OnConnectButtonClicked" />
               </widget>
               <packing>
                 <property name="PackType">End</property>
@@ -130,14 +129,14 @@
           </packing>
         </child>
         <child>
-          <widget class="Gtk.DrawingArea" id="cameraArea">
+          <widget class="Gtk.Image" id="cameraImage">
             <property name="MemberName" />
-            <property name="WidthRequest">320</property>
-            <property name="HeightRequest">240</property>
           </widget>
           <packing>
             <property name="Position">1</property>
             <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
           </packing>
         </child>
         <child>

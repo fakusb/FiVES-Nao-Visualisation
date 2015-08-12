@@ -21,7 +21,7 @@ public partial class MainWindow
 	
 	private global::Gtk.Entry userNameEntry;
 	
-	private global::Gtk.DrawingArea cameraArea;
+	private global::Gtk.Image cameraImage;
 	
 	private global::Gtk.HBox hbox2;
 	
@@ -130,13 +130,13 @@ public partial class MainWindow
 		w9.Expand = false;
 		w9.Fill = false;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.cameraArea = new global::Gtk.DrawingArea ();
-		this.cameraArea.WidthRequest = 320;
-		this.cameraArea.HeightRequest = 240;
-		this.cameraArea.Name = "cameraArea";
-		this.vbox1.Add (this.cameraArea);
-		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.cameraArea]));
+		this.cameraImage = new global::Gtk.Image ();
+		this.cameraImage.Name = "cameraImage";
+		this.vbox1.Add (this.cameraImage);
+		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.cameraImage]));
 		w10.Position = 1;
+		w10.Expand = false;
+		w10.Fill = false;
 		// Container child vbox1.Gtk.Box+BoxChild
 		this.hbox2 = new global::Gtk.HBox ();
 		this.hbox2.Name = "hbox2";
@@ -178,6 +178,5 @@ public partial class MainWindow
 		}
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
-		this.connectButton.Clicked += new global::System.EventHandler (this.OnConnectButtonClicked);
 	}
 }
