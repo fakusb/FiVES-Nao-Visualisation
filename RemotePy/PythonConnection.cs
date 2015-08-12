@@ -65,6 +65,12 @@ namespace RemotePy
 			return pythonCommand(command);
 		}
 
+		public void executeAsync(string command)
+		{
+			pythonCommand(command, null);
+			pythonReady = false;
+		}
+
 		public PythonConnection(string hostName, string userName, string password)
 		{
 			var connectionInfo = new KeyboardInteractiveConnectionInfo(hostName, userName);

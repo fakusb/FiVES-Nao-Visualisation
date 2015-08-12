@@ -88,6 +88,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ssh-playground", "ssh-playg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotePy", "RemotePy\RemotePy.csproj", "{7930DE13-2E51-44F1-B443-025DB6784481}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAORC", "NAORC\NAORC.csproj", "{F1D19A76-0082-48D7-A661-EDA63CC2A579}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -230,6 +232,10 @@ Global
 		{E1955FF2-6109-4C71-9F13-486A48DE6C17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1955FF2-6109-4C71-9F13-486A48DE6C17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1955FF2-6109-4C71-9F13-486A48DE6C17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1D19A76-0082-48D7-A661-EDA63CC2A579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1D19A76-0082-48D7-A661-EDA63CC2A579}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1D19A76-0082-48D7-A661-EDA63CC2A579}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1D19A76-0082-48D7-A661-EDA63CC2A579}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F88DAF4A-1C7B-4EF0-AEE0-55624976C4DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F88DAF4A-1C7B-4EF0-AEE0-55624976C4DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F88DAF4A-1C7B-4EF0-AEE0-55624976C4DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
