@@ -72,7 +72,7 @@ FIVES.Communication = FIVES.Communication || {};
     c.connect = function(callback) {
         var self = this;
 
-        var requiredServices = ["kiara", "objectsync", "editing", "avatar"];
+        var requiredServices = ["kiara", "objectsync", "editing"];
         var reportFailure = function(message) {
             callback(false, message);
         };

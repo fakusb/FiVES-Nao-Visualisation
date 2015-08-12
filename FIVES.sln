@@ -283,7 +283,6 @@ Global
 		{B698B7A2-8E46-4D92-9229-1A68F8BFC545} = {4493E16B-2266-45D8-A0B5-F998EF9B790E}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Plugins\Location\Location.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None

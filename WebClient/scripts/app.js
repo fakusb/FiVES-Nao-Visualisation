@@ -32,18 +32,9 @@ function(KIARA, $) {
         return false;
     }
 
-    function resetFormAndReportError(message) {
-        // Reset the form.
-        $("#signin-login").prop('disabled', false);
-        $("#signin-password").prop('disabled', false);
-        $("#signin-btn").button("reset");
-
+    function ReportError(message) {
         // Show error message.
-        $("#signin-failed").text(message);
-        $("#signin-failed").show();
-
-        // Focus the login input.
-        $("#signin-login").focus();
+        alert("SignIn failed!\n"+message);
     }
 
     var loginComplete = false;
@@ -53,21 +44,14 @@ function(KIARA, $) {
         if (loginComplete)
             return true;
 
-        // This is to ignore attempts to close the signin modal by clicking outside of it.
-        if (!signinBtnPressed)
-            return false;
-        else
-            signinBtnPressed = false; // reset the value
-
-        var login = $("#signin-login").val();
-        var password = $("#signin-password").val();
+        var login = "norbert";
+        var password = "norbert";
 
         var connectCallback = function(success, message) {
             if (success) {
                 loginComplete = true;
-                $("#signin-modal").modal("hide");
             } else {
-                resetFormAndReportError(message);
+                ReportError(message);
             }
         };
 
@@ -75,15 +59,9 @@ function(KIARA, $) {
             if (success) {
                 FIVES.Communication.FivesCommunicator.connect(connectCallback);
             } else {
-                resetFormAndReportError(message);
+                ReportError(message);
             }
         };
-
-        // Disable input fields and button, hide error message if any.
-        $("#signin-btn").button("loading");
-        $("#signin-login").prop('disabled', true);
-        $("#signin-password").prop('disabled', true);
-        $("#signin-failed").hide();
 
         FIVES.Communication.FivesCommunicator.auth(login, password, authCallback);
 
@@ -97,10 +75,7 @@ function(KIARA, $) {
         FIVES.Communication.FivesCommunicator.initialize(context, service);
         FIVES.Resources.SceneManager.initialize("xml3dView");
 
-        // Show signin modal.
-        $('#signin-modal').modal("show");
-        $("#signin-modal").on("hide.bs.modal", login);
-        $("#signin-btn").click(function() { signinBtnPressed = true; $('#signin-modal').modal("hide"); });
+        login();
     }
     $(document).ready(main);
 });
