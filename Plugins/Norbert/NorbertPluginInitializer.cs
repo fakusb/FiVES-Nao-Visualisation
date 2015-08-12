@@ -34,9 +34,12 @@ namespace NorbertPlugin
 		{
 			StopDeamon();
 			entRWL.AcquireWriterLock(-1);
+			try {
 				foreach (NaoConnection nc in entities.Values)
 					nc.Dispose();
-			entRWL.ReleaseWriterLock ();
+			} finally {
+				entRWL.ReleaseWriterLock ();
+			}
 		}
 
 		public string Name {
@@ -117,11 +120,14 @@ namespace NorbertPlugin
 			while (true) {
 				doUpdate.WaitOne ();
 				entRWL.AcquireReaderLock (-1);
+				try {
 					foreach (KeyValuePair<Entity, NaoConnection> ec in entities) {	
 						var connection = ec.Value;
 						connection.QueryJoints ();
 					}
-				entRWL.ReleaseReaderLock ();
+				} finally {
+					entRWL.ReleaseReaderLock ();
+				}
 			}
 		}
 
@@ -133,6 +139,7 @@ namespace NorbertPlugin
 		private void HandleEventTick(Object sender, TickEventArgs e)
 		{
 			entRWL.AcquireReaderLock (-1);
+			try {
 				foreach (KeyValuePair<Entity, NaoConnection> ec in entities)
 				{
 					var entity = ec.Key;
@@ -141,7 +148,9 @@ namespace NorbertPlugin
 						foreach (KeyValuePair<string, double> kv in connection.jointState)
 							entity["nao_posture"][kv.Key].Suggest(kv.Value);
 				}
-			entRWL.ReleaseReaderLock ();
+			} finally {
+				entRWL.ReleaseReaderLock ();
+			}
 			doUpdate.Set();
 		}
 
@@ -171,8 +180,11 @@ namespace NorbertPlugin
 
 				var connection = new NaoConnection(hostName, userName, password);
 				entRWL.AcquireWriterLock(-1);
+				try {
 					entities[e] = connection;
-				entRWL.ReleaseWriterLock();
+				} finally {
+					entRWL.ReleaseWriterLock();
+				}
 				Terminal.Instance.WriteLine("\tConnected :-)");
 			}
 			catch (Exception ex) {
