@@ -13,7 +13,7 @@ public partial class MainWindow
 	
 	private global::Gtk.Label label2;
 	
-	private global::Gtk.Button connectButton;
+	private global::Gtk.ToggleButton connectionToggle;
 	
 	private global::Gtk.Entry passwordEntry;
 	
@@ -22,6 +22,14 @@ public partial class MainWindow
 	private global::Gtk.Entry userNameEntry;
 	
 	private global::Gtk.DrawingArea cameraArea;
+	
+	private global::Gtk.HBox hbox3;
+	
+	private global::Gtk.ToggleButton cameraToggle;
+	
+	private global::Gtk.ToggleButton stiffnessToggle;
+	
+	private global::Gtk.ToggleButton controlToggle;
 	
 	private global::Gtk.HBox hbox2;
 	
@@ -76,16 +84,16 @@ public partial class MainWindow
 		w3.Expand = false;
 		w3.Fill = false;
 		// Container child hbox1.Gtk.Box+BoxChild
-		this.connectButton = new global::Gtk.Button ();
-		this.connectButton.CanFocus = true;
-		this.connectButton.Name = "connectButton";
-		this.connectButton.UseUnderline = true;
-		this.connectButton.Label = global::Mono.Unix.Catalog.GetString ("Connect");
+		this.connectionToggle = new global::Gtk.ToggleButton ();
+		this.connectionToggle.CanFocus = true;
+		this.connectionToggle.Name = "connectionToggle";
+		this.connectionToggle.UseUnderline = true;
+		this.connectionToggle.Label = global::Mono.Unix.Catalog.GetString ("Connection");
 		global::Gtk.Image w4 = new global::Gtk.Image ();
-		w4.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-apply", global::Gtk.IconSize.Menu);
-		this.connectButton.Image = w4;
-		this.hbox1.Add (this.connectButton);
-		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.connectButton]));
+		w4.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-connect", global::Gtk.IconSize.LargeToolbar);
+		this.connectionToggle.Image = w4;
+		this.hbox1.Add (this.connectionToggle);
+		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.connectionToggle]));
 		w5.PackType = ((global::Gtk.PackType)(1));
 		w5.Position = 3;
 		w5.Expand = false;
@@ -136,6 +144,67 @@ public partial class MainWindow
 		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.cameraArea]));
 		w10.Position = 1;
 		// Container child vbox1.Gtk.Box+BoxChild
+		this.hbox3 = new global::Gtk.HBox ();
+		this.hbox3.Name = "hbox3";
+		this.hbox3.Homogeneous = true;
+		this.hbox3.Spacing = 6;
+		// Container child hbox3.Gtk.Box+BoxChild
+		this.cameraToggle = new global::Gtk.ToggleButton ();
+		this.cameraToggle.WidthRequest = 100;
+		this.cameraToggle.HeightRequest = 50;
+		this.cameraToggle.Sensitive = false;
+		this.cameraToggle.CanFocus = true;
+		this.cameraToggle.Name = "cameraToggle";
+		this.cameraToggle.UseUnderline = true;
+		this.cameraToggle.Label = global::Mono.Unix.Catalog.GetString ("Vision");
+		global::Gtk.Image w11 = new global::Gtk.Image ();
+		w11.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-find", global::Gtk.IconSize.LargeToolbar);
+		this.cameraToggle.Image = w11;
+		this.hbox3.Add (this.cameraToggle);
+		global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.cameraToggle]));
+		w12.Position = 0;
+		w12.Expand = false;
+		w12.Fill = false;
+		// Container child hbox3.Gtk.Box+BoxChild
+		this.stiffnessToggle = new global::Gtk.ToggleButton ();
+		this.stiffnessToggle.WidthRequest = 100;
+		this.stiffnessToggle.HeightRequest = 50;
+		this.stiffnessToggle.Sensitive = false;
+		this.stiffnessToggle.CanFocus = true;
+		this.stiffnessToggle.Name = "stiffnessToggle";
+		this.stiffnessToggle.UseUnderline = true;
+		this.stiffnessToggle.Label = global::Mono.Unix.Catalog.GetString ("Stiffness");
+		global::Gtk.Image w13 = new global::Gtk.Image ();
+		w13.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-dialog-authentication", global::Gtk.IconSize.LargeToolbar);
+		this.stiffnessToggle.Image = w13;
+		this.hbox3.Add (this.stiffnessToggle);
+		global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.stiffnessToggle]));
+		w14.Position = 1;
+		w14.Expand = false;
+		w14.Fill = false;
+		// Container child hbox3.Gtk.Box+BoxChild
+		this.controlToggle = new global::Gtk.ToggleButton ();
+		this.controlToggle.WidthRequest = 100;
+		this.controlToggle.HeightRequest = 50;
+		this.controlToggle.Sensitive = false;
+		this.controlToggle.CanFocus = true;
+		this.controlToggle.Name = "controlToggle";
+		this.controlToggle.UseUnderline = true;
+		this.controlToggle.Label = global::Mono.Unix.Catalog.GetString ("Control");
+		global::Gtk.Image w15 = new global::Gtk.Image ();
+		w15.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "stock_zoom-page", global::Gtk.IconSize.LargeToolbar);
+		this.controlToggle.Image = w15;
+		this.hbox3.Add (this.controlToggle);
+		global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.controlToggle]));
+		w16.Position = 2;
+		w16.Expand = false;
+		w16.Fill = false;
+		this.vbox1.Add (this.hbox3);
+		global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox3]));
+		w17.Position = 2;
+		w17.Expand = false;
+		w17.Fill = false;
+		// Container child vbox1.Gtk.Box+BoxChild
 		this.hbox2 = new global::Gtk.HBox ();
 		this.hbox2.Name = "hbox2";
 		this.hbox2.Spacing = 6;
@@ -146,37 +215,42 @@ public partial class MainWindow
 		this.ttsEntry.IsEditable = true;
 		this.ttsEntry.InvisibleChar = '●';
 		this.hbox2.Add (this.ttsEntry);
-		global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.ttsEntry]));
-		w11.Position = 0;
+		global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.ttsEntry]));
+		w18.Position = 0;
 		// Container child hbox2.Gtk.Box+BoxChild
 		this.ttsButton = new global::Gtk.Button ();
 		this.ttsButton.WidthRequest = 100;
 		this.ttsButton.HeightRequest = 50;
+		this.ttsButton.Sensitive = false;
 		this.ttsButton.CanFocus = true;
 		this.ttsButton.Name = "ttsButton";
 		this.ttsButton.UseUnderline = true;
 		this.ttsButton.Label = global::Mono.Unix.Catalog.GetString ("Say");
-		global::Gtk.Image w12 = new global::Gtk.Image ();
-		w12.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "stock_volume", global::Gtk.IconSize.Button);
-		this.ttsButton.Image = w12;
+		global::Gtk.Image w19 = new global::Gtk.Image ();
+		w19.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "stock_volume", global::Gtk.IconSize.Button);
+		this.ttsButton.Image = w19;
 		this.hbox2.Add (this.ttsButton);
-		global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.ttsButton]));
-		w13.Position = 1;
-		w13.Expand = false;
-		w13.Fill = false;
+		global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.ttsButton]));
+		w20.Position = 1;
+		w20.Expand = false;
+		w20.Fill = false;
 		this.vbox1.Add (this.hbox2);
-		global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox2]));
-		w14.PackType = ((global::Gtk.PackType)(1));
-		w14.Position = 2;
-		w14.Expand = false;
-		w14.Fill = false;
+		global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox2]));
+		w21.PackType = ((global::Gtk.PackType)(1));
+		w21.Position = 3;
+		w21.Expand = false;
+		w21.Fill = false;
 		this.Add (this.vbox1);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
 		}
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
+		this.KeyPressEvent += new global::Gtk.KeyPressEventHandler (this.OnKeyPressEvent);
+		this.KeyReleaseEvent += new global::Gtk.KeyReleaseEventHandler (this.OnKeyReleaseEvent);
+		this.connectionToggle.Toggled += new global::System.EventHandler (this.OnConnectionToggleToggled);
 		this.cameraArea.ExposeEvent += new global::Gtk.ExposeEventHandler (this.OnCameraAreaExposeEvent);
+		this.cameraToggle.Toggled += new global::System.EventHandler (this.OnCameraToggleToggled);
 		this.ttsButton.Clicked += new global::System.EventHandler (this.OnTtsButtonClicked);
 	}
 }
