@@ -10,7 +10,7 @@ public partial class MainWindow: Gtk.Window
 	private System.Net.Sockets.Socket dataConnection;
 	private byte[] imageBuffer = new byte[3 * 320 * 240];
 	private Gdk.Pixbuf imagePixBuf = null;
-	private const double fps = 30.0;
+	private const double fps = 10.0;
 
 	System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
@@ -92,7 +92,6 @@ public partial class MainWindow: Gtk.Window
 	{
 		say(ttsEntry.Text);
 	}
-
 
 	protected void OnCameraAreaExposeEvent (object sender, ExposeEventArgs args)
 	{
