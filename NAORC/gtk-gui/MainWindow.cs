@@ -251,6 +251,8 @@ public partial class MainWindow
 		this.connectionToggle.Toggled += new global::System.EventHandler (this.OnConnectionToggleToggled);
 		this.cameraArea.ExposeEvent += new global::Gtk.ExposeEventHandler (this.OnCameraAreaExposeEvent);
 		this.cameraToggle.Toggled += new global::System.EventHandler (this.OnCameraToggleToggled);
+		this.stiffnessToggle.Toggled += new global::System.EventHandler (this.OnStiffnessToggleToggled);
+		this.controlToggle.Toggled += new global::System.EventHandler (this.OnControlToggleToggled);
 		this.ttsButton.Clicked += new global::System.EventHandler (this.OnTtsButtonClicked);
 	}
 }

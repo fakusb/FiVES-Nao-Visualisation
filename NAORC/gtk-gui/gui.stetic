@@ -177,6 +177,7 @@
                 <property name="Icon">stock:gtk-dialog-authentication LargeToolbar</property>
                 <property name="Label" translatable="yes">Stiffness</property>
                 <property name="UseUnderline">True</property>
+                <signal name="Toggled" handler="OnStiffnessToggleToggled" />
               </widget>
               <packing>
                 <property name="Position">1</property>
@@ -196,6 +197,7 @@
                 <property name="Icon">stock:stock_zoom-page LargeToolbar</property>
                 <property name="Label" translatable="yes">Control</property>
                 <property name="UseUnderline">True</property>
+                <signal name="Toggled" handler="OnControlToggleToggled" />
               </widget>
               <packing>
                 <property name="Position">2</property>
