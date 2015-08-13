@@ -10,14 +10,15 @@ public partial class MainWindow: Gtk.Window
 	private System.Net.Sockets.Socket dataConnection;
 	private byte[] imageBuffer = new byte[3 * 320 * 240];
 	private Gdk.Pixbuf imagePixBuf = null;
-	private const uint refreshFrequency = 1000;
+	private const double fps = 30.0;
+
+	System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
 	public MainWindow () : base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
 		OnConnectButtonClicked(null, null);
 	}
-
 
 	void receiveCallback(IAsyncResult state)
 	{
@@ -31,6 +32,11 @@ public partial class MainWindow: Gtk.Window
 
 	protected bool refreshCameraImage()
 	{
+		if (watch.ElapsedMilliseconds < 1000.0 / fps)
+			return true;
+
+		watch.Restart();
+
 		commandConnection.executeAsync("sendImage()");
 		int level = 0;
 
@@ -70,7 +76,9 @@ public partial class MainWindow: Gtk.Window
 		dataConnection.Connect(new IPEndPoint(ip, 4711));
 		commandConnection.execute("connection, _ = sock.accept()");
 
-		GLib.Timeout.Add(refreshFrequency, new GLib.TimeoutHandler(refreshCameraImage));
+		//GLib.Timeout.Add(refreshFrequency, new GLib.TimeoutHandler(refreshCameraImage));
+		GLib.Idle.Add(new GLib.IdleHandler(refreshCameraImage));
+
 	}
 
 	protected void say(string msg)
