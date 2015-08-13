@@ -3,6 +3,7 @@ from naoqi import ALProxy
 import vision_definitions
 import binascii
 import socket
+import time
 
 ip = "nao.local"
 port = 9559
@@ -38,11 +39,11 @@ def close():
 def startMove(joint, target, speed):
 	tasks1 = motion.getTaskList()
 	motion.post.angleInterpolationWithSpeed(joint, target, speed)
-	for t in motion.getTaskList():
-		if t not in tasks1:
-			return t[1]
-		else:
-			tasks1.remove(t)
+	time.sleep(0.005)
+	while True:
+		for t in motion.getTaskList():
+			if t not in tasks1:
+				return t[1]
 
 def stopMove(moveID):
 	motion.killTask(moveID)
