@@ -168,7 +168,7 @@ public partial class MainWindow: Gtk.Window
 	{
 		if (cameraToggle.Active)
 		{
-			commandConnection.execute("enableCamera()");
+			commandConnection.execute("imgClient = video.subscribe(\"_client\", resolution, colorSpace, 5)");
 			GLib.Idle.Add(refreshHandler);
 		}
 		else

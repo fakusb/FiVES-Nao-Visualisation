@@ -22,9 +22,7 @@ sock.bind(server_address)
 sock.listen(1)
 
 connection = None # Has to be set to the first component of the result of calling sock.accept!
-
-def enableCamera():
-	imgClient = video.subscribe("_client", resolution, colorSpace, 5)
+imgClient = None # Has to be set to the result of calling video.subscribe!
 
 def sendImage():
 	image = video.getImageRemote(imgClient)
@@ -54,3 +52,5 @@ def enableStiffness():
 
 def disableStiffness():
 	motion.stiffnessInterpolation("Body", 0.0, 1.0)
+
+
