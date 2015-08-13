@@ -177,5 +177,6 @@ public partial class MainWindow
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.cameraArea.ExposeEvent += new global::Gtk.ExposeEventHandler (this.OnCameraAreaExposeEvent);
+		this.ttsButton.Clicked += new global::System.EventHandler (this.OnTtsButtonClicked);
 	}
 }

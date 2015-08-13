@@ -164,6 +164,7 @@
                 <property name="Icon">stock:stock_volume Button</property>
                 <property name="Label" translatable="yes">Say</property>
                 <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnTtsButtonClicked" />
               </widget>
               <packing>
                 <property name="Position">1</property>
