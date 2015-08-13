@@ -20,11 +20,6 @@ public partial class MainWindow: Gtk.Window
 		OnConnectButtonClicked(null, null);
 	}
 
-	void receiveCallback(IAsyncResult state)
-	{
-		// Nothing to do here.
-	}
-
 	void connectCallback(IAsyncResult state)
 	{
 		((System.Net.Sockets.Socket)state.AsyncState).EndConnect(state);
