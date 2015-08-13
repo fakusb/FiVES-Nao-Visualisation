@@ -9,6 +9,7 @@ public partial class MainWindow: Gtk.Window
 	private PythonConnection commandConnection;
 	private System.Net.Sockets.Socket dataConnection;
 	private byte[] imageBuffer = new byte[3 * 320 * 240];
+	private Gdk.Pixbuf imagePixBuf = null;
 	private const uint refreshFrequency = 1000;
 
 	public MainWindow () : base (Gtk.WindowType.Toplevel)
@@ -38,14 +39,11 @@ public partial class MainWindow: Gtk.Window
 			level += dataConnection.Receive(imageBuffer, level, imageBuffer.Length - level, SocketFlags.None);
 		}
 
-		var image = new Gdk.Pixbuf(imageBuffer, Gdk.Colorspace.Rgb, false, 8, 320, 240, 320);
+		imagePixBuf = new Gdk.Pixbuf(imageBuffer, Gdk.Colorspace.Rgb, false, 8, 320, 240, 3 * 320);
 
-		commandConnection.execute("close()");
-		image.Save("image.png", "png");
+		cameraArea.QueueDraw();
 
-		Console.WriteLine("Got it :-)");
-
-		return false; // TODO: Return true here in order to loop the refresh!
+		return true;
 	}
 		
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
@@ -85,5 +83,21 @@ public partial class MainWindow: Gtk.Window
 	protected void OnTtsButtonClicked (object sender, EventArgs e)
 	{
 		say(ttsEntry.Text);
+	}
+
+
+	protected void OnCameraAreaExposeEvent (object sender, ExposeEventArgs args)
+	{
+		if (imagePixBuf == null)
+			return;
+
+		DrawingArea area = (DrawingArea)sender;
+
+		Cairo.Context cx = Gdk.CairoHelper.Create(area.GdkWindow);
+
+		Gdk.CairoHelper.SetSourcePixbuf(cx, imagePixBuf, 0.0, 0.0);
+
+		cx.Rectangle(0, 0, 320, 240);
+		cx.Fill();
 	}
 }

@@ -39,7 +39,7 @@
                 <property name="MemberName" />
                 <property name="WidthRequest">100</property>
                 <property name="CanFocus">True</property>
-                <property name="Text" translatable="yes">134.96.186.47</property>
+                <property name="Text" translatable="yes">169.254.179.212</property>
                 <property name="IsEditable">True</property>
                 <property name="InvisibleChar">●</property>
               </widget>
@@ -129,14 +129,13 @@
           </packing>
         </child>
         <child>
-          <widget class="Gtk.Image" id="cameraImage">
+          <widget class="Gtk.DrawingArea" id="cameraArea">
             <property name="MemberName" />
+            <signal name="ExposeEvent" handler="OnCameraAreaExposeEvent" />
           </widget>
           <packing>
             <property name="Position">1</property>
             <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
           </packing>
         </child>
         <child>

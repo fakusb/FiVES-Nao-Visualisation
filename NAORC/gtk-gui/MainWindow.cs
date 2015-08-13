@@ -21,7 +21,7 @@ public partial class MainWindow
 	
 	private global::Gtk.Entry userNameEntry;
 	
-	private global::Gtk.Image cameraImage;
+	private global::Gtk.DrawingArea cameraArea;
 	
 	private global::Gtk.HBox hbox2;
 	
@@ -60,7 +60,7 @@ public partial class MainWindow
 		this.ipEntry.WidthRequest = 100;
 		this.ipEntry.CanFocus = true;
 		this.ipEntry.Name = "ipEntry";
-		this.ipEntry.Text = global::Mono.Unix.Catalog.GetString ("134.96.186.47");
+		this.ipEntry.Text = global::Mono.Unix.Catalog.GetString ("169.254.179.212");
 		this.ipEntry.IsEditable = true;
 		this.ipEntry.InvisibleChar = '●';
 		this.hbox1.Add (this.ipEntry);
@@ -130,13 +130,11 @@ public partial class MainWindow
 		w9.Expand = false;
 		w9.Fill = false;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.cameraImage = new global::Gtk.Image ();
-		this.cameraImage.Name = "cameraImage";
-		this.vbox1.Add (this.cameraImage);
-		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.cameraImage]));
+		this.cameraArea = new global::Gtk.DrawingArea ();
+		this.cameraArea.Name = "cameraArea";
+		this.vbox1.Add (this.cameraArea);
+		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.cameraArea]));
 		w10.Position = 1;
-		w10.Expand = false;
-		w10.Fill = false;
 		// Container child vbox1.Gtk.Box+BoxChild
 		this.hbox2 = new global::Gtk.HBox ();
 		this.hbox2.Name = "hbox2";
@@ -178,5 +176,6 @@ public partial class MainWindow
 		}
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
+		this.cameraArea.ExposeEvent += new global::Gtk.ExposeEventHandler (this.OnCameraAreaExposeEvent);
 	}
 }
