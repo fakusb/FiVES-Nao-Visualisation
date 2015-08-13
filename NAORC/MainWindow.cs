@@ -8,7 +8,10 @@ public partial class MainWindow: Gtk.Window
 {
 	private PythonConnection commandConnection;
 	private System.Net.Sockets.Socket dataConnection;
-	private byte[] imageBuffer = new byte[3 * 320 * 240];
+	private const int cam_width = 320;
+	private const int cam_height = 240;
+
+	private byte[] imageBuffer = new byte[3 * cam_width * cam_height];
 	private Gdk.Pixbuf imagePixBuf = null;
 	private const double fps = 10.0;
 
@@ -40,7 +43,7 @@ public partial class MainWindow: Gtk.Window
 			level += dataConnection.Receive(imageBuffer, level, imageBuffer.Length - level, SocketFlags.None);
 		}
 
-		imagePixBuf = new Gdk.Pixbuf(imageBuffer, Gdk.Colorspace.Rgb, false, 8, 320, 240, 3 * 320);
+		imagePixBuf = new Gdk.Pixbuf(imageBuffer, Gdk.Colorspace.Rgb, false, 8, cam_width, cam_height, 3 * cam_width);
 
 		cameraArea.QueueDraw();
 
@@ -75,9 +78,10 @@ public partial class MainWindow: Gtk.Window
 
 		using (Cairo.Context cx = Gdk.CairoHelper.Create(area.GdkWindow))
 		{
-			Gdk.CairoHelper.SetSourcePixbuf(cx, imagePixBuf, 0.0, 0.0);
-
-			cx.Rectangle(0, 0, 320, 240);
+			var x = (area.Allocation.Width - cam_width) / 2;
+			var y = (area.Allocation.Height - cam_height) / 2;
+			Gdk.CairoHelper.SetSourcePixbuf(cx, imagePixBuf, x, y);
+			cx.Rectangle(x, y, cam_width, cam_height);
 			cx.Fill();
 		}
 	}
