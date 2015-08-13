@@ -101,11 +101,12 @@ public partial class MainWindow: Gtk.Window
 
 		DrawingArea area = (DrawingArea)sender;
 
-		Cairo.Context cx = Gdk.CairoHelper.Create(area.GdkWindow);
+		using (Cairo.Context cx = Gdk.CairoHelper.Create(area.GdkWindow))
+		{
+			Gdk.CairoHelper.SetSourcePixbuf(cx, imagePixBuf, 0.0, 0.0);
 
-		Gdk.CairoHelper.SetSourcePixbuf(cx, imagePixBuf, 0.0, 0.0);
-
-		cx.Rectangle(0, 0, 320, 240);
-		cx.Fill();
+			cx.Rectangle(0, 0, 320, 240);
+			cx.Fill();
+		}
 	}
 }
