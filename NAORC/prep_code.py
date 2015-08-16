@@ -2,7 +2,6 @@ import sys
 from naoqi import ALProxy
 import vision_definitions
 import binascii
-import socket
 import time
 
 ip = "nao.local"
@@ -17,12 +16,6 @@ resolution = vision_definitions.kQVGA  # 320 * 240
 colorSpace = vision_definitions.kRGBColorSpace
 video.setParam(vision_definitions.kCameraSelectID, camera)
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_address = ('', 4711)
-sock.bind(server_address)
-sock.listen(1)
-
-connection = None # Has to be set to the first component of the result of calling sock.accept!
 imgClient = None # Has to be set to the result of calling video.subscribe!
 
 def sendImage():

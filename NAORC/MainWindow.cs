@@ -1,8 +1,6 @@
 ﻿using System;
 using Gtk;
 using RemotePy;
-using System.Net;
-using System.Net.Sockets;
 
 public partial class MainWindow: Gtk.Window
 {
@@ -21,11 +19,6 @@ public partial class MainWindow: Gtk.Window
 	{
 		Build ();
 		refreshHandler = new GLib.IdleHandler(refreshCameraImage);
-	}
-
-	void connectCallback(IAsyncResult state)
-	{
-		((System.Net.Sockets.Socket)state.AsyncState).EndConnect(state);
 	}
 
 	protected bool refreshCameraImage()
@@ -185,15 +178,16 @@ public partial class MainWindow: Gtk.Window
 		{
 			commandConnection = new PythonConnection(ipEntry.Text, userNameEntry.Text, passwordEntry.Text);
 
+			// Open a separate data connection:
+			// Has to be done before sending prep_code.py as it defines necessary variables for prep_code.py
+			dataConnection = new DataConnection (ref commandConnection, ipEntry.Text, 4711);
+
 			using (var sr = new System.IO.StreamReader("prep_code.py"))
 			{
 				String line;
 				while ((line = sr.ReadLine()) != null)
 					commandConnection.execute(line);
 			}
-
-			// Open a separate data connection:
-			dataConnection = new DataConnection (ref commandConnection, ipEntry.Text, 4711);
 		}
 		else
 		{

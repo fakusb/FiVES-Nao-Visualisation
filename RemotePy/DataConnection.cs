@@ -6,13 +6,23 @@ namespace RemotePy
 {
 	public class DataConnection : IDisposable
 	{
-		private System.Net.Sockets.Socket dataConnection;
+		private Socket dataConnection;
 
 		public DataConnection (ref PythonConnection pyConn, string ipAddress, int port)
 		{
 			IPAddress ip = IPAddress.Parse(ipAddress);
 
-			dataConnection = new System.Net.Sockets.Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp);
+			using (var sr = new System.IO.StreamReader("setup_socket.py"))
+			{
+				String line;
+				while ((line = sr.ReadLine ()) != null) {
+					if (line.Contains ("sock_port = "))
+						line = String.Format ("sock_port = {0}", port);
+					pyConn.execute (line);
+				}
+			}
+
+			dataConnection = new Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp);
 			dataConnection.Connect(new IPEndPoint(ip, port));
 			pyConn.execute("connection, _ = sock.accept()");
 		}

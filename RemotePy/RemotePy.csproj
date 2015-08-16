@@ -38,4 +38,7 @@
     <Compile Include="DataConnection.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="setup_socket.py" />
+  </ItemGroup>
 </Project>
