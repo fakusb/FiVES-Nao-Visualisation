@@ -7,7 +7,7 @@ using System.Net.Sockets;
 public partial class MainWindow: Gtk.Window
 {
 	private PythonConnection commandConnection;
-	private System.Net.Sockets.Socket dataConnection;
+	private DataConnection dataConnection;
 	private const int cam_width = 320;
 	private const int cam_height = 240;
 
@@ -36,12 +36,7 @@ public partial class MainWindow: Gtk.Window
 		watch.Restart();
 
 		commandConnection.executeAsync("sendImage()");
-		int level = 0;
-
-		while (level < imageBuffer.Length)
-		{
-			level += dataConnection.Receive(imageBuffer, level, imageBuffer.Length - level, SocketFlags.None);
-		}
+		dataConnection.Receive (ref imageBuffer, imageBuffer.Length);
 
 		imagePixBuf = new Gdk.Pixbuf(imageBuffer, Gdk.Colorspace.Rgb, false, 8, cam_width, cam_height, 3 * cam_width);
 
@@ -188,7 +183,6 @@ public partial class MainWindow: Gtk.Window
 
 		if (active)
 		{
-			IPAddress ip = IPAddress.Parse(ipEntry.Text);
 			commandConnection = new PythonConnection(ipEntry.Text, userNameEntry.Text, passwordEntry.Text);
 
 			using (var sr = new System.IO.StreamReader("prep_code.py"))
@@ -199,9 +193,7 @@ public partial class MainWindow: Gtk.Window
 			}
 
 			// Open a separate data connection:
-			dataConnection = new System.Net.Sockets.Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp);
-			dataConnection.Connect(new IPEndPoint(ip, 4711));
-			commandConnection.execute("connection, _ = sock.accept()");
+			dataConnection = new DataConnection (ref commandConnection, ipEntry.Text, 4711);
 		}
 		else
 		{
@@ -209,7 +201,7 @@ public partial class MainWindow: Gtk.Window
 			cameraToggle.Active = false;
 			commandConnection.execute("close()");
 			commandConnection.Dispose();
-			dataConnection.Close();
+			dataConnection.Dispose();
 			commandConnection = null;
 			dataConnection = null;
 		}
