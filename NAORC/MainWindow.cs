@@ -203,6 +203,11 @@ public partial class MainWindow: Gtk.Window
 		stiffnessToggle.Sensitive = active;
 		cameraToggle.Sensitive = active;
 		ttsButton.Sensitive = active;
+
+		ipEntry.Sensitive = !active;
+		userNameEntry.Sensitive = !active;
+		passwordEntry.Sensitive = !active;
+
 	}
 
 	protected void OnStiffnessToggleToggled (object sender, EventArgs e)
@@ -231,7 +236,10 @@ public partial class MainWindow: Gtk.Window
 				c.Stop();
 
 			controls.Clear();
-		}
+
+
+		}		
+		ttsEntry.Sensitive = !controlToggle.Active;
 	}
 
 }
