@@ -27,12 +27,12 @@ namespace NorbertPlugin
 
 			DefineComponents();
 			RegisterEvents();
-			StartDaemon();
+//			StartDaemon();
 		}
 
 		public void Shutdown ()
 		{
-			StopDaemon();
+//			StopDaemon();
 			entRWL.AcquireWriterLock(-1);
 			try {
 				foreach (NaoConnection nc in entities.Values)
@@ -105,36 +105,36 @@ namespace NorbertPlugin
 
 		//volatile bool doUpdate = true;
 
-		public ManualResetEvent doUpdate = new ManualResetEvent (true);
-
-		Thread daemon;
-
-		private void StartDaemon()
-		{
-			daemon = new Thread (new ThreadStart (DaemonFunction));
-			daemon.Start();
-		}
-
-		public void DaemonFunction()
-		{
-			while (true) {
-				doUpdate.WaitOne ();
-				entRWL.AcquireReaderLock (-1);
-				try {
-					foreach (KeyValuePair<Entity, NaoConnection> ec in entities) {	
-						var connection = ec.Value;
-						connection.QueryJoints ();
-					}
-				} finally {
-					entRWL.ReleaseReaderLock ();
-				}
-			}
-		}
-
-		private void StopDaemon()
-		{
-			daemon.Abort ();
-		}
+//		public ManualResetEvent doUpdate = new ManualResetEvent (true);
+//
+//		Thread daemon;
+//
+//		private void StartDaemon()
+//		{
+//			daemon = new Thread (new ThreadStart (DaemonFunction));
+//			daemon.Start();
+//		}
+//
+//		public void DaemonFunction()
+//		{
+//			while (true) {
+//				doUpdate.WaitOne ();
+//				entRWL.AcquireReaderLock (-1);
+//				try {
+//					foreach (KeyValuePair<Entity, NaoConnection> ec in entities) {	
+//						var connection = ec.Value;
+//						connection.QueryJoints ();
+//					}
+//				} finally {
+//					entRWL.ReleaseReaderLock ();
+//				}
+//			}
+//		}
+//
+//		private void StopDaemon()
+//		{
+//			daemon.Abort ();
+//		}
 			
 		private void HandleEventTick(Object sender, TickEventArgs e)
 		{
@@ -145,13 +145,13 @@ namespace NorbertPlugin
 					var entity = ec.Key;
 					var connection = ec.Value;
 					lock (connection)
-						foreach (KeyValuePair<string, double> kv in connection.jointState)
+						foreach (KeyValuePair<string, float> kv in connection.jointState)
 							entity["nao_posture"][kv.Key].Suggest(kv.Value);
 				}
 			} finally {
 				entRWL.ReleaseReaderLock ();
 			}
-			doUpdate.Set();
+//			doUpdate.Set();
 		}
 
 		void AddEntity(string commandLine)
@@ -182,6 +182,7 @@ namespace NorbertPlugin
 				entRWL.AcquireWriterLock(-1);
 				try {
 					entities[e] = connection;
+					connection.Start();
 				} finally {
 					entRWL.ReleaseWriterLock();
 				}
