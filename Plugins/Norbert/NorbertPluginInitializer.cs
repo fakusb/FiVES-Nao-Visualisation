@@ -7,6 +7,7 @@ using KIARA;
 using KIARAPlugin;
 using TerminalPlugin;
 using System.Threading;
+using System.Diagnostics;
 
 namespace NorbertPlugin
 {
@@ -102,9 +103,13 @@ namespace NorbertPlugin
 		{
 			EventLoop.Instance.TickFired += new EventHandler<TickEventArgs>(HandleEventTick);
 		}
-			
+
+		Stopwatch sw = Stopwatch.StartNew();
+
 		private void HandleEventTick(Object sender, TickEventArgs e)
 		{
+			Console.WriteLine(String.Format("Slept for {0}ms.", sw.ElapsedMilliseconds));
+			sw.Restart();
 
 			entRWL.AcquireReaderLock (-1);
 			try {
@@ -122,8 +127,11 @@ namespace NorbertPlugin
 				}
 			} finally {
 				entRWL.ReleaseReaderLock ();
+				Console.WriteLine(String.Format("Tick handler took {0}ms", sw.ElapsedMilliseconds));
+				sw.Restart();
 			}
 //			doUpdate.Set();
+
 		}
 
 		void AddEntity(string commandLine)
