@@ -292,13 +292,15 @@ public partial class MainWindow: Gtk.Window
 		}
 		else
 		{
-			foreach (var c in controls.Values)
+			foreach (var c in shiftedControls.Values)
+				c.Stop();
+			foreach (var c in shiftlessControls.Values)
 				c.Stop();
 
-			controls.Clear();
-
-
+			shiftedControls.Clear();
+			shiftlessControls.Clear();
 		}		
+
 		ttsEntry.Sensitive = !controlToggle.Active;
 	}
 
