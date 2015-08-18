@@ -102,42 +102,10 @@ namespace NorbertPlugin
 		{
 			EventLoop.Instance.TickFired += new EventHandler<TickEventArgs>(HandleEventTick);
 		}
-
-		//volatile bool doUpdate = true;
-
-//		public ManualResetEvent doUpdate = new ManualResetEvent (true);
-//
-//		Thread daemon;
-//
-//		private void StartDaemon()
-//		{
-//			daemon = new Thread (new ThreadStart (DaemonFunction));
-//			daemon.Start();
-//		}
-//
-//		public void DaemonFunction()
-//		{
-//			while (true) {
-//				doUpdate.WaitOne ();
-//				entRWL.AcquireReaderLock (-1);
-//				try {
-//					foreach (KeyValuePair<Entity, NaoConnection> ec in entities) {	
-//						var connection = ec.Value;
-//						connection.QueryJoints ();
-//					}
-//				} finally {
-//					entRWL.ReleaseReaderLock ();
-//				}
-//			}
-//		}
-//
-//		private void StopDaemon()
-//		{
-//			daemon.Abort ();
-//		}
 			
 		private void HandleEventTick(Object sender, TickEventArgs e)
 		{
+
 			entRWL.AcquireReaderLock (-1);
 			try {
 				foreach (KeyValuePair<Entity, NaoConnection> ec in entities)
