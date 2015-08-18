@@ -41,7 +41,7 @@
                 <property name="MemberName" />
                 <property name="WidthRequest">100</property>
                 <property name="CanFocus">True</property>
-                <property name="Text" translatable="yes">169.254.179.212</property>
+                <property name="Text" translatable="yes">134.96.186.47</property>
                 <property name="IsEditable">True</property>
                 <property name="InvisibleChar">●</property>
               </widget>
