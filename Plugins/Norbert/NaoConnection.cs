@@ -52,6 +52,7 @@ namespace NorbertPlugin
 		public NaoConnection(string hostName, string userName, string password) : base(hostName, userName, password)
 		{
 			ip = hostName;
+			dc = new InputChannel (this, ip, 4712);
 			using (var sr = new System.IO.StreamReader("queryJoints.py"))
 			{
 				String line;
@@ -62,7 +63,6 @@ namespace NorbertPlugin
 
 		public void Start()
 		{
-			dc = new InputChannel (this, ip, 4712);
 			StartDaemon ();
 			execute ("rt.start()");
 			running = true;

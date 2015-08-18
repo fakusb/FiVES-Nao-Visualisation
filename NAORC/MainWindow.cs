@@ -142,7 +142,7 @@ public partial class MainWindow: Gtk.Window
 		private double deltaFrequency;
 		private bool active = false;
 
-		public WalkControl(PythonConnection connection, double deltaSpeed, double deltaAngle, double delta_frequency)
+		public WalkControl(PythonConnection connection, double deltaSpeed, double deltaAngle, double deltaFrequency)
 		{
 			this.connection = connection;
 			this.deltaSpeed = deltaSpeed;
