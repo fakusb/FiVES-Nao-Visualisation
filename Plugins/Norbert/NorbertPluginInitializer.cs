@@ -145,8 +145,12 @@ namespace NorbertPlugin
 					var entity = ec.Key;
 					var connection = ec.Value;
 					lock (connection)
+					{
 						foreach (KeyValuePair<string, float> kv in connection.jointState)
 							entity["nao_posture"][kv.Key].Suggest(kv.Value);
+
+						connection.jointState.Clear()
+					}
 				}
 			} finally {
 				entRWL.ReleaseReaderLock ();
