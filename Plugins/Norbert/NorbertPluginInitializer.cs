@@ -149,7 +149,7 @@ namespace NorbertPlugin
 						foreach (KeyValuePair<string, float> kv in connection.jointState)
 							entity["nao_posture"][kv.Key].Suggest(kv.Value);
 
-						connection.jointState.Clear()
+						connection.jointState.Clear();
 					}
 				}
 			} finally {
