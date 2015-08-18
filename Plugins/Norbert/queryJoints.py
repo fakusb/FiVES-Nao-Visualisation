@@ -1,36 +1,40 @@
-joints = {
-	0: "HeadYaw",
-	1: "HeadPitch",
-	2: "RShoulderPitch",
-	3: "RShoulderRoll",
-	4: "RElbowRoll",
-	5: "RElbowYaw",
-	6: "RWristYaw",
-	7: "RHand",
-	8: "LShoulderPitch",
-	9: "LShoulderRoll",
-	10: "LElbowRoll",
-	11: "LElbowYaw",
-	12: "LWristYaw",
-	13: "LHand",
-	14: "RHipYawPitch",
-	15: "RHipPitch",
-	16: "RHipRoll",
-	17: "RKneePitch",
-	18: "RAnklePitch",
-	19: "RAnkleRoll",
-	20: "LHipYawPitch",
-	21: "LHipPitch",
-	22: "LHipRoll",
-	23: "LKneePitch",
-	24: "LAnklePitch",
-	25: "LAnkleRoll"}
+joints = [
+	"HeadYaw",
+	"HeadPitch",
+	"RShoulderPitch",
+	"RShoulderRoll",
+	"RElbowRoll",
+	"RElbowYaw",
+	"RWristYaw",
+	"RHand",
+	"LShoulderPitch",
+	"LShoulderRoll",
+	"LElbowRoll",
+	"LElbowYaw",
+	"LWristYaw",
+	"LHand",
+	"RHipYawPitch",
+	"RHipPitch",
+	"RHipRoll",
+	"RKneePitch",
+	"RAnklePitch",
+	"RAnkleRoll",
+	"LHipYawPitch",
+	"LHipPitch",
+	"LHipRoll",
+	"LKneePitch",
+	"LAnklePitch",
+	"LAnkleRoll"]
 
+jointBuffer = {}
 
 ALMEMORY_KEY_NAMES = []
 
-for j in joints.itervalues():
-	ALMEMORY_KEY_NAMES.append("Device/SubDeviceList/{j}/Position/Sensor/Value".format(j=j))
+i = 0
+for j in joints:
+	ALMEMORY_KEY_NAMES.append((i, "Device/SubDeviceList/{j}/Position/Sensor/Value".format(j=j)))
+	jointBuffer[i] = float("inf")
+	i += 1
 
 import os
 import sys
@@ -43,35 +47,43 @@ from threading import Timer
 memory = ALProxy("ALMemory", "127.0.0.1", 9559)
 
 def query():
-    for (num, key) in itertools.izip(joints, ALMEMORY_KEY_NAMES):
-    	if num == 14:
-    		continue
-    	elif num == 20:
-    		connection.send(pack('<Bf', 14, -memory.getData(key)))
-        connection.send(pack('<Bf', num, memory.getData(key)))
+	for (idx, key) in ALMEMORY_KEY_NAMES:
+		if idx == 14:
+			continue
+		
+		v = memory.getData(key)
+		
+		if abs(v - jointBuffer[idx]) > 0.0025:
+			jointBuffer[idx] = v
+			if idx == 20:
+				connection.send(pack('<Bf', 14, -v))
+			connection.send(pack('<Bf', idx, v))
+			#if idx == 20:
+			#	print unpack('<Bf', (pack('<Bf', 14, -v)))
+			#print unpack('<Bf', (pack('<Bf', idx, v)))
 
 class RepeatedTimer(object):
-    def __init__(self, interval, function, *args, **kwargs):
-        self._timer     = None
-        self.interval   = interval
-        self.function   = function
-        self.args       = args
-        self.kwargs     = kwargs
-        self.is_running = False
+	def __init__(self, interval, function, *args, **kwargs):
+		self._timer     = None
+		self.interval   = interval
+		self.function   = function
+		self.args       = args
+		self.kwargs     = kwargs
+		self.is_running = False
 	
-    def _run(self):
-        self.is_running = False
-        self.start()
-        self.function(*self.args, **self.kwargs)
-    
-    def start(self):
-        if not self.is_running:
-            self._timer = Timer(self.interval, self._run)
-            self._timer.start()
-            self.is_running = True
-    
-    def stop(self):
-        self._timer.cancel()
-        self.is_running = False
+	def _run(self):
+		self.is_running = False
+		self.function(*self.args, **self.kwargs)
+		self.start()
+		
+	def start(self):
+		if not self.is_running:
+			self._timer = Timer(self.interval, self._run)
+			self._timer.start()
+			self.is_running = True
+	
+	def stop(self):
+		self._timer.cancel()
+		self.is_running = False
 
 rt = RepeatedTimer(0.02, query)
