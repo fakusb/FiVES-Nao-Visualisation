@@ -74,7 +74,6 @@ public partial class MainWindow: Gtk.Window
 		}
 	}
 
-	System.Collections.Generic.HashSet<Gdk.Key> pressed = new System.Collections.Generic.HashSet<Gdk.Key>();
 
 	private abstract class Control
 	{
@@ -106,6 +105,9 @@ public partial class MainWindow: Gtk.Window
 
 		public override void Start()
 		{
+			if (currentID != -1)
+				return;
+
 			var response = connection.execute(command).Trim();
 			try
 			{
@@ -124,34 +126,75 @@ public partial class MainWindow: Gtk.Window
 		}
 	}
 
-	System.Collections.Generic.Dictionary<Gdk.Key, Control> controls = new System.Collections.Generic.Dictionary<Gdk.Key, Control>();
+	System.Collections.Generic.HashSet<Gdk.Key> pressed = new System.Collections.Generic.HashSet<Gdk.Key>();
 
+	System.Collections.Generic.Dictionary<Gdk.Key, Control> shiftlessControls = new System.Collections.Generic.Dictionary<Gdk.Key, Control>();
+	System.Collections.Generic.Dictionary<Gdk.Key, Control> shiftedControls = new System.Collections.Generic.Dictionary<Gdk.Key, Control>();
 
+	System.Collections.Generic.Dictionary<Gdk.Key, Control> selectedControls;
 
 	[GLib.ConnectBefore ()]
 	protected void OnKeyPressEvent (object sender, KeyPressEventArgs a)
 	{
 		var key = a.Event.Key;
-		if (!controls.ContainsKey(key))
-			return;
 
 		if (pressed.Contains(key))
 			return;
+
+		if (key == Gdk.Key.Shift_L)
+		{
+			selectedControls = shiftedControls;
+			foreach (var ctrl in shiftlessControls)
+			{
+				if (pressed.Contains(ctrl.Key))
+				{
+					ctrl.Value.Stop();
+
+					if (shiftedControls.ContainsKey(ctrl.Key))
+						shiftedControls[ctrl.Key].Start();
+				}
+			}
+		}
 		else
+		{
+			if (!selectedControls.ContainsKey(key))
+				return;
+
 			pressed.Add(key);
 
-		controls[key].Start();
+			selectedControls[key].Start();
+		}
 	}
 
 	protected void OnKeyReleaseEvent (object sender, KeyReleaseEventArgs a)
 	{
 		var key = a.Event.Key;
-		if (!controls.ContainsKey(key))
-			return;
 
-		pressed.Remove(key);
+		if (key == Gdk.Key.Shift_L)
+		{	
+			selectedControls = shiftlessControls;
+			foreach (var ctrl in shiftedControls)
+			{
+				if (pressed.Contains(ctrl.Key))
+				{
+					ctrl.Value.Stop();
 
-		controls[key].Stop();
+					if (shiftlessControls.ContainsKey(ctrl.Key))
+						shiftlessControls[ctrl.Key].Start();
+				}
+			}
+		}
+		else
+		{
+			if (shiftlessControls.ContainsKey(key))
+				shiftlessControls[key].Stop();
+			else if (shiftedControls.ContainsKey(key))
+				shiftedControls[key].Stop();
+			else
+				return;
+
+				pressed.Remove(key);
+		}
 	}
 
 	GLib.IdleHandler refreshHandler; 
@@ -227,8 +270,25 @@ public partial class MainWindow: Gtk.Window
 	{
 		if (controlToggle.Active)
 		{
-			controls[Gdk.Key.Left] = new JointControl(this.commandConnection, "HeadYaw", 1.0, 0.1);
-			controls[Gdk.Key.Right] = new JointControl(this.commandConnection, "HeadYaw", -1.0, 0.1);
+			shiftedControls[Gdk.Key.Left] = new JointControl(this.commandConnection, "HeadYaw", 1.0, 0.05);
+			shiftedControls[Gdk.Key.Right] = new JointControl(this.commandConnection, "HeadYaw", -1.0, 0.05);
+			shiftedControls[Gdk.Key.Up] = new JointControl(this.commandConnection, "HeadPitch", -0.7, 0.05);
+			shiftedControls[Gdk.Key.Down] = new JointControl(this.commandConnection, "HeadPitch", 0.5, 0.05);
+
+			shiftlessControls[Gdk.Key.c] = new JointControl(this.commandConnection, "LShoulderPitch", 3.14, 0.1);
+			shiftlessControls[Gdk.Key.v] = new JointControl(this.commandConnection, "LShoulderPitch", 0, 0.1);
+			shiftlessControls[Gdk.Key.d] = new JointControl(this.commandConnection, "LElbowRoll", 0, 0.1);
+			shiftlessControls[Gdk.Key.f] = new JointControl(this.commandConnection, "LElbowRoll", 1.57, 0.1);
+			shiftlessControls[Gdk.Key.e] = new JointControl(this.commandConnection, "LHand", 0, 0.25);
+			shiftlessControls[Gdk.Key.r] = new JointControl(this.commandConnection, "LHand", 1, 0.25);
+
+			shiftlessControls[Gdk.Key.m] = new JointControl(this.commandConnection, "RShoulderPitch", 3.14, 0.1);
+			shiftlessControls[Gdk.Key.n] = new JointControl(this.commandConnection, "RShoulderPitch", 0, 0.1);
+			shiftlessControls[Gdk.Key.k] = new JointControl(this.commandConnection, "RElbowRoll", 0, 0.1);
+			shiftlessControls[Gdk.Key.j] = new JointControl(this.commandConnection, "RElbowRoll", 1.57, 0.1);
+			shiftlessControls[Gdk.Key.o] = new JointControl(this.commandConnection, "RHand", 0, 0.25);
+			shiftlessControls[Gdk.Key.i] = new JointControl(this.commandConnection, "RHand", 1, 0.25);
+
 		}
 		else
 		{
