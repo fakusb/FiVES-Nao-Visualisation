@@ -328,8 +328,8 @@ public partial class MainWindow: Gtk.Window
 	{
 		if (controlToggle.Active)
 		{
-			shiftedControls[Gdk.Key.Left] = new JointControl(this.commandConnection, "HeadYaw", 1.0, 0.15);
-			shiftedControls[Gdk.Key.Right] = new JointControl(this.commandConnection, "HeadYaw", -1.0, 0.15);
+			shiftedControls[Gdk.Key.Left] = new JointControl(this.commandConnection, "HeadYaw", 1.57, 0.15);
+			shiftedControls[Gdk.Key.Right] = new JointControl(this.commandConnection, "HeadYaw", -1.57, 0.15);
 			shiftedControls[Gdk.Key.Up] = new JointControl(this.commandConnection, "HeadPitch", -0.7, 0.1);
 			shiftedControls[Gdk.Key.Down] = new JointControl(this.commandConnection, "HeadPitch", 0.5, 0.1);
 
