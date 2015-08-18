@@ -123,6 +123,8 @@ public partial class MainWindow: Gtk.Window
 		{
 			if (currentID != -1)
 				connection.execute(String.Format("stopMove({0})", toString(currentID)));
+		}
+	}
 
 	private class WalkControl : Control
 	{
