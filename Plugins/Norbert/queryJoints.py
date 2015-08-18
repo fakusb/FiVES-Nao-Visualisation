@@ -26,32 +26,6 @@ joints = {
 	24: "LAnklePitch",
 	25: "LAnkleRoll"}
 
-#["HeadYaw",
-#          "HeadPitch",
-#          "RShoulderPitch",
-#          "RShoulderRoll",
-#          "RElbowRoll",
-#          "RElbowYaw",
-#          "RWristYaw",
-#          "RHand",
-#          "LShoulderPitch",
-#          "LShoulderRoll",
-#          "LElbowRoll",
-#          "LElbowYaw",
-#          "LWristYaw",
-#          "LHand",
-#          "RHipYawPitch",
-#          "RHipPitch",
-#          "RHipRoll",
-#          "RKneePitch",
-#          "RAnklePitch",
-#          "RAnkleRoll",
-#          "LHipYawPitch",
-#          "LHipPitch",
-#          "LHipRoll",
-#          "LKneePitch",
-#          "LAnklePitch",
-#          "LAnkleRoll"]
 
 ALMEMORY_KEY_NAMES = []
 
@@ -68,17 +42,13 @@ from threading import Timer
 
 memory = ALProxy("ALMemory", "127.0.0.1", 9559)
 
-motion = ALProxy("ALMotion", "127.0.0.1", 9559)
-
 def query():
     for (num, key) in itertools.izip(joints, ALMEMORY_KEY_NAMES):
     	if num == 14:
     		continue
     	elif num == 20:
-    		connection.send(pack('Bf', 14, -memory.getData(key)))
-        connection.send(pack('Bf', num, memory.getData(key)))
-
-#    	print(str(num) + " - " + str(memory.getData(key)) )#+ pack('Bf', label, memory.getData(key)))
+    		connection.send(pack('<Bf', 14, -memory.getData(key)))
+        connection.send(pack('<Bf', num, memory.getData(key)))
 
 class RepeatedTimer(object):
     def __init__(self, interval, function, *args, **kwargs):
@@ -104,4 +74,4 @@ class RepeatedTimer(object):
         self._timer.cancel()
         self.is_running = False
 
-rt = RepeatedTimer(2, query)
+rt = RepeatedTimer(0.02, query)
