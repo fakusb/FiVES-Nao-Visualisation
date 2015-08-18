@@ -122,7 +122,10 @@ public partial class MainWindow: Gtk.Window
 		public override void Stop()
 		{
 			if (currentID != -1)
+			{
 				connection.execute(String.Format("stopMove({0})", toString(currentID)));
+				currentID = -1;
+			}
 		}
 	}
 
