@@ -161,9 +161,11 @@ public partial class MainWindow: Gtk.Window
 			WalkControl.stepAngle += this.deltaAngle;
 			WalkControl.frequency += this.deltaFrequency;
 
-			var command = String.Format("motion.setWalkArmsEnabled(True, True)\nmotion.setWalkTargetVelocity({0}, 0, {1}, {2})", toString(WalkControl.x_speed), toString(WalkControl.stepAngle), toString(WalkControl.frequency));
+			connection.execute("motion.setWalkArmsEnabled(True, True)");
 
+			var command = String.Format("motion.setWalkTargetVelocity({0}, 0, {1}, {2})", toString(WalkControl.x_speed), toString(WalkControl.stepAngle), toString(WalkControl.frequency));
 			connection.execute(command);
+
 		}
 
 		public override void Stop()
@@ -177,8 +179,9 @@ public partial class MainWindow: Gtk.Window
 			WalkControl.stepAngle -= this.deltaAngle;
 			WalkControl.frequency -= this.deltaFrequency;
 
-			var command = String.Format("motion.setWalkArmsEnabled(True, True)\nmotion.setWalkTargetVelocity({0}, 0, {1}, {2})", toString(WalkControl.x_speed), toString(WalkControl.stepAngle), toString(WalkControl.frequency));
+			connection.execute("motion.setWalkArmsEnabled(True, True)");
 
+			var command = String.Format("motion.setWalkTargetVelocity({0}, 0, {1}, {2})", toString(WalkControl.x_speed), toString(WalkControl.stepAngle), toString(WalkControl.frequency));
 			connection.execute(command);
 		}
 	}
