@@ -37,7 +37,7 @@ public partial class MainWindow: Gtk.Window
 
 		return true;
 	}
-		
+
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 	{
 		connectionToggle.Active = false;
@@ -188,6 +188,9 @@ public partial class MainWindow: Gtk.Window
 	[GLib.ConnectBefore ()]
 	protected void OnKeyPressEvent (object sender, KeyPressEventArgs a)
 	{
+		if (selectedControls == null)
+			return;
+
 		var key = a.Event.Key;
 
 		if (pressed.Contains(key))
@@ -240,11 +243,9 @@ public partial class MainWindow: Gtk.Window
 		{
 			if (shiftlessControls.ContainsKey(key))
 				shiftlessControls[key].Stop();
-			else if (shiftedControls.ContainsKey(key))
+			if (shiftedControls.ContainsKey(key))
 				shiftedControls[key].Stop();
-			else
-				return;
-
+			if (pressed.Contains(key))
 				pressed.Remove(key);
 		}
 	}
@@ -327,6 +328,11 @@ public partial class MainWindow: Gtk.Window
 			shiftedControls[Gdk.Key.Up] = new JointControl(this.commandConnection, "HeadPitch", -0.7, 0.05);
 			shiftedControls[Gdk.Key.Down] = new JointControl(this.commandConnection, "HeadPitch", 0.5, 0.05);
 
+			shiftlessControls[Gdk.Key.Left] = new WalkControl(this.commandConnection, 0.0, -0.5, 0.0);
+			shiftlessControls[Gdk.Key.Right] = new WalkControl(this.commandConnection, 0.0, 0.5, 0.0);
+			shiftlessControls[Gdk.Key.Up] = new WalkControl(this.commandConnection, 0.5, 0.0, 0.5);
+			shiftlessControls[Gdk.Key.Down] = new WalkControl(this.commandConnection, -0.25, 0.0, 0.25);
+
 			shiftlessControls[Gdk.Key.c] = new JointControl(this.commandConnection, "LShoulderPitch", 3.14, 0.1);
 			shiftlessControls[Gdk.Key.v] = new JointControl(this.commandConnection, "LShoulderPitch", 0, 0.1);
 			shiftlessControls[Gdk.Key.d] = new JointControl(this.commandConnection, "LElbowRoll", 0, 0.1);
@@ -341,6 +347,7 @@ public partial class MainWindow: Gtk.Window
 			shiftlessControls[Gdk.Key.o] = new JointControl(this.commandConnection, "RHand", 0, 0.25);
 			shiftlessControls[Gdk.Key.i] = new JointControl(this.commandConnection, "RHand", 1, 0.25);
 
+			selectedControls = shiftlessControls;
 		}
 		else
 		{
@@ -351,6 +358,8 @@ public partial class MainWindow: Gtk.Window
 
 			shiftedControls.Clear();
 			shiftlessControls.Clear();
+
+			selectedControls = null;
 		}		
 
 		ttsEntry.Sensitive = !controlToggle.Active;
