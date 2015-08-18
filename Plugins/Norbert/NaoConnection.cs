@@ -9,6 +9,8 @@ using KIARA;
 using KIARAPlugin;
 using TerminalPlugin;
 using System.Threading;
+using System.Diagnostics;
+
 namespace NorbertPlugin
 {
 	public class NaoConnection : PythonConnection
@@ -68,22 +70,6 @@ namespace NorbertPlugin
 			running = true;
 		}
 
-//		public void QueryJoints()
-//		{
-//			string line;
-//			using (var sr = new System.IO.StringReader(execute("query()")))
-//				while ((line = sr.ReadLine()) != null)
-//				{
-//					var data = line.Trim().Split();
-//					var key = data[0];
-//					var val = double.Parse(data[1]);
-//					lock (this)
-//						jointState [key] = val;
-//				}
-//			lock (this)
-//				jointState ["RHipYawPitch"] = -jointState ["LHipYawPitch"];
-//		}
-
 		Thread daemon;
 
 		private void StartDaemon()
@@ -95,6 +81,9 @@ namespace NorbertPlugin
 		private void DaemonFunction()
 		{
 			byte[] buf = new byte[5];
+
+			Stopwatch sw = Stopwatch.StartNew();
+
 			while (true) {
 				dc.Receive (ref buf, 5);
 				string joint = jointDict [buf [0]];
@@ -103,6 +92,8 @@ namespace NorbertPlugin
 				lock (this) {
 					jointState [joint] = val;
 				}
+				Console.WriteLine(String.Format("Network read took {0}ms.", sw.ElapsedMilliseconds));
+				sw.Restart();
 			}
 		}
 

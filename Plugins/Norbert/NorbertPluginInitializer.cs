@@ -104,12 +104,12 @@ namespace NorbertPlugin
 			EventLoop.Instance.TickFired += new EventHandler<TickEventArgs>(HandleEventTick);
 		}
 
-		Stopwatch sw = Stopwatch.StartNew();
+		//Stopwatch sw = Stopwatch.StartNew();
 
 		private void HandleEventTick(Object sender, TickEventArgs e)
 		{
-			Console.WriteLine(String.Format("Slept for {0}ms.", sw.ElapsedMilliseconds));
-			sw.Restart();
+			//Console.WriteLine(String.Format("Slept for {0}ms.", sw.ElapsedMilliseconds));
+			//sw.Restart();
 
 			entRWL.AcquireReaderLock (-1);
 			try {
@@ -127,8 +127,8 @@ namespace NorbertPlugin
 				}
 			} finally {
 				entRWL.ReleaseReaderLock ();
-				Console.WriteLine(String.Format("Tick handler took {0}ms", sw.ElapsedMilliseconds));
-				sw.Restart();
+				//Console.WriteLine(String.Format("Tick handler took {0}ms", sw.ElapsedMilliseconds));
+				//sw.Restart();
 			}
 //			doUpdate.Set();
 
