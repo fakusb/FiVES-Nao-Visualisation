@@ -4,11 +4,11 @@ using System.Net.Sockets;
 
 namespace RemotePy
 {
-	public class DataConnection : IDisposable
+	public class InputChannel : IDisposable
 	{
 		private Socket dataConnection;
 
-		public DataConnection (ref PythonConnection pyConn, string ipAddress, int port)
+		public InputChannel (PythonConnection pyConn, string ipAddress, int port)
 		{
 			IPAddress ip = IPAddress.Parse(ipAddress);
 
