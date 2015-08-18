@@ -75,10 +75,10 @@ def query():
     	if num == 14:
     		continue
     	elif num == 20:
-    		print(str(14) + " - " + str(-memory.getData(key)))
-    	print(str(num) + " - " + str(memory.getData(key)) )#+ pack('Bf', label, memory.getData(key)))
-#        connection.send(pack('Bf', num, memory.getData(key)))
+    		connection.send(pack('Bf', 14, -memory.getData(key)))
+        connection.send(pack('Bf', num, memory.getData(key)))
 
+#    	print(str(num) + " - " + str(memory.getData(key)) )#+ pack('Bf', label, memory.getData(key)))
 
 class RepeatedTimer(object):
     def __init__(self, interval, function, *args, **kwargs):
