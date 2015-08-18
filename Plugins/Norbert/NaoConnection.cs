@@ -63,9 +63,9 @@ namespace NorbertPlugin
 		public void Start()
 		{
 			dc = new InputChannel (this, ip, 4712);
+			StartDaemon ();
 			execute ("rt.start()");
 			running = true;
-			StartDaemon ();
 		}
 
 //		public void QueryJoints()
