@@ -333,10 +333,10 @@ public partial class MainWindow: Gtk.Window
 			shiftedControls[Gdk.Key.Up] = new JointControl(this.commandConnection, "HeadPitch", -0.7, 0.05);
 			shiftedControls[Gdk.Key.Down] = new JointControl(this.commandConnection, "HeadPitch", 0.5, 0.05);
 
-			shiftlessControls[Gdk.Key.Left] = new WalkControl(this.commandConnection, 0.0, -0.5, 0.0);
-			shiftlessControls[Gdk.Key.Right] = new WalkControl(this.commandConnection, 0.0, 0.5, 0.0);
-			shiftlessControls[Gdk.Key.Up] = new WalkControl(this.commandConnection, 0.5, 0.0, 0.5);
-			shiftlessControls[Gdk.Key.Down] = new WalkControl(this.commandConnection, -0.25, 0.0, 0.25);
+			shiftlessControls[Gdk.Key.Left] = new WalkControl(this.commandConnection, 0.0, 0.75, 0.0);
+			shiftlessControls[Gdk.Key.Right] = new WalkControl(this.commandConnection, 0.0, -0.75, 0.0);
+			shiftlessControls[Gdk.Key.Up] = new WalkControl(this.commandConnection, 1.0, 0.0, 1.0);
+			shiftlessControls[Gdk.Key.Down] = new WalkControl(this.commandConnection, -0.5, 0.0, 0.5);
 
 			shiftlessControls[Gdk.Key.c] = new JointControl(this.commandConnection, "LShoulderPitch", 1.57, 0.1);
 			shiftlessControls[Gdk.Key.v] = new JointControl(this.commandConnection, "LShoulderPitch", 0, 0.1);
