@@ -338,14 +338,14 @@ public partial class MainWindow: Gtk.Window
 			shiftlessControls[Gdk.Key.Up] = new WalkControl(this.commandConnection, 0.5, 0.0, 0.5);
 			shiftlessControls[Gdk.Key.Down] = new WalkControl(this.commandConnection, -0.25, 0.0, 0.25);
 
-			shiftlessControls[Gdk.Key.c] = new JointControl(this.commandConnection, "LShoulderPitch", 3.14, 0.1);
+			shiftlessControls[Gdk.Key.c] = new JointControl(this.commandConnection, "LShoulderPitch", 1.57, 0.1);
 			shiftlessControls[Gdk.Key.v] = new JointControl(this.commandConnection, "LShoulderPitch", 0, 0.1);
 			shiftlessControls[Gdk.Key.d] = new JointControl(this.commandConnection, "LElbowRoll", 0, 0.1);
-			shiftlessControls[Gdk.Key.f] = new JointControl(this.commandConnection, "LElbowRoll", 1.57, 0.1);
+			shiftlessControls[Gdk.Key.f] = new JointControl(this.commandConnection, "LElbowRoll", -1.57, 0.1);
 			shiftlessControls[Gdk.Key.e] = new JointControl(this.commandConnection, "LHand", 0, 0.25);
 			shiftlessControls[Gdk.Key.r] = new JointControl(this.commandConnection, "LHand", 1, 0.25);
 
-			shiftlessControls[Gdk.Key.m] = new JointControl(this.commandConnection, "RShoulderPitch", 3.14, 0.1);
+			shiftlessControls[Gdk.Key.m] = new JointControl(this.commandConnection, "RShoulderPitch", 1.57, 0.1);
 			shiftlessControls[Gdk.Key.n] = new JointControl(this.commandConnection, "RShoulderPitch", 0, 0.1);
 			shiftlessControls[Gdk.Key.k] = new JointControl(this.commandConnection, "RElbowRoll", 0, 0.1);
 			shiftlessControls[Gdk.Key.j] = new JointControl(this.commandConnection, "RElbowRoll", 1.57, 0.1);
