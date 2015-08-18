@@ -48,3 +48,4 @@ def disableStiffness():
 	motion.stiffnessInterpolation("Body", 0.0, 1.0)
 
 
+motion.setMotionConfig([["ENABLE_FOOT_CONTACT_PROTECTION", True]])
