@@ -123,6 +123,58 @@ public partial class MainWindow: Gtk.Window
 		{
 			if (currentID != -1)
 				connection.execute(String.Format("stopMove({0})", toString(currentID)));
+
+	private class WalkControl : Control
+	{
+		PythonConnection connection;
+
+		private static double x_speed = 0.0;
+		private static double stepAngle = 0.0;
+		private static double frequency = 0.0;
+
+		private double deltaSpeed;
+		private double deltaAngle;
+		private double deltaFrequency;
+		private bool active = false;
+
+		public WalkControl(PythonConnection connection, double deltaSpeed, double deltaAngle, double delta_frequency)
+		{
+			this.connection = connection;
+			this.deltaSpeed = deltaSpeed;
+			this.deltaAngle = deltaAngle;
+			this.deltaFrequency = deltaFrequency;
+		}
+
+		public override void Start()
+		{	
+			if (active)
+				return;
+
+			active = true;
+
+			WalkControl.x_speed += this.deltaSpeed;
+			WalkControl.stepAngle += this.deltaAngle;
+			WalkControl.frequency += this.deltaFrequency;
+
+			var command = String.Format("motion.setWalkArmsEnabled(True, True)\nmotion.setWalkTargetVelocity({0}, 0, {1}, {2})", WalkControl.x_speed, WalkControl.stepAngle, WalkControl.frequency);
+
+			connection.execute(command);
+		}
+
+		public override void Stop()
+		{
+			if (!active)
+				return;
+
+			active = false;
+
+			WalkControl.x_speed -= this.deltaSpeed;
+			WalkControl.stepAngle -= this.deltaAngle;
+			WalkControl.frequency -= this.deltaFrequency;
+
+			var command = String.Format("motion.setWalkTargetVelocity({0}, 0, {1}, {2})", WalkControl.x_speed, WalkControl.stepAngle, WalkControl.frequency);
+
+			connection.execute(command);
 		}
 	}
 
