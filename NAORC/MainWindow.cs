@@ -1,6 +1,7 @@
 ﻿using System;
 using Gtk;
 using RemotePy;
+using System.Threading;
 
 public partial class MainWindow: Gtk.Window
 {
@@ -11,9 +12,12 @@ public partial class MainWindow: Gtk.Window
 
 	private byte[] imageBuffer = new byte[3 * cam_width * cam_height];
 	private Gdk.Pixbuf imagePixBuf = null;
-	private const double fps = 10.0;
+	private const double fps = 15.0;
+	bool cameraActive = false;
 
 	System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
+
+	private Thread cameraThread;
 
 	public MainWindow () : base (Gtk.WindowType.Toplevel)
 	{
@@ -27,15 +31,27 @@ public partial class MainWindow: Gtk.Window
 			return true;
 
 		watch.Restart();
-
-		commandConnection.executeAsync("sendImage()");
-		videoChannel.Receive (ref imageBuffer, imageBuffer.Length);
-
-		imagePixBuf = new Gdk.Pixbuf(imageBuffer, Gdk.Colorspace.Rgb, false, 8, cam_width, cam_height, 3 * cam_width);
-
 		cameraArea.QueueDraw();
-
 		return true;
+	}
+
+	protected void camera()
+	{
+		bool active = true;
+		while (active)
+		{
+			videoChannel.Flash(42);
+			videoChannel.Receive (ref imageBuffer, imageBuffer.Length);
+
+			lock (imageBuffer)
+			{
+				imagePixBuf = new Gdk.Pixbuf(imageBuffer, Gdk.Colorspace.Rgb, false, 8, cam_width, cam_height, 3 * cam_width);
+				active = cameraActive;
+			}
+
+			Thread.Sleep((int)(1000.0 / fps));
+		}
+		videoChannel.Flash(0);
 	}
 
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
@@ -68,9 +84,13 @@ public partial class MainWindow: Gtk.Window
 		{
 			var x = (area.Allocation.Width - cam_width) / 2;
 			var y = (area.Allocation.Height - cam_height) / 2;
-			Gdk.CairoHelper.SetSourcePixbuf(cx, imagePixBuf, x, y);
-			cx.Rectangle(x, y, cam_width, cam_height);
-			cx.Fill();
+
+			lock (imageBuffer)
+			{
+				Gdk.CairoHelper.SetSourcePixbuf(cx, imagePixBuf, x, y);
+				cx.Rectangle(x, y, cam_width, cam_height);
+				cx.Fill();
+			}
 		}
 	}
 
@@ -264,12 +284,20 @@ public partial class MainWindow: Gtk.Window
 	{
 		if (cameraToggle.Active)
 		{
-			commandConnection.execute("imgClient = video.subscribe(\"_client\", resolution, colorSpace, 5)");
+			commandConnection.execute("startCamera()");
+			cameraThread = new System.Threading.Thread(camera);
+			lock (imageBuffer)
+				cameraActive = true;
+			cameraThread.Start();
 			GLib.Idle.Add(refreshHandler);
 		}
 		else
 		{
-			commandConnection.execute("disableCamera()");
+			lock (imageBuffer)
+				cameraActive = false;
+
+			cameraThread.Join();
+			commandConnection.execute("stopCamera()");
 			GLib.Idle.Remove(refreshHandler);
 		}
 	}

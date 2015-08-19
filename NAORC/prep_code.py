@@ -3,10 +3,12 @@ from naoqi import ALProxy
 import vision_definitions
 import binascii
 import time
+import threading
 
 ip = "nao.local"
 port = 9559
 camera = 0
+fps = 15.0
 
 tts = ALProxy("ALTextToSpeech", "nao.local", port)
 video = ALProxy("ALVideoDevice", ip, port)
@@ -16,15 +18,25 @@ resolution = vision_definitions.kQVGA  # 320 * 240
 colorSpace = vision_definitions.kRGBColorSpace
 video.setParam(vision_definitions.kCameraSelectID, camera)
 
-imgClient = None # Has to be set to the result of calling video.subscribe!
+cameraThread = None
 
-def sendImage():
-	image = video.getImageRemote(imgClient)
-	pixels = image[6]
-	connection.send(pixels)
+def camera():
+	imgClient = video.subscribe(\"_client\", resolution, colorSpace, 5)
 
-def disableCamera():
+	while connection.receive(1) > 42:
+		image = video.getImageRemote(imgClient)
+		pixels = image[6]
+		connection.send(pixels)
+
 	video.unsubscribe(imgClient)
+
+def startCamera():
+	cameraThread = Thread(camera)
+	cameraThread.start()
+
+def stopCamera():
+	cameraThread.join()
+	cameraThread = None
 
 def close():
 	disableCamera()
@@ -46,6 +58,5 @@ def enableStiffness():
 
 def disableStiffness():
 	motion.stiffnessInterpolation("Body", 0.0, 1.0)
-
 
 motion.setMotionConfig([["ENABLE_FOOT_CONTACT_PROTECTION", True]])

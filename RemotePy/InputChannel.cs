@@ -27,6 +27,11 @@ namespace RemotePy
 			pyConn.execute("connection, _ = sock.accept()");
 		}
 
+		public void Flash(byte value)
+		{
+			dataConnection.Send(new byte[]{value});
+		}
+
 		public void Receive(ref Byte[] dest, int numBytes) {
 			int level = 0;
 
