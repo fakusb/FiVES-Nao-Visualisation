@@ -12,7 +12,7 @@ public partial class MainWindow: Gtk.Window
 
 	private byte[] imageBuffer = new byte[3 * cam_width * cam_height];
 	private Gdk.Pixbuf imagePixBuf = null;
-	private const double fps = 15.0;
+	private const double fps = 30.0;
 	bool cameraActive = false;
 
 	System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
