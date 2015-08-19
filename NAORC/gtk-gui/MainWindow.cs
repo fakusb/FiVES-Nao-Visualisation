@@ -44,8 +44,9 @@ public partial class MainWindow
 		this.Name = "MainWindow";
 		this.Title = global::Mono.Unix.Catalog.GetString ("NAO Remote Control");
 		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
-		this.DefaultWidth = 300;
-		this.DefaultHeight = 300;
+		this.AllowShrink = true;
+		this.DefaultWidth = 500;
+		this.DefaultHeight = 500;
 		// Container child MainWindow.Gtk.Container+ContainerChild
 		this.vbox1 = new global::Gtk.VBox ();
 		this.vbox1.Name = "vbox1";
