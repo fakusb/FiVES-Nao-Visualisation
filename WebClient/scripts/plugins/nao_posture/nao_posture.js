@@ -99,63 +99,7 @@ FIVES.Plugins = FIVES.Plugins || {};
                     }
                 }
             }
-
-            // if (componentName == "nao_posture" && attributeName == "HeadYaw")
-            // {
-            //     console.log("Here we go!");
-            //
-            //     var axisAngleRotation = new XML3DRotation();
-            //
-            //     axisAngleRotation.setAxisAngle(zAxis, entity["nao_posture"]["HeadYaw"]);
-            //     var transformationForEntity = entity.getTransformElement();
-            //     if(transformationForEntity)
-            //     {
-            //         console.log("Caua bunga!");
-            //         // entity.xml3dView.groupElement.getElementById("Head").transform.rotation.set(axisAngleRotation);
-            //         entity.xml3dView.defElement.children[2].rotation.set(axisAngleRotation);
-            //         //transformationForEntity.rotation.set(axisAngleRotation);
-            //     }
-
-
-
-                /*
-                var _xml3dElement = FIVES.Resources.SceneManager.xml3dElement;
-
-
-
-        var transformTag = XML3D.createElement("transform");
-        transformTag.setAttribute("id", "transform-" + entity.guid) ;
-
-        transformTag.rotation.set(this._createRotationFromOrientation(entity));
-
-        _mainDefs.appendChild(transformTag);
-        return transformTag;
-
-
-
-                        var entityGroup = XML3D.createElement("group");
-        entityGroup.setAttribute("id", "Entity-" + entity.guid);
-        entityGroup.setAttribute("transform", "#transform-" + entity.guid );
-        return entityGroup;
-*/
-
-            // }
         }
-    };
-
-    l.updateHeadYaw = function(entity, headYaw) {
-		console.log("updateHeadYaw");
-        //entity.nao_posture.headYaw = headYaw;
-        //FIVES.Resources.SceneManager.applyPositionToXML3DView(entity);
-    };
-
-    l.setEntityHeadYaw = function(entity, headYaw) {
-        this.sendEntityHeadYawUpdate(entity.guid, headYaw);
-    };
-
-    l.sendEntityHeadYawUpdate = function(guid, headYaw) {
-		console.log("sendEntityHeadYawUpdate");
-        //this.updateEntityPosition(guid, position, _fivesCommunicator.generateTimestamp());
     };
 
     FIVES.Plugins.Posture = new nao_posture();

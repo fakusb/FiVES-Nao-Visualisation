@@ -75,7 +75,9 @@ function(KIARA, $) {
         FIVES.Communication.FivesCommunicator.initialize(context, service);
         FIVES.Resources.SceneManager.initialize("xml3dView");
 
-        login();
+        setTimeout(function() {
+            login();
+        }.bind(this), 10);
     }
     $(document).ready(main);
 });
