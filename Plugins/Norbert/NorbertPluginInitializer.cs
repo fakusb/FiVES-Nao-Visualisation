@@ -121,6 +121,9 @@ namespace NorbertPlugin
 					{
 						foreach (KeyValuePair<string, float> kv in connection.jointState)
 							entity["nao_posture"][kv.Key].Suggest(kv.Value);
+						entity["location"]["position"].Suggest(
+							new Vector(connection.positionState.XPosition, 10, connection.positionState.YPosition));
+						//TODO orientation
 
 						connection.jointState.Clear();
 					}

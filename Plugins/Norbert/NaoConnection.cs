@@ -13,6 +13,12 @@ using System.Diagnostics;
 
 namespace NorbertPlugin
 {
+	public struct RobotPosition {
+		public float XPosition;
+		public float YPosition;
+		public float Orientation;
+	};
+
 	public class NaoConnection : PythonConnection
 	{	
 		private static readonly Dictionary<byte, string> jointDict = new Dictionary<byte, string>{
@@ -41,7 +47,10 @@ namespace NorbertPlugin
 			{22, "LHipRoll"},
 			{23, "LKneePitch"},
 			{24, "LAnklePitch"},
-			{25, "LAnkleRoll"}
+			{25, "LAnkleRoll"},
+			{26, "XPosition"},
+			{27, "YPosition"},
+			{28, "Orientation"}
 		};
 
 		private bool running = false;
@@ -50,6 +59,8 @@ namespace NorbertPlugin
 		private InputChannel dc;
 
 		public Dictionary<string, float> jointState = new Dictionary<string, float>();
+
+		public RobotPosition positionState;
 
 		public NaoConnection(string hostName, string userName, string password) : base(hostName, userName, password)
 		{
@@ -86,12 +97,30 @@ namespace NorbertPlugin
 
 			while (true) {
 				dc.Receive (ref buf, 5);
-				string joint = jointDict [buf [0]];
+				byte idx = buf [0];
 				float val = BitConverter.ToSingle(buf, 1);
-				
-				lock (this) {
-					jointState [joint] = val;
+
+				switch (idx) {
+				case 26:
+					Console.WriteLine ("XPos");
+					lock (this)
+						positionState.XPosition = val;
+					break;
+				case 27:
+					lock (this)
+						positionState.YPosition = val;
+					break;
+				case 28:
+					lock (this)
+						positionState.Orientation = val;
+					break;
+				default:
+					string name = jointDict [idx];
+					lock (this)
+						jointState [name] = val;
+					break;
 				}
+
 				Console.WriteLine(String.Format("Network read took {0}ms.", sw.ElapsedMilliseconds));
 				sw.Restart();
 			}
