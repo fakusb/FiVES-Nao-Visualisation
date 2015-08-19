@@ -21,17 +21,17 @@ video.setParam(vision_definitions.kCameraSelectID, camera)
 cameraThread = None
 
 def camera():
-	imgClient = video.subscribe(\"_client\", resolution, colorSpace, 5)
-
-	while connection.receive(1) > 42:
+	imgClient = video.subscribe("_client", resolution, colorSpace, 5)
+	
+	while ord(connection.recv(1)) > 0:
 		image = video.getImageRemote(imgClient)
 		pixels = image[6]
 		connection.send(pixels)
-
+	
 	video.unsubscribe(imgClient)
 
 def startCamera():
-	cameraThread = Thread(camera)
+	cameraThread = threading.Thread(target=camera)
 	cameraThread.start()
 
 def stopCamera():
