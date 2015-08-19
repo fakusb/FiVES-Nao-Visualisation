@@ -366,8 +366,8 @@ public partial class MainWindow: Gtk.Window
 
 			shiftlessControls[Gdk.Key.Left] = new WalkControl(this.commandConnection, 0.0, 0.75, 0.0);
 			shiftlessControls[Gdk.Key.Right] = new WalkControl(this.commandConnection, 0.0, -0.75, 0.0);
-			shiftlessControls[Gdk.Key.Up] = new WalkControl(this.commandConnection, 1.0, 0.0, 1.0);
-			shiftlessControls[Gdk.Key.Down] = new WalkControl(this.commandConnection, -0.5, 0.0, 0.5);
+			shiftlessControls[Gdk.Key.Up] = new WalkControl(this.commandConnection, 1.0, 0.0, 0.0);
+			shiftlessControls[Gdk.Key.Down] = new WalkControl(this.commandConnection, -0.5, 0.0, 0.0);
 
 			shiftlessControls[Gdk.Key.c] = new JointControl(this.commandConnection, "LShoulderPitch", 1.57, 0.1);
 			shiftlessControls[Gdk.Key.v] = new JointControl(this.commandConnection, "LShoulderPitch", 0, 0.1);
