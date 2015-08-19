@@ -17,6 +17,8 @@ namespace NorbertPlugin
 		public float XPosition;
 		public float YPosition;
 		public float Orientation;
+		public float XAngle;
+		public float YAngle;
 	};
 
 	public class NaoConnection : PythonConnection
@@ -93,7 +95,7 @@ namespace NorbertPlugin
 		{
 			byte[] buf = new byte[5];
 
-			Stopwatch sw = Stopwatch.StartNew();
+//			Stopwatch sw = Stopwatch.StartNew();
 
 			while (true) {
 				dc.Receive (ref buf, 5);
@@ -102,7 +104,6 @@ namespace NorbertPlugin
 
 				switch (idx) {
 				case 26:
-					Console.WriteLine ("XPos");
 					lock (this)
 						positionState.XPosition = val;
 					break;
@@ -114,6 +115,14 @@ namespace NorbertPlugin
 					lock (this)
 						positionState.Orientation = val;
 					break;
+				case 29:
+					lock (this)
+						positionState.XAngle = val;
+					break;
+				case 30:
+					lock (this)
+						positionState.YAngle = val;
+					break;
 				default:
 					string name = jointDict [idx];
 					lock (this)
@@ -121,8 +130,8 @@ namespace NorbertPlugin
 					break;
 				}
 
-				Console.WriteLine(String.Format("Network read took {0}ms.", sw.ElapsedMilliseconds));
-				sw.Restart();
+//				Console.WriteLine(String.Format("Network read took {0}ms.", sw.ElapsedMilliseconds));
+//				sw.Restart();
 			}
 		}
 

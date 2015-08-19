@@ -25,9 +25,11 @@ joints = [
 	"LKneePitch",		# 23
 	"LAnklePitch",		# 24
 	"LAnkleRoll"]		# 25
-	# "XPosition",		# 26
-	# "YPosition",		# 27
+	# "XPosition"		# 26
+	# "YPosition"		# 27
 	# "Orientation"		# 28
+	# "XAngle"		# 29
+	# "YAngle"		# 30
 
 jointBuffer = {}
 
@@ -73,6 +75,10 @@ def query():
 	connection.send(pack('<Bf', 26, xpos))
 	connection.send(pack('<Bf', 27, ypos))
 	connection.send(pack('<Bf', 28, ori))
+	XAngle = memory.getData("Device/SubDeviceList/InertialSensor/AngleX/Sensor/Value")
+	connection.send(pack('<Bf', 29, XAngle))
+	YAngle = memory.getData("Device/SubDeviceList/InertialSensor/AngleX/Sensor/Value")
+	connection.send(pack('<Bf', 30, YAngle))
 
 class RepeatedTimer(object):
 	def __init__(self, interval, function, *args, **kwargs):

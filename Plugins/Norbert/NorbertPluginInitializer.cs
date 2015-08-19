@@ -122,8 +122,16 @@ namespace NorbertPlugin
 						foreach (KeyValuePair<string, float> kv in connection.jointState)
 							entity["nao_posture"][kv.Key].Suggest(kv.Value);
 						entity["location"]["position"].Suggest(
-							new Vector(connection.positionState.XPosition, 10, connection.positionState.YPosition));
-						//TODO orientation
+							new Vector((float)1.8*connection.positionState.XPosition, (float)0.0, (float)1.8*-connection.positionState.YPosition));
+						Quat ori = FIVES.Math.QuaternionFromAxisAngle(new Vector(0,1,0),
+							connection.positionState.Orientation);
+						Quat xang = FIVES.Math.QuaternionFromAxisAngle(new Vector(1,0,0),
+							connection.positionState.XAngle);
+						Quat yang = FIVES.Math.QuaternionFromAxisAngle(new Vector(0,0,1),
+							connection.positionState.YAngle);
+						Quat res = FIVES.Math.MultiplyQuaternions(yang, /*FIVES.Math.MultiplyQuaternions(xang,*/ori/*)*/);
+							
+						entity["location"]["orientation"].Suggest(res);
 
 						connection.jointState.Clear();
 					}
