@@ -1,30 +1,33 @@
 joints = [
-	"HeadYaw",
-	"HeadPitch",
-	"RShoulderPitch",
-	"RShoulderRoll",
-	"RElbowRoll",
-	"RElbowYaw",
-	"RWristYaw",
-	"RHand",
-	"LShoulderPitch",
-	"LShoulderRoll",
-	"LElbowRoll",
-	"LElbowYaw",
-	"LWristYaw",
-	"LHand",
-	"RHipYawPitch",
-	"RHipPitch",
-	"RHipRoll",
-	"RKneePitch",
-	"RAnklePitch",
-	"RAnkleRoll",
-	"LHipYawPitch",
-	"LHipPitch",
-	"LHipRoll",
-	"LKneePitch",
-	"LAnklePitch",
-	"LAnkleRoll"]
+	"HeadYaw",		# 0
+	"HeadPitch",		# 1
+	"RShoulderPitch",	# 2
+	"RShoulderRoll",	# 3
+	"RElbowRoll",		# 4
+	"RElbowYaw",		# 5
+	"RWristYaw",		# 6
+	"RHand",		# 7
+	"LShoulderPitch",	# 8
+	"LShoulderRoll",	# 9
+	"LElbowRoll",		# 10
+	"LElbowYaw",		# 11
+	"LWristYaw",		# 12
+	"LHand",		# 13
+	"RHipYawPitch",		# 14
+	"RHipPitch",		# 15
+	"RHipRoll",		# 16
+	"RKneePitch",		# 17
+	"RAnklePitch",		# 18
+	"RAnkleRoll",		# 19
+	"LHipYawPitch",		# 20
+	"LHipPitch",		# 21
+	"LHipRoll",		# 22
+	"LKneePitch",		# 23
+	"LAnklePitch",		# 24
+	"LAnkleRoll"]		# 25
+	# "XPosition",		# 26
+	# "YPosition",		# 27
+	# "Orientation"		# 28
 
 jointBuffer = {}
 
@@ -32,7 +35,10 @@ ALMEMORY_KEY_NAMES = []
 
 i = 0
 for j in joints:
-	ALMEMORY_KEY_NAMES.append((i, "Device/SubDeviceList/{j}/Position/Sensor/Value".format(j=j)))
+	if i <= 25:
+		ALMEMORY_KEY_NAMES.append((i, "Device/SubDeviceList/{j}/Position/Sensor/Value".format(j=j)))
+	else:
+		ALMEMORY_KEY_NAMES.append((i, "None"))
 	jointBuffer[i] = float("inf")
 	i += 1
 
@@ -45,6 +51,7 @@ from naoqi import ALProxy
 from threading import Timer
 
 memory = ALProxy("ALMemory", "127.0.0.1", 9559)
+motion = ALProxy("ALMotion", "127.0.0.1", 9559)
 
 def query():
 	for (idx, key) in ALMEMORY_KEY_NAMES:
@@ -58,9 +65,14 @@ def query():
 			if idx == 20:
 				connection.send(pack('<Bf', 14, -v))
 			connection.send(pack('<Bf', idx, v))
-			#if idx == 20:
-			#	print unpack('<Bf', (pack('<Bf', 14, -v)))
-			#print unpack('<Bf', (pack('<Bf', idx, v)))
+			# if idx == 20:
+			# 	print(unpack('<Bf', (pack('<Bf', 14, -v))))
+			# print(unpack('<Bf', (pack('<Bf', idx, v))))
+	(xpos, ypos, ori) = motion.getRobotPosition(True)
+	# print((xpos, ypos, ori))
+	connection.send(pack('<Bf', 26, xpos))
+	connection.send(pack('<Bf', 27, ypos))
+	connection.send(pack('<Bf', 28, ori))
 
 class RepeatedTimer(object):
 	def __init__(self, interval, function, *args, **kwargs):
