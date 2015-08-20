@@ -71,7 +71,7 @@ def query():
 			# 	print(unpack('<Bf', (pack('<Bf', 14, -v))))
 			# print(unpack('<Bf', (pack('<Bf', idx, v))))
 	
-	x, y, z, wx, wy, wz = motion.getPosition("Torso", motion.FRAME_WORLD, True)
+	x, y, z, wx, wy, wz = motion.getPosition("Torso", 1, True)
 	connection.send(pack('<Bf', 26, x))
 	connection.send(pack('<Bf', 27, y))
 	connection.send(pack('<Bf', 28, z))
