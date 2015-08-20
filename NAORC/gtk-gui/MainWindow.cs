@@ -69,7 +69,7 @@ public partial class MainWindow
 		this.ipEntry.WidthRequest = 100;
 		this.ipEntry.CanFocus = true;
 		this.ipEntry.Name = "ipEntry";
-		this.ipEntry.Text = global::Mono.Unix.Catalog.GetString ("10.42.0.106");
+		this.ipEntry.Text = global::Mono.Unix.Catalog.GetString ("192.168.1.146");
 		this.ipEntry.IsEditable = true;
 		this.ipEntry.InvisibleChar = '●';
 		this.hbox1.Add (this.ipEntry);
