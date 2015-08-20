@@ -63,6 +63,13 @@ namespace NorbertPlugin
 
 		internal void DefineComponents()
 		{
+			posture.AddAttribute<double>("x", 0.0);
+			posture.AddAttribute<double>("y", 0.0);
+			posture.AddAttribute<double>("z", 0.0);
+			posture.AddAttribute<double>("wx", 0.0);
+			posture.AddAttribute<double>("wy", 0.0);
+			posture.AddAttribute<double>("wz", 0.0);
+
 			posture.AddAttribute<double>("HeadYaw", 0.0);
 			posture.AddAttribute<double>("HeadPitch", 0.0);
 			posture.AddAttribute<double>("RShoulderPitch", 0.0);
@@ -122,6 +129,14 @@ namespace NorbertPlugin
 						foreach (KeyValuePair<string, float> kv in connection.jointState)
 							entity["nao_posture"][kv.Key].Suggest(kv.Value);
 
+						entity["nao_posture"]["x"].Suggest((float)connection.positionState.x);
+						entity["nao_posture"]["y"].Suggest((float)connection.positionState.y);
+						entity["nao_posture"]["z"].Suggest((float)connection.positionState.z);
+						entity["nao_posture"]["wx"].Suggest((float)connection.positionState.wx);
+						entity["nao_posture"]["wy"].Suggest((float)connection.positionState.wy);
+						entity["nao_posture"]["wz"].Suggest((float)connection.positionState.wz);
+
+						/*
 						entity["location"]["position"].Suggest(
 							new Vector((float)connection.positionState.x, (float)connection.positionState.z, (float)-connection.positionState.y));
 						Quat zang = FIVES.Math.QuaternionFromAxisAngle(new Vector(0,1,0),
@@ -133,7 +148,7 @@ namespace NorbertPlugin
 						Quat res = FIVES.Math.MultiplyQuaternions(xang, FIVES.Math.MultiplyQuaternions(yang,zang));
 							
 						entity["location"]["orientation"].Suggest(res);
-
+						*/
 						connection.jointState.Clear();
 					}
 				}
@@ -160,8 +175,8 @@ namespace NorbertPlugin
 
 			e["mesh"]["uri"].Suggest("resources/models/v11/nao.xml");
 			e["mesh"]["visible"].Suggest(true);
-			e["location"]["position"].Suggest(new Vector(XoffsetBase, 10, 0));
-			e["location"]["orientation"].Suggest(new Quat((float)3.0, (float)3.0, (float)3.0, (float)10 ));
+			//e["location"]["position"].Suggest(new Vector(XoffsetBase, 10, 0));
+			//e["location"]["orientation"].Suggest(new Quat((float)3.0, (float)3.0, (float)3.0, (float)10 ));
 
 			XoffsetBase += 5;
 
