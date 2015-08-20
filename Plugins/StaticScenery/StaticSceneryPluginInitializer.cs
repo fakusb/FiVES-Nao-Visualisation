@@ -94,7 +94,7 @@ namespace StaticSceneryPlugin
             World.Instance.Add(sceneryEntity);
         }
 
-		internal string SceneryURL = "";//"resources/proprietary/megacity/megacity.xml";
+		internal string SceneryURL = "resources/models/floor/floor_model.xml";
         internal float OffsetX = 0f;
         internal float OffsetY = 0f;
         internal float OffsetZ = 0f;
