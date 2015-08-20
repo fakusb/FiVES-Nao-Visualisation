@@ -70,15 +70,14 @@ def query():
 			# if idx == 20:
 			# 	print(unpack('<Bf', (pack('<Bf', 14, -v))))
 			# print(unpack('<Bf', (pack('<Bf', idx, v))))
-	(xpos, ypos, ori) = motion.getRobotPosition(True)
-	# print((xpos, ypos, ori))
-	connection.send(pack('<Bf', 26, xpos))
-	connection.send(pack('<Bf', 27, ypos))
-	connection.send(pack('<Bf', 28, ori))
-	XAngle = memory.getData("Device/SubDeviceList/InertialSensor/AngleX/Sensor/Value")
-	connection.send(pack('<Bf', 29, XAngle))
-	YAngle = memory.getData("Device/SubDeviceList/InertialSensor/AngleX/Sensor/Value")
-	connection.send(pack('<Bf', 30, YAngle))
+	
+	x, y, z, wx, wy, wz = motion.getPosition("Torso", motion.FRAME_WORLD, True)
+	connection.send(pack('<Bf', 26, x))
+	connection.send(pack('<Bf', 27, y))
+	connection.send(pack('<Bf', 28, z))
+	connection.send(pack('<Bf', 29, wx))
+	connection.send(pack('<Bf', 30, wy))
+	connection.send(pack('<Bf', 31, wz))
 
 class RepeatedTimer(object):
 	def __init__(self, interval, function, *args, **kwargs):

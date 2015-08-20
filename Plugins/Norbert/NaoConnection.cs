@@ -14,11 +14,12 @@ using System.Diagnostics;
 namespace NorbertPlugin
 {
 	public struct RobotPosition {
-		public float XPosition;
-		public float YPosition;
-		public float Orientation;
-		public float XAngle;
-		public float YAngle;
+		public float x;
+		public float y;
+		public float z;
+		public float wx;
+		public float wy;
+		public float wz;
 	};
 
 	public class NaoConnection : PythonConnection
@@ -49,10 +50,7 @@ namespace NorbertPlugin
 			{22, "LHipRoll"},
 			{23, "LKneePitch"},
 			{24, "LAnklePitch"},
-			{25, "LAnkleRoll"},
-			{26, "XPosition"},
-			{27, "YPosition"},
-			{28, "Orientation"}
+			{25, "LAnkleRoll"}
 		};
 
 		private bool running = false;
@@ -105,24 +103,29 @@ namespace NorbertPlugin
 				switch (idx) {
 				case 26:
 					lock (this)
-						positionState.XPosition = val;
+						positionState.x = val;
 					break;
 				case 27:
 					lock (this)
-						positionState.YPosition = val;
+						positionState.y = val;
 					break;
 				case 28:
 					lock (this)
-						positionState.Orientation = val;
+						positionState.z = val;
 					break;
 				case 29:
 					lock (this)
-						positionState.XAngle = val;
+						positionState.wx = val;
 					break;
 				case 30:
 					lock (this)
-						positionState.YAngle = val;
+						positionState.wy = val;
 					break;
+				case 31:
+					lock (this)
+						positionState.wz = val;
+					break;
+
 				default:
 					string name = jointDict [idx];
 					lock (this)
