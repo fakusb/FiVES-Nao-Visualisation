@@ -139,6 +139,7 @@ namespace NorbertPlugin
 						/*
 						entity["location"]["position"].Suggest(
 							new Vector((float)connection.positionState.x, (float)connection.positionState.z, (float)-connection.positionState.y));
+						
 						Quat zang = FIVES.Math.QuaternionFromAxisAngle(new Vector(0,1,0),
 							connection.positionState.wz);
 						Quat xang = FIVES.Math.QuaternionFromAxisAngle(new Vector(1,0,0),
@@ -175,8 +176,8 @@ namespace NorbertPlugin
 
 			e["mesh"]["uri"].Suggest("resources/models/v11/nao.xml");
 			e["mesh"]["visible"].Suggest(true);
-			//e["location"]["position"].Suggest(new Vector(XoffsetBase, 10, 0));
-			//e["location"]["orientation"].Suggest(new Quat((float)3.0, (float)3.0, (float)3.0, (float)10 ));
+			e["location"]["position"].Suggest(new Vector(XoffsetBase, 0, 0));
+			e["location"]["orientation"].Suggest(new Quat((float)3.0, (float)3.0, (float)3.0, (float)10 ));
 
 			XoffsetBase += 5;
 

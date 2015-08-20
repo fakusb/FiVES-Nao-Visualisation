@@ -39,13 +39,14 @@
         <transform id="RShinebone_transform" translation="-0.000000 0.000036 -103.799988"/>
         <transform id="RAnkle_transform" translation="-0.000000 0.000024 -100.999947"/>
         <transform id="RFoot_transform" translation="-0.000000 0.000004 0.000015"/>
+        <transform id="Chest_transform" scale="0.01 0.01 0.01" translation="0.029162 0.000000 -0.989356"/>
 
         <!--style="transform:matrix3d(1.000000,0.000000,0.000000,0.000000,0.000000,1.000000,0.000000,0.000000,-0.000000,0.000000,1.000000,0.000000,-3.367815,-0.000000,-0.435688,1.000000);"-->
         
     </defs>
     <group id="assetGroup" shader="#shader_test" transform="#root_transform">
 
-        <group id="Chest" class="layer-0" style="transform:matrix3d(0.010000,0.000000,0.000000,0.000000,0.000000,0.010000,0.000000,0.000000,0.000000,0.000000,0.010000,0.000000,0.029162,0.000000,-0.989356,1.000000);" shader="#shader_test">
+        <group id="Chest" class="layer-0" transform="#Chest_transform" shader="#shader_test">
             <model src="assets/assets-0.xml#Chest" shader="#shader_test"></model>
             <group id="RShoulderPadMobil" class="layer-0" transform="#RShoulderPadMobil_transform">
                 <model src="assets/assets-1.xml#RShoulderPadMobil-001"></model>
