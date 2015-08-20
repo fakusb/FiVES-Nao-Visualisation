@@ -127,7 +127,13 @@ XML3D.Xml3dSceneController = function(xml3dElement) {
     }
 
     this.camera = new XML3D.Camera(view);
-    this.camera.position.y = 10;
+    this.camera.position.x = 5;
+    this.camera.position.y = 0;
+    this.camera.position.z = 0;
+
+    var mx = new window.XML3DRotation(new window.XML3DVec3(0,1,0), 1.57);
+    this.camera.rotateAroundPoint(mx, new window.XML3DVec3(0, 0, 0));
+
     this.timer = new XML3D.util.Timer();
     this.prevPos = {x: -1, y: -1};
     this.prevTouchPositions = new Array();

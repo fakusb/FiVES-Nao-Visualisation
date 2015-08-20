@@ -74,6 +74,9 @@ function(KIARA, $) {
 
         FIVES.Communication.FivesCommunicator.initialize(context, service);
         FIVES.Resources.SceneManager.initialize("xml3dView");
+        XML3D.options.setValue("renderer-ssao", true);
+        XML3D.options.setValue("renderer-ssao-radius", 0.1);
+        XML3D.options.setValue("renderer-ssao-scale", 0.1);
 
         setTimeout(function() {
             login();

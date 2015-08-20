@@ -2,14 +2,14 @@
 <xml3d xmlns="http://www.xml3d.org/2009/xml3d" style="width: 800px;height:600px;background-color:lightblue;" activeView="#camera-camera">
     <defs>
         <shader id="shader_test" script="urn:xml3d:shader:phong">
-            <float3 name="emissiveColor">0.55 0.6 0.61</float3>
-            <float3 name="diffuseColor">0.74705882352 0.841176470588235 0.9</float3>
+            <!-- <float3 name="emissiveColor">0.55 0.6 0.61</float3> -->
+            <float3 name="diffuseColor">1.0 1.0 1.0</float3>
             <float3 name="specularColor">0.0 0.0 0.0</float3>
             <float name="shininess">0.9</float>
-            <float name="ambientIntensity">0.3</float>
+            <!-- <float name="ambientIntensity">0.3</float> -->
             <float name="transparency">0.0</float>
         </shader>
-        <transform id="root_transform" scale="0.3 0.3 0.3" rotation="1.0 0.0 0.0 -1.57"/>
+        <transform id="root_transform" scale="1.0 1.0 1.0" rotation="1.0 0.0 0.0 -1.57"/>
 
         <transform id="Head_transform" translation="-3.367815 -0.000000 -0.435688"/>
         <transform id="Neck_transform" translation="-0.970842 0.252345 126.475937"/>

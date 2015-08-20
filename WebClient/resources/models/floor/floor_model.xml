@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml3d>
+	<group style="transform: scale3d(2px, 2px, 2px) translate3d(0px, -0.655px, 0px);">
+		<model src="floor.xml#Floor"></model>
+	</group>
+</xml3d>
